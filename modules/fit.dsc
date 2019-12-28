@@ -1,0 +1,132 @@
+# workhorse(s) for finemapping
+
+# Module input
+# ============
+# $X, $Y: full data; or
+# $sumstats: summary statistics; or / and
+# $ld: LD information
+
+# Module output
+# =============
+# $fitted: for diagnostics
+# $posterior: for inference
+
+caviar: fit_caviar.R + add_z.R + R(posterior = finemap_mcaviar(z,ld_file, args, prefix=cache))
+  @CONF: R_libs = (dplyr, magrittr, data.table)
+  sumstats: $sumstats
+  ld: $ld
+  N_ref: $N_ref
+  N_in: $N_sample
+  args: "-g 0.001 -c 1", "-g 0.001 -c 2", "-g 0.001 -c 3"
+  ld_method: "in_sample","ref_sample"
+  add_z: FALSE
+  ld_ref_z_file: file(ref.z.ld)
+  ld_sample_z_file: file(sample.z.ld)
+  cache: file(CAVIAR)
+  $posterior: posterior
+
+caviar_add_z(caviar):
+  ld_method: "ref_sample"
+  add_z: TRUE
+
+caviar_in_sample(caviar):
+  ld_method: "in_sample"
+  args: "-g 0.001 -c 1", "-g 0.001 -c 2", "-g 0.001 -c 3"
+
+finemap(caviar): fit_finemap.R + add_z.R + R(posterior = finemap_mvar(z,ld_file, N_in, k, args, prefix=cache))
+  k: NULL
+  args: "--n-causal-max 1", "--n-causal-max 2", "--n-causal-max 3"
+  cache: file(FM)
+
+finemap_add_z(finemap):
+  add_z: TRUE
+  ld_method: "ref_sample"
+
+finemap_in_sample(finemap):
+  ld_method: "in_sample"
+  args: "--n-causal-max 1", "--n-causal-max 2", "--n-causal-max 3"
+
+finemapv3(caviar): fit_finemap_v3.R + add_z.R + R(posterior = finemap_mvar_v1.3.1(sumstats$bhat, sumstats$shat,
+                                                  maf[[ld_method]], ld_file, N_in, k, method, args, prefix=cache))
+  k: NULL
+  maf: $maf
+  method: 'sss'
+  args: "--n-causal-snps 5"
+  cache: file(FM)
+
+finemapv3_in_sample(finemapv3):
+  ld_method: "in_sample"
+  args: "--n-causal-snps 1", "--n-causal-snps 2", "--n-causal-snps 3"
+
+dap_z: fit_dap.py + Python(z = sumstats['bhat']/sumstats['shat'];
+                           numpy.nan_to_num(z, copy=False);
+                           posterior = dap_batch_z(z, ld[ld_method], cache, args))
+  sumstats: $sumstats
+  ld: $ld
+  ld_method: "in_sample", "ref_sample"
+  args: "-ld_control 0.20 --all"
+  cache: file(DAP)
+  $posterior: posterior
+
+susie: fit_susie.R
+  # Prior variance of nonzero effects.
+  @CONF: R_libs = susieR
+  maxI: 200
+  maxL: 10
+  null_weight: 0
+  prior_var: 0
+  X: $X_sample
+  Y: $Y
+  $posterior: posterior
+  $fitted: fitted
+
+susie_auto: fit_susie.R
+  @CONF: R_libs = susieR
+  X: $X_sample
+  Y: $Y
+  prior_var: "auto"
+  $posterior: posterior
+  $fitted: fitted
+
+susie01(susie):
+  null_weight: 0
+  maxL: 1
+
+susie10(susie):
+  null_weight: 0
+  maxL: 15
+  prior_var: 0, 0.1
+
+#------------------------------
+# SuSiE with summary statistics
+#------------------------------
+
+init_oracle: initialize.R + R(s_init=init_susie($(meta)$true_coef))
+  @CONF: R_libs = susieR
+  $s_init: s_init
+
+susie_rss: fit_susie_rss.R
+  @CONF: R_libs = (susieR, data.table)
+  sumstats: $sumstats
+  s_init: NA
+  L: 5, 10
+  ld: $ld
+  ld_method: "in_sample", "ref_sample"
+  lamb: 0, 1e-4, 0.1
+  estimate_residual_variance: TRUE, FALSE
+  add_z: FALSE
+  N_sample: $N_sample
+  N_ref: $N_ref
+  $fitted: res$fitted
+  $posterior: res$posterior
+
+susie_rss_add_z(susie_rss):
+  add_z: TRUE
+  ld_method: "ref_sample"
+
+susie_rss_large(susie_rss):
+  L: 15
+
+susie_rss_init(susie_rss):
+  s_init: $s_init
+  L: 10

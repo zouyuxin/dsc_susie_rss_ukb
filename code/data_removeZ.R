@@ -8,7 +8,7 @@ class(geno) <- "data.frame"
 X <- as(as.matrix(geno[-(1:6)]),'dgCMatrix')
 
 # read phenotype files
-pheno.file <- "data/height.csv.gz"
+pheno.file <- "genotype_dir/height.csv.gz"
 pheno        <- suppressMessages(read_csv(pheno.file))
 class(pheno) <- "data.frame"
 pheno$sex = factor(pheno$sex)

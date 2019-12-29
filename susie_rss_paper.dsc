@@ -19,5 +19,5 @@ DSC:
     data_file: data/ukb_genotypes_files.txt
     GWAS_sample: 10000
     REF_sample: 500
-    neale_effect_size: data/UKB_neale_effectsize.rds
+    neale_effect_size: "data/UKB_neale_effectsize.rds"
   output: output/rss_compare_ukb

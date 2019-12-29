@@ -1,6 +1,6 @@
 # Get subset of X
 n = nrow(X)
-X.idx = get_center(subset, ncol(X), pos)
+X.idx = get_genotype(subset, ncol(X), pos)
 X.all = X[, X.idx]
 in_sample = sample(1:n, GWASsample)
 X.sample = X.all[in_sample,]
@@ -17,14 +17,14 @@ if(REFsample > 0){
 
 # Remove invariant sites
 sample.index = apply(X.sample, 2, var, na.rm=TRUE) != 0
-if (!is.na(X.ref)) {
+if (all(!is.na(X.ref))) {
     ref.index = apply(X.ref, 2, var, na.rm=TRUE) != 0
 } else {
     ref.index = 1
 }
 choose.index = as.logical(sample.index * ref.index)
 X.sample = X.sample[, choose.index]
-if (!is.na(X.ref)) X.ref = X.ref[, choose.index]
+if (all(!is.na(X.ref))) X.ref = X.ref[, choose.index]
 # # Apply MAF filter
 # maf.sample = apply(X.sample, 2, function(x) sum(x)/(2*length(x)))
 # maf.sample = pmin(maf.sample, 1-maf.sample)
@@ -52,7 +52,7 @@ if (!is.na(X.ref)) X.ref = X.ref[, choose.index]
 
 # Center & scale data
 X.sample = center_scale(X.sample)
-if (!is.na(X.ref)) X.ref = center_scale(X.ref)
+if (all(!is.na(X.ref))) X.ref = center_scale(X.ref)
 # Get LD (correlations)
 if(GWASsample == n){
   XtX = as.matrix(fread(XtX_full))
@@ -61,7 +61,7 @@ if(GWASsample == n){
 }else{
   r.sample = cor(X.sample)  
 }
-if (!is.na(X.ref)) {
+if (all(!is.na(X.ref))) {
     r.ref = cor(X.ref)
 } else {
     r.ref = NA

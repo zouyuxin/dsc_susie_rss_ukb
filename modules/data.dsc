@@ -25,7 +25,6 @@ full_data: sim_utils.R + data_sim.R
   ld_ref_file: file(ref.ld)
   $X_sample: X.sample
   $X_ref: X.ref
-  $Y: data$Y
   $N_sample: nrow(X.sample)
   $N_ref: nrow(X.ref)
   $ld: list(in_sample=ld_sample_file, ref_sample=ld_ref_file)

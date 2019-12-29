@@ -36,7 +36,7 @@ z = sumstats$bhat/sumstats$shat;
 r = as.matrix(fread(ld[[ld_method]]));
 if (add_z) {
   if (ld_method == 'out_sample') {
-    if (is.null(N_ref)) stop("Cannot use add_z out sample LD when N_out is not available (NULL)")
+    if (is.null(N_ref)) stop("Cannot use add_z out sample LD when N_ref is not available (NULL)")
     r = cov2cor(r*(N_ref-1) + tcrossprod(z));
     r = (r + t(r))/2;
   }else if(ld_method == 'ref_sample'){

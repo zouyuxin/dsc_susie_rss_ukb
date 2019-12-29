@@ -1,5 +1,6 @@
 sim_gaussian: simulate.R + \
-                R(t_neale = readRDS(effects);
+                R(print(effects);
+                t_neale = readRDS(effects);
                 effects = t_neale$tstat / sqrt(t_neale$n_sample);
                 res=sim_gaussian_multiple(X, pve, n_signal, effects, n_traits))
   @CONF: R_libs = susieR

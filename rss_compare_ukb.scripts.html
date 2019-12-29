@@ -2739,65 +2739,422 @@ Prism.languages.yaml={scalar:{pattern:/([\-:]\s*(![^\s]+)?[ \t]*[|>])[ \t]*(?:((
 !function(){"undefined"!=typeof self&&self.Prism&&self.document&&Prism.hooks.add("complete",function(e){if(e.code){var t=e.element.parentNode,s=/\s*\bline-numbers\b\s*/;if(t&&/pre/i.test(t.nodeName)&&(s.test(t.className)||s.test(e.element.className))&&!e.element.querySelector(".line-numbers-rows")){s.test(e.element.className)&&(e.element.className=e.element.className.replace(s,"")),s.test(t.className)||(t.className+=" line-numbers");var n,a=e.code.match(/\n(?!$)/g),l=a?a.length+1:1,m=new Array(l+1);m=m.join("<span></span>"),n=document.createElement("span"),n.className="line-numbers-rows",n.innerHTML=m,t.hasAttribute("data-start")&&(t.style.counterReset="linenumber "+(parseInt(t.getAttribute("data-start"),10)-1)),e.element.appendChild(n)}}})}();
 !function(){function e(e){this.defaults=r({},e)}function n(e){return e.replace(/-(\w)/g,function(e,n){return n.toUpperCase()})}function t(e){for(var n=0,t=0;t<e.length;++t)e.charCodeAt(t)=="	".charCodeAt(0)&&(n+=3);return e.length+n}if("undefined"!=typeof self&&self.Prism&&self.document){var r=Object.assign||function(e,n){for(var t in n)n.hasOwnProperty(t)&&(e[t]=n[t]);return e};e.prototype={setDefaults:function(e){this.defaults=r(this.defaults,e)},normalize:function(e,t){t=r(this.defaults,t);for(var i in t){var o=n(i);"normalize"!==i&&"setDefaults"!==o&&t[i]&&this[o]&&(e=this[o].call(this,e,t[i]))}return e},leftTrim:function(e){return e.replace(/^\s+/,"")},rightTrim:function(e){return e.replace(/\s+$/,"")},tabsToSpaces:function(e,n){return n=0|n||4,e.replace(/\t/g,new Array(++n).join(" "))},spacesToTabs:function(e,n){return n=0|n||4,e.replace(new RegExp(" {"+n+"}","g"),"	")},removeTrailing:function(e){return e.replace(/\s*?$/gm,"")},removeInitialLineFeed:function(e){return e.replace(/^(?:\r?\n|\r)/,"")},removeIndent:function(e){var n=e.match(/^[^\S\n\r]*(?=\S)/gm);return n&&n[0].length?(n.sort(function(e,n){return e.length-n.length}),n[0].length?e.replace(new RegExp("^"+n[0],"gm"),""):e):e},indent:function(e,n){return e.replace(/^[^\S\n\r]*(?=\S)/gm,new Array(++n).join("	")+"$&")},breakLines:function(e,n){n=n===!0?80:0|n||80;for(var r=e.split("\n"),i=0;i<r.length;++i)if(!(t(r[i])<=n)){for(var o=r[i].split(/(\s+)/g),a=0,s=0;s<o.length;++s){var l=t(o[s]);a+=l,a>n&&(o[s]="\n"+o[s],a=l)}r[i]=o.join("")}return r.join("\n")}},Prism.plugins.NormalizeWhitespace=new e({"remove-trailing":!0,"remove-indent":!0,"left-trim":!0,"right-trim":!0}),Prism.hooks.add("before-highlight",function(e){var n=e.element.parentNode,t=/\bno-whitespace-normalization\b/;if(!(!e.code||!n||"pre"!==n.nodeName.toLowerCase()||e.settings&&e.settings["whitespace-normalization"]===!1||t.test(n.className)||t.test(e.element.className))){for(var r=n.childNodes,i="",o="",a=!1,s=Prism.plugins.NormalizeWhitespace,l=0;l<r.length;++l){var c=r[l];c==e.element?a=!0:"#text"===c.nodeName&&(a?o+=c.nodeValue:i+=c.nodeValue,n.removeChild(c),--l)}if(e.element.children.length&&Prism.plugins.KeepMarkup){var u=i+e.element.innerHTML+o;e.element.innerHTML=s.normalize(u,e.settings),e.code=e.element.textContent}else e.code=i+e.code+o,e.code=s.normalize(e.code,e.settings)}})}}();
 </script></head><body>R script 1<pre><code class="language-r; line-numbers; left-trim; right-trim;">
-## r script UUID: 49566428
+## r script UUID: 55137849
+library(dplyr)
+library(magrittr)
 library(data.table)
-library(Matrix)
-library(readr)
-XtX_full_file <- paste0('output/rss_compare_ukb/prepare_data/prepare_data_1', ".XtX_full_file.full.XTX")
-dataset <- "/scratch/midway2/yuxin/ukb/sims/genotypes/height.chr10.104285594"
-DSC_REPLICATE <- 1
-TIC_90338D94 <- proc.time()
+DSC_62100A82 <- list()
+DSC_62100A82 <- dscrutils:::load_inputs(c('output/rss_compare_ukb/small_data/prepare_data_1_small_data_1.rds','output/rss_compare_ukb/get_sumstats/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2.rds'), dscrutils:::read_dsc)
+DSC_REPLICATE <- DSC_62100A82$DSC_DEBUG$replicate
+N_in <- DSC_62100A82$N_sample
+N_ref <- DSC_62100A82$N_ref
+ld <- DSC_62100A82$ld
+sumstats <- DSC_62100A82$sumstats
+cache <- paste0('output/rss_compare_ukb/finemap/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_finemap_2', ".cache.FM")
+ld_ref_z_file <- paste0('output/rss_compare_ukb/finemap/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_finemap_2', ".ld_ref_z_file.ref.z.ld")
+ld_sample_z_file <- paste0('output/rss_compare_ukb/finemap/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_finemap_2', ".ld_sample_z_file.sample.z.ld")
+args <- "--n-causal-max 1"
+ld_method <- "in_sample"
+add_z <- FALSE
+k <- NULL
+TIC_62100A82 <- proc.time()
 set.seed(DSC_REPLICATE)
-XtX_full <- paste0('output/rss_compare_ukb/prepare_data/prepare_data_1', ".XtX_full_file.full.XTX")
-write('DSC_OUTPUT:\n  XtX_full: output/rss_compare_ukb/prepare_data/prepare_data_1.XtX_full_file.full.XTX', paste0('output/rss_compare_ukb/prepare_data/prepare_data_1', '.yml'))
 
 ## BEGIN DSC CORE
-library(data.table)
-library(Matrix)
-library(readr)
-geno <- fread(paste0(dataset, '.raw.gz'),sep = "\t", header = TRUE, stringsAsFactors = FALSE)
-class(geno) <- "data.frame"
-X <- as(as.matrix(geno[-(1:6)]),'dgCMatrix')
-pheno.file <- "data/height.csv.gz"
-pheno        <- suppressMessages(read_csv(pheno.file))
-class(pheno) <- "data.frame"
-pheno$sex = factor(pheno$sex)
-pheno$assessment_centre = factor(pheno$assessment_centre)
-pheno$genotype_measurement_batch = factor(pheno$genotype_measurement_batch)
-pheno$age2 = pheno$age^2
-ind = fread(paste0(dataset, '.psam'))
-match.idx = match(ind$IID, pheno$id)
-pheno = pheno[match.idx,]
-Z = model.matrix(~ sex + age + age2 + assessment_centre + genotype_measurement_batch +
-                   pc_genetic1 + pc_genetic2 + pc_genetic3 + pc_genetic4 + pc_genetic5 +
-                   pc_genetic6 + pc_genetic7 + pc_genetic8 + pc_genetic9 + pc_genetic10 +
-                   pc_genetic11 + pc_genetic12 + pc_genetic13 + pc_genetic14 + pc_genetic15 +
-                   pc_genetic16 + pc_genetic17 + pc_genetic18 + pc_genetic19 + pc_genetic20, data = pheno)
-Z = Z[,-1]
-Z = scale(Z, center=T, scale=F)
-cols = which(colnames(Z) %in% c("age","pc_genetic1","pc_genetic2","pc_genetic3","pc_genetic4",
-                                "pc_genetic5","pc_genetic6","pc_genetic7","pc_genetic8","pc_genetic9",
-                                "pc_genetic10","pc_genetic11","pc_genetic12","pc_genetic13","pc_genetic14",
-                                "pc_genetic15","pc_genetic16","pc_genetic17","pc_genetic18","pc_genetic19","pc_genetic20"))
-Z[,cols] = scale(Z[,cols])
-Z[,'age2'] = Z[,'age']^2
-X.c = scale(X, center=T, scale=FALSE)
-A   <- crossprod(Z)
-SZX <- as.matrix(solve(A,t(Z) %*% X.c))
-X   <- X.c - Z %*% SZX
-xtxdiag = colSums(X.c^2)
-ld.matrix = as.matrix(fread(paste0(dataset,'.matrix')))
-R = chol(solve(A)) # R'R = (Z'Z)^(-1)
-W = R %*% crossprod(Z, X.c) # RZ'X
-XtX = sqrt(xtxdiag) * t(ld.matrix*sqrt(xtxdiag)) - crossprod(W) # W'W = X'ZR'RZ'X = X'Z(Z'Z)^{-1}Z'X
-write.table(XtX, XtX_full_file, quote=F, col.names=F, row.names=F)
-snps = fread(paste0(dataset, '.pvar'))
-signal_pos = gsub('^.*height.chr\\d*.', '', dataset)
-pos = max(which(snps$POS <= as.integer(signal_pos)))
-res = list(X = X, pos = pos)
+write_finemap_sumstats <- function(z, LD_file, n, k, prefix) {
+  cfg = list(z=paste0(prefix,".z"),
+             ld=LD_file,
+             snp=paste0(prefix,".snp"),
+             config=paste0(prefix,".config"),
+             k=paste0(prefix,".k"),
+             log=paste0(prefix,".log"),
+             meta=paste0(prefix,".master"))
+  write.table(z,cfg$z,quote=F,col.names=F)
+  if (!is.null(k)) {
+      write.table(t(k),cfg$k,quote=F,col.names=F,row.names=F)
+      write("z;ld;snp;config;k;log;n-ind",file=cfg$meta)
+      write(paste(cfg$z, cfg$ld, cfg$snp, cfg$config, cfg$k, cfg$log, n, sep=";"),
+        file=cfg$meta,append=TRUE)
+  } else {
+      write("z;ld;snp;config;log;n-ind",file=cfg$meta)
+      write(paste(cfg$z, cfg$ld, cfg$snp, cfg$config, cfg$log, n, sep=";"),
+            file=cfg$meta,append=TRUE)
+  }
+  return(cfg)
+}
+run_finemap <- function(z, LD_file, n, k, args = "", prefix="data")
+{
+  cfg = write_finemap_sumstats(z, LD_file, n, k, prefix)
+  cmd = paste("finemap --sss --log", "--in-files", cfg$meta, args)
+  dscrutils::run_cmd(cmd)
+  snp = read.table(cfg$snp,header=TRUE,sep=" ")
+  snp$snp = as.character(snp$snp)
+  snp = rank_snp(snp)
+  config = read.table(cfg$config,header=TRUE,sep=" ")
+  ncausal = finemap_extract_ncausal(cfg$log)
+  return(list(snp=snp, set=config, ncausal=ncausal))
+}
+rank_snp <- function(snp) {
+  snp <- arrange(snp, -snp_prob) %>%
+    mutate(
+        rank = seq(1, n()),
+        snp_prob_cumsum = cumsum(snp_prob) / sum(snp_prob)) %>%
+    select(rank, snp, snp_prob, snp_prob_cumsum, snp_log10bf)
+  return(snp)
+}
+finemap_extract_ncausal <- function(logfile)
+{
+  lines <- grep("->", readLines(logfile), value = TRUE)
+  lines <- gsub("\\(|\\)|>", "", lines)
+  splits <- strsplit(lines, "\\s+")
+  tab <- data.frame(
+    ncausal_num = sapply(splits, function(x) as.integer(x[2])),
+    ncausal_prob = sapply(splits, function(x) as.double(x[4])))
+  tab <- mutate(tab, type = ifelse(duplicated(ncausal_num), "post", "prior"))
+  return(tab)
+}
+finemap_mvar <- function(zscore, LD_file, n, k, args, prefix, parallel = FALSE) {
+  if (is.null(dim(zscore))) {
+      zscore = matrix(ncol=1,zscore)
+  }
+  single_core = function(r)
+      run_finemap(zscore[,r], LD_file, n, k, args,
+                  paste0(prefix, '_condition_', r))
+  if (parallel)
+      return(parallel::mclapply(1:ncol(zscore), function(r) single_core(r),
+                                mc.cores = min(8, ncol(zscore))))
+  else
+      return(lapply(1:ncol(zscore), function(r) single_core(r)))
+}
+library(data.table);
+z = sumstats$bhat / sumstats$shat;
+if(add_z){
+  r = as.matrix(fread(ld[[ld_method]]));
+  if(ld_method == 'ref_sample'){
+    if (is.null(N_ref)) stop("Cannot use add_z out sample LD when N_ref is not available (NULL)")
+    r = cov2cor(r*(N_ref-1) + tcrossprod(z));
+    r = (r + t(r))/2;
+    write.table(r,ld_ref_z_file,quote=F,col.names=F,row.names=F);
+    ld_file = ld_ref_z_file;
+  }else{
+    r = cov2cor(r*(N_sample-1) + tcrossprod(z));
+    r = (r + t(r))/2;
+    write.table(r,ld_sample_z_file,quote=F,col.names=F,row.names=F);
+    ld_file = ld_sample_z_file;
+  }
+} else { ld_file = ld[[ld_method]] }
+posterior = finemap_mvar(z,ld_file, N_in, k, args, prefix=cache)
 ## END DSC CORE
 
-saveRDS(list(X=res$X, pos=res$pos, DSC_DEBUG=dscrutils:::save_session(TIC_90338D94, DSC_REPLICATE)), 'output/rss_compare_ukb/prepare_data/prepare_data_1.rds')
+saveRDS(list(posterior=posterior, DSC_DEBUG=dscrutils:::save_session(TIC_62100A82, DSC_REPLICATE)), 'output/rss_compare_ukb/finemap/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_finemap_2.rds')
+
+
+
+
+</code></pre>
+R script 2<pre><code class="language-r; line-numbers; left-trim; right-trim;">
+## r script UUID: 15109541
+library(dplyr)
+library(magrittr)
+library(data.table)
+DSC_1967AEEA <- list()
+DSC_1967AEEA <- dscrutils:::load_inputs(c('output/rss_compare_ukb/small_data/prepare_data_1_small_data_1.rds','output/rss_compare_ukb/get_sumstats/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2.rds'), dscrutils:::read_dsc)
+DSC_REPLICATE <- DSC_1967AEEA$DSC_DEBUG$replicate
+N_in <- DSC_1967AEEA$N_sample
+N_ref <- DSC_1967AEEA$N_ref
+ld <- DSC_1967AEEA$ld
+sumstats <- DSC_1967AEEA$sumstats
+cache <- paste0('output/rss_compare_ukb/caviar/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_caviar_2', ".cache.CAVIAR")
+ld_ref_z_file <- paste0('output/rss_compare_ukb/caviar/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_caviar_2', ".ld_ref_z_file.ref.z.ld")
+ld_sample_z_file <- paste0('output/rss_compare_ukb/caviar/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_caviar_2', ".ld_sample_z_file.sample.z.ld")
+args <- "-g 0.001 -c 1"
+ld_method <- "in_sample"
+add_z <- FALSE
+TIC_1967AEEA <- proc.time()
+set.seed(DSC_REPLICATE)
+
+## BEGIN DSC CORE
+write_caviar_sumstats <- function(z, prefix) {
+  cfg = list(z=paste0(prefix,".z"),
+             set=paste0(prefix,"_set"),
+             post=paste0(prefix,"_post"),
+             log=paste0(prefix,".log"))
+  write.table(z,cfg$z,quote=F,col.names=F)
+  return(cfg)
+}
+run_caviar <- function(z, LD_file, args = "", prefix="data")
+{
+  cfg = write_caviar_sumstats(z, prefix)
+  cmd = paste("CAVIAR", "-z", cfg$z, "-l", LD_file, "-o", prefix, args)
+  dscrutils::run_cmd(cmd)
+  if(!all(file.exists(cfg$post, cfg$set, cfg$log))) {
+      stop("Cannot find one of the post, set, and log files")
+  }
+  file.remove(cfg$z)
+  log <- readLines(cfg$log)
+  snp <- read.delim(cfg$post)
+  stopifnot(ncol(snp) == 3)
+  names(snp) <- c("snp", "snp_prob_set", "snp_prob")
+  snp$snp <- as.character(snp$snp)
+  snp <- rank_snp(snp)
+  set <- readLines(cfg$set)
+  set_ordered <- left_join(data_frame(snp = set), snp, by = "snp") %>%
+    arrange(rank) %$% snp
+  return(list(snp=snp, set=set_ordered))
+}
+rank_snp <- function(snp) {
+  snp <- arrange(snp, -snp_prob) %>%
+    mutate(
+        rank = seq(1, n()),
+        snp_prob_cumsum = cumsum(snp_prob) / sum(snp_prob)) %>%
+    select(rank, snp, snp_prob, snp_prob_cumsum, snp_prob_set)
+  return(snp)
+}
+finemap_mcaviar <- function(zscore, LD_file, args, prefix, parallel = FALSE) {
+  if (is.null(dim(zscore))) {
+      zscore = matrix(ncol=1,zscore)
+  }
+  single_core = function(r)
+      run_caviar(zscore[,r], LD_file, args,
+                  paste0(prefix, '_condition_', r))
+  if (parallel)
+      return(parallel::mclapply(1:ncol(zscore), function(r) single_core(r),
+                                mc.cores = min(8, ncol(zscore))))
+  else
+      return(lapply(1:ncol(zscore), function(r) single_core(r)))
+}
+library(data.table);
+z = sumstats$bhat / sumstats$shat;
+if(add_z){
+  r = as.matrix(fread(ld[[ld_method]]));
+  if(ld_method == 'ref_sample'){
+    if (is.null(N_ref)) stop("Cannot use add_z out sample LD when N_ref is not available (NULL)")
+    r = cov2cor(r*(N_ref-1) + tcrossprod(z));
+    r = (r + t(r))/2;
+    write.table(r,ld_ref_z_file,quote=F,col.names=F,row.names=F);
+    ld_file = ld_ref_z_file;
+  }else{
+    r = cov2cor(r*(N_sample-1) + tcrossprod(z));
+    r = (r + t(r))/2;
+    write.table(r,ld_sample_z_file,quote=F,col.names=F,row.names=F);
+    ld_file = ld_sample_z_file;
+  }
+} else { ld_file = ld[[ld_method]] }
+posterior = finemap_mcaviar(z,ld_file, args, prefix=cache)
+## END DSC CORE
+
+saveRDS(list(posterior=posterior, DSC_DEBUG=dscrutils:::save_session(TIC_1967AEEA, DSC_REPLICATE)), 'output/rss_compare_ukb/caviar/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_caviar_2.rds')
+
+
+
+
+</code></pre>
+R script 3<pre><code class="language-r; line-numbers; left-trim; right-trim;">
+## r script UUID: 15109541
+library(dplyr)
+library(magrittr)
+library(data.table)
+DSC_1967AEEA <- list()
+DSC_1967AEEA <- dscrutils:::load_inputs(c('output/rss_compare_ukb/small_data/prepare_data_1_small_data_1.rds','output/rss_compare_ukb/get_sumstats/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2.rds'), dscrutils:::read_dsc)
+DSC_REPLICATE <- DSC_1967AEEA$DSC_DEBUG$replicate
+N_in <- DSC_1967AEEA$N_sample
+N_ref <- DSC_1967AEEA$N_ref
+ld <- DSC_1967AEEA$ld
+sumstats <- DSC_1967AEEA$sumstats
+cache <- paste0('output/rss_compare_ukb/caviar_add_z/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_caviar_add_z_2', ".cache.CAVIAR")
+ld_ref_z_file <- paste0('output/rss_compare_ukb/caviar_add_z/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_caviar_add_z_2', ".ld_ref_z_file.ref.z.ld")
+ld_sample_z_file <- paste0('output/rss_compare_ukb/caviar_add_z/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_caviar_add_z_2', ".ld_sample_z_file.sample.z.ld")
+args <- "-g 0.001 -c 1"
+ld_method <- "ref_sample"
+add_z <- TRUE
+TIC_1967AEEA <- proc.time()
+set.seed(DSC_REPLICATE)
+
+## BEGIN DSC CORE
+write_caviar_sumstats <- function(z, prefix) {
+  cfg = list(z=paste0(prefix,".z"),
+             set=paste0(prefix,"_set"),
+             post=paste0(prefix,"_post"),
+             log=paste0(prefix,".log"))
+  write.table(z,cfg$z,quote=F,col.names=F)
+  return(cfg)
+}
+run_caviar <- function(z, LD_file, args = "", prefix="data")
+{
+  cfg = write_caviar_sumstats(z, prefix)
+  cmd = paste("CAVIAR", "-z", cfg$z, "-l", LD_file, "-o", prefix, args)
+  dscrutils::run_cmd(cmd)
+  if(!all(file.exists(cfg$post, cfg$set, cfg$log))) {
+      stop("Cannot find one of the post, set, and log files")
+  }
+  file.remove(cfg$z)
+  log <- readLines(cfg$log)
+  snp <- read.delim(cfg$post)
+  stopifnot(ncol(snp) == 3)
+  names(snp) <- c("snp", "snp_prob_set", "snp_prob")
+  snp$snp <- as.character(snp$snp)
+  snp <- rank_snp(snp)
+  set <- readLines(cfg$set)
+  set_ordered <- left_join(data_frame(snp = set), snp, by = "snp") %>%
+    arrange(rank) %$% snp
+  return(list(snp=snp, set=set_ordered))
+}
+rank_snp <- function(snp) {
+  snp <- arrange(snp, -snp_prob) %>%
+    mutate(
+        rank = seq(1, n()),
+        snp_prob_cumsum = cumsum(snp_prob) / sum(snp_prob)) %>%
+    select(rank, snp, snp_prob, snp_prob_cumsum, snp_prob_set)
+  return(snp)
+}
+finemap_mcaviar <- function(zscore, LD_file, args, prefix, parallel = FALSE) {
+  if (is.null(dim(zscore))) {
+      zscore = matrix(ncol=1,zscore)
+  }
+  single_core = function(r)
+      run_caviar(zscore[,r], LD_file, args,
+                  paste0(prefix, '_condition_', r))
+  if (parallel)
+      return(parallel::mclapply(1:ncol(zscore), function(r) single_core(r),
+                                mc.cores = min(8, ncol(zscore))))
+  else
+      return(lapply(1:ncol(zscore), function(r) single_core(r)))
+}
+library(data.table);
+z = sumstats$bhat / sumstats$shat;
+if(add_z){
+  r = as.matrix(fread(ld[[ld_method]]));
+  if(ld_method == 'ref_sample'){
+    if (is.null(N_ref)) stop("Cannot use add_z out sample LD when N_ref is not available (NULL)")
+    r = cov2cor(r*(N_ref-1) + tcrossprod(z));
+    r = (r + t(r))/2;
+    write.table(r,ld_ref_z_file,quote=F,col.names=F,row.names=F);
+    ld_file = ld_ref_z_file;
+  }else{
+    r = cov2cor(r*(N_sample-1) + tcrossprod(z));
+    r = (r + t(r))/2;
+    write.table(r,ld_sample_z_file,quote=F,col.names=F,row.names=F);
+    ld_file = ld_sample_z_file;
+  }
+} else { ld_file = ld[[ld_method]] }
+posterior = finemap_mcaviar(z,ld_file, args, prefix=cache)
+## END DSC CORE
+
+saveRDS(list(posterior=posterior, DSC_DEBUG=dscrutils:::save_session(TIC_1967AEEA, DSC_REPLICATE)), 'output/rss_compare_ukb/caviar_add_z/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_caviar_add_z_2.rds')
+
+
+
+
+</code></pre>
+R script 4<pre><code class="language-r; line-numbers; left-trim; right-trim;">
+## r script UUID: 55137849
+library(dplyr)
+library(magrittr)
+library(data.table)
+DSC_62100A82 <- list()
+DSC_62100A82 <- dscrutils:::load_inputs(c('output/rss_compare_ukb/small_data/prepare_data_1_small_data_1.rds','output/rss_compare_ukb/get_sumstats/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2.rds'), dscrutils:::read_dsc)
+DSC_REPLICATE <- DSC_62100A82$DSC_DEBUG$replicate
+N_in <- DSC_62100A82$N_sample
+N_ref <- DSC_62100A82$N_ref
+ld <- DSC_62100A82$ld
+sumstats <- DSC_62100A82$sumstats
+cache <- paste0('output/rss_compare_ukb/finemap_add_z/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_finemap_add_z_2', ".cache.FM")
+ld_ref_z_file <- paste0('output/rss_compare_ukb/finemap_add_z/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_finemap_add_z_2', ".ld_ref_z_file.ref.z.ld")
+ld_sample_z_file <- paste0('output/rss_compare_ukb/finemap_add_z/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_finemap_add_z_2', ".ld_sample_z_file.sample.z.ld")
+args <- "--n-causal-max 1"
+ld_method <- "ref_sample"
+add_z <- TRUE
+k <- NULL
+TIC_62100A82 <- proc.time()
+set.seed(DSC_REPLICATE)
+
+## BEGIN DSC CORE
+write_finemap_sumstats <- function(z, LD_file, n, k, prefix) {
+  cfg = list(z=paste0(prefix,".z"),
+             ld=LD_file,
+             snp=paste0(prefix,".snp"),
+             config=paste0(prefix,".config"),
+             k=paste0(prefix,".k"),
+             log=paste0(prefix,".log"),
+             meta=paste0(prefix,".master"))
+  write.table(z,cfg$z,quote=F,col.names=F)
+  if (!is.null(k)) {
+      write.table(t(k),cfg$k,quote=F,col.names=F,row.names=F)
+      write("z;ld;snp;config;k;log;n-ind",file=cfg$meta)
+      write(paste(cfg$z, cfg$ld, cfg$snp, cfg$config, cfg$k, cfg$log, n, sep=";"),
+        file=cfg$meta,append=TRUE)
+  } else {
+      write("z;ld;snp;config;log;n-ind",file=cfg$meta)
+      write(paste(cfg$z, cfg$ld, cfg$snp, cfg$config, cfg$log, n, sep=";"),
+            file=cfg$meta,append=TRUE)
+  }
+  return(cfg)
+}
+run_finemap <- function(z, LD_file, n, k, args = "", prefix="data")
+{
+  cfg = write_finemap_sumstats(z, LD_file, n, k, prefix)
+  cmd = paste("finemap --sss --log", "--in-files", cfg$meta, args)
+  dscrutils::run_cmd(cmd)
+  snp = read.table(cfg$snp,header=TRUE,sep=" ")
+  snp$snp = as.character(snp$snp)
+  snp = rank_snp(snp)
+  config = read.table(cfg$config,header=TRUE,sep=" ")
+  ncausal = finemap_extract_ncausal(cfg$log)
+  return(list(snp=snp, set=config, ncausal=ncausal))
+}
+rank_snp <- function(snp) {
+  snp <- arrange(snp, -snp_prob) %>%
+    mutate(
+        rank = seq(1, n()),
+        snp_prob_cumsum = cumsum(snp_prob) / sum(snp_prob)) %>%
+    select(rank, snp, snp_prob, snp_prob_cumsum, snp_log10bf)
+  return(snp)
+}
+finemap_extract_ncausal <- function(logfile)
+{
+  lines <- grep("->", readLines(logfile), value = TRUE)
+  lines <- gsub("\\(|\\)|>", "", lines)
+  splits <- strsplit(lines, "\\s+")
+  tab <- data.frame(
+    ncausal_num = sapply(splits, function(x) as.integer(x[2])),
+    ncausal_prob = sapply(splits, function(x) as.double(x[4])))
+  tab <- mutate(tab, type = ifelse(duplicated(ncausal_num), "post", "prior"))
+  return(tab)
+}
+finemap_mvar <- function(zscore, LD_file, n, k, args, prefix, parallel = FALSE) {
+  if (is.null(dim(zscore))) {
+      zscore = matrix(ncol=1,zscore)
+  }
+  single_core = function(r)
+      run_finemap(zscore[,r], LD_file, n, k, args,
+                  paste0(prefix, '_condition_', r))
+  if (parallel)
+      return(parallel::mclapply(1:ncol(zscore), function(r) single_core(r),
+                                mc.cores = min(8, ncol(zscore))))
+  else
+      return(lapply(1:ncol(zscore), function(r) single_core(r)))
+}
+library(data.table);
+z = sumstats$bhat / sumstats$shat;
+if(add_z){
+  r = as.matrix(fread(ld[[ld_method]]));
+  if(ld_method == 'ref_sample'){
+    if (is.null(N_ref)) stop("Cannot use add_z out sample LD when N_ref is not available (NULL)")
+    r = cov2cor(r*(N_ref-1) + tcrossprod(z));
+    r = (r + t(r))/2;
+    write.table(r,ld_ref_z_file,quote=F,col.names=F,row.names=F);
+    ld_file = ld_ref_z_file;
+  }else{
+    r = cov2cor(r*(N_sample-1) + tcrossprod(z));
+    r = (r + t(r))/2;
+    write.table(r,ld_sample_z_file,quote=F,col.names=F,row.names=F);
+    ld_file = ld_sample_z_file;
+  }
+} else { ld_file = ld[[ld_method]] }
+posterior = finemap_mvar(z,ld_file, N_in, k, args, prefix=cache)
+## END DSC CORE
+
+saveRDS(list(posterior=posterior, DSC_DEBUG=dscrutils:::save_session(TIC_62100A82, DSC_REPLICATE)), 'output/rss_compare_ukb/finemap_add_z/prepare_data_2_small_data_2_sim_gaussian_2_get_sumstats_2_finemap_add_z_2.rds')
 
 
 

@@ -13,12 +13,11 @@ prepare_data: data_removeZ.R
   $pos: res$pos
   $XtX_full: XtX_full_file
   
-full_data: sim_utils.R + data_sim.R
+full_data: sim_utils.R + data_prepare.R
   tag: "full"
-  X: $X
-  pos: $pos
-  XtX_full: $XtX_full
+  dataset: Shell{cat ${data_file}}
   subset: NULL
+  maf_thresh: 0
   GWASsample: ${GWAS_sample}
   REFsample: ${REF_sample}
   ld_sample_file: file(sample.ld)
@@ -27,6 +26,7 @@ full_data: sim_utils.R + data_sim.R
   $X_ref: X.ref
   $N_sample: nrow(X.sample)
   $N_ref: nrow(X.ref)
+  $maf: list(in_sample=maf.sample, ref_sample=maf.ref)
   $ld: list(in_sample=ld_sample_file, ref_sample=ld_ref_file)
 
 lite_data(full_data):

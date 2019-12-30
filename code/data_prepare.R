@@ -24,15 +24,15 @@ if(REFsample > 0){
 }
 
 # Remove invariant SNPs
-sample.index = apply(X.sample, 2, var, na.rm=TRUE) != 0
+sample.idx = apply(X.sample, 2, var, na.rm=TRUE) != 0
 if (all(!is.na(X.ref))) {
-  ref.index = apply(X.ref, 2, var, na.rm=TRUE) != 0
+  ref.idx = apply(X.ref, 2, var, na.rm=TRUE) != 0
 } else {
-  ref.index = 1
+  ref.idx = 1
 }
-choose.index = as.logical(sample.index * ref.index)
-X.sample = X.sample[, choose.index]
-if (all(!is.na(X.ref))) X.ref = X.ref[, choose.index]
+choose.idx = which(sample.idx * ref.idx == 1)
+X.sample = X.sample[, choose.idx]
+if (all(!is.na(X.ref))) X.ref = X.ref[, choose.idx]
 
 # Compute MAF
 maf.sample = apply(X.sample, 2, function(x) sum(x)/(2*length(x)))
@@ -51,7 +51,7 @@ if (maf_thresh > 0) {
     } else {
         ref.idx = 1
     }
-    overlap.idx = as.logical(sample.idx*ref.idx)
+    overlap.idx = which(sample.idx*ref.idx == 1)
     X.sample = X.sample[, overlap.idx]
     maf.sample = maf.sample[overlap.idx]
     if (all(!is.na(X.ref))) {
@@ -59,10 +59,13 @@ if (maf_thresh > 0) {
         maf.ref = maf.ref[overlap.idx]
     }
 }else{
-  overlap.idx = 1:length(choose.index)
+  overlap.idx = 1:length(choose.idx)
 }
 
 # subset SNPs
+snps = fread(paste0(dataset, '.pvar'))
+signal_pos = gsub('^.*height.chr\\d*.', '', dataset)
+pos = max(which(snps$POS[choose.idx[overlap.idx]] <= as.integer(signal_pos)))
 X.idx = get_genotype(subset, ncol(X.sample), pos)
 X.sample = X.sample[, X.idx]
 if(all(!is.na(X.ref))){
@@ -106,24 +109,26 @@ remove_Z = function(X, pheno){
   X.c = scale(X, center=T, scale=FALSE)
   
   # Remove Z from X
-  A   <- crossprod(Z)
-  SZX <- as.matrix(solve(A,t(Z) %*% X.c))
-  X   <- X.c - Z %*% SZX
-  R = chol(solve(A)) # R'R = (Z'Z)^(-1)
-  W = R %*% crossprod(Z, X.c) # RZ'X
+  qrZ <- qr(Z) # Z = QR
+  Z = Z[, qrZ$pivot[1:qrZ$rank]] # remove rank deficient columns
+  qrZ.R = qr.R(qrZ)[1:qrZ$rank, 1:qrZ$rank]
+  qrZ.Q = qr.Q(qrZ)[, 1:qrZ$rank]
+  W = crossprod(qrZ.Q, X.c) # W = Q'X
+  SZX = backsolve(qrZ.R, W) # (Z'Z)^{-1} Z'X = R^{-1} Q'X
+  X = X.c - Z %*% SZX
   
-  return(list(X=X, A=A, Z=Z, xtxdiag = colSums(X.c^2), W=W))
+  return(list(X=X, xtxdiag = colSums(X.c^2), W=W))
 }
 
 pheno.sample = pheno[in_sample, ]
 X.sample.res = remove_Z(X.sample, pheno.sample)
-X.sample = X.sample$X
+X.sample = X.sample.res$X
 
 if(GWASsample == n){
   ld.matrix = as.matrix(fread(paste0(dataset,'.matrix')))
-  ld.matrix = ld.matrix[choose.index[overlap.idx[X.idx]], choose.index[overlap.idx[X.idx]]]
+  ld.matrix = ld.matrix[choose.idx[overlap.idx[X.idx]], choose.idx[overlap.idx[X.idx]]]
   XtX = sqrt(X.sample.res$xtxdiag) * t(ld.matrix*sqrt(X.sample.res$xtxdiag)) - 
-    crossprod(X.sample.res$W) # W'W = X'ZR'RZ'X = X'Z(Z'Z)^{-1}Z'X
+    crossprod(X.sample.res$W) # W'W = X'Q Q'X = X'Z(Z'Z)^{-1}Z'X
   r.sample = cov2cor(XtX)
 }else{
   r.sample = cor(X.sample)
@@ -132,7 +137,7 @@ if(GWASsample == n){
 if (all(!is.na(X.ref))) {
   pheno.ref = pheno[ref_sample, ]
   X.ref.res = remove_Z(X.ref, pheno.ref)
-  X.ref = X.ref$X
+  X.ref = X.ref.res$X
   r.ref = cor(X.ref)
 } else {
   r.ref = NA

@@ -34,6 +34,7 @@ score_susie: susie_scores.R + R(sc = susie_scores_multiple($(fitted), $(meta)$tr
     $top: sc$top
     $objective: sc$objective
     $converged: sc$converged
+    $niter: sc$niter
     $overlap: sc$overlap
     $signal_pip: sc$signal_pip
     $pip: sc$pip
@@ -55,7 +56,7 @@ score_finemap: finemap_scores.R + R(sc = finemap_scores_multiple($(posterior), $
     $signal_pip: sc$signal_pip
     $pip: sc$pip
     
-score_finemapv3: finemap_scores.R + R(sc = finemap_v1.3_scores_multiple($(posterior), $(meta)$true_coef))
+score_finemapv3: finemap_scores.R + R(sc = finemap_v1.3.1_scores_multiple($(posterior), $(meta)$true_coef))
     $total: sc$total
     $valid: sc$valid
     $size: sc$size

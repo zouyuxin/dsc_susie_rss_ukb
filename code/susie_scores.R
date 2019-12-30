@@ -59,7 +59,7 @@ susie_scores = function(sets, pip, true_coef) {
 }
 
 susie_scores_multiple = function(res, truth) {
-  total = valid = top = overlap = objective = converged = vector()
+  total = valid = top = overlap = objective = converged = niter = vector()
   signal_pip = pip = size = purity = avgr2 = list()
   for (r in 1:length(res)) {
     out = susie_scores(res[[r]]$sets, res[[r]]$pip, truth[,r])
@@ -67,6 +67,7 @@ susie_scores_multiple = function(res, truth) {
     valid[r] = out$valid
     top[r] = out$top
     overlap[r] = out$has_overlap
+    niter[r] = out$niter
     if(is.null(susieR::susie_get_objective(res[[r]]))){
       objective[r] = NA
       converged[r] = NA
@@ -80,6 +81,6 @@ susie_scores_multiple = function(res, truth) {
     purity[[r]] = out$purity
     avgr2[[r]] = out$avgr2
   }
-  return(list(total=total, valid=valid, size=size, purity=purity, avgr2=avgr2, top=top, objective=objective, converged=converged,
-              overlap=overlap, signal_pip = do.call(cbind, signal_pip), pip = do.call(cbind, pip)))
+  return(list(total=total, valid=valid, size=size, purity=purity, avgr2=avgr2, top=top, objective=objective, converged=converged, 
+              niter = niter, overlap=overlap, signal_pip = do.call(cbind, signal_pip), pip = do.call(cbind, pip)))
 }

@@ -3,7 +3,7 @@ sim_gaussian: simulate.R + \
                 res=sim_gaussian_multiple(X, pve, n_signal, neale_effects$beta, n_traits))
   @CONF: R_libs = susieR
   X: $X_sample
-  pve: 0.02
+  pve: 0.01
   n_signal: 1,2,3,4,5
   effects: ${neale_effect_size}
   n_traits: 1

@@ -52,7 +52,7 @@ finemap_scores_multiple = function(res, truth) {
   return(list(total=total, valid=valid, size=size, signal_pip = do.call(cbind,signal_pip), pip = do.call(cbind,pip)))
 }
 
-finemap_v1.3_scores = function(cs, pip, true_coef) {
+finemap_v1.3.1_scores = function(cs, pip, true_coef) {
   if (is.null(dim(true_coef))) beta_idx = which(true_coef!=0)
   else beta_idx = which(apply(true_coef, 1, sum) != 0)
 
@@ -76,10 +76,9 @@ finemap_v1.3_scores = function(cs, pip, true_coef) {
   return(list(total=total, valid=valid, size=size, signal_pip = pip[beta_idx]))
 }
 
-finemap_v1.3_scores_multiple = function(res, truth) {
-  total = valid = size = vector() 
-  signal_pip = list()
-  pip = list()
+finemap_v1.3.1_scores_multiple = function(res, truth) {
+  total = valid = vector() 
+  signal_pip = size = pip = list()
   for (r in 1:length(res)) {
     set = res[[r]]$set
     snps = res[[r]]$snp
@@ -89,12 +88,12 @@ finemap_v1.3_scores_multiple = function(res, truth) {
     }else{
       snps = snps[order(as.numeric(snps$snp)),]
 
-      out = finemap_v1.3_scores(set, snps$snp_prob, truth[,r])
+      out = finemap_v1.3.1_scores(set, snps$snp_prob, truth[,r])
       pip[[r]] = snps$snp_prob
     }
     total[r] = out$total
     valid[r] = out$valid
-    size[r] = out$size
+    size[[r]] = out$size
     signal_pip[[r]] = out$signal_pip
   }
   return(list(total=total, valid=valid, size=size, signal_pip = do.call(cbind,signal_pip), pip = do.call(cbind,pip)))

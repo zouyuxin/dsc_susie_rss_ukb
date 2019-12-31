@@ -51,8 +51,12 @@ finemapv3(caviar): fit_finemap_v3.R + add_z.R + R(posterior = finemap_mvar_v1.3.
   k: NULL
   maf: $maf
   method: 'sss'
-  args: "--n-causal-snps 5"
+  args: "--n-causal-snps 1", "--n-causal-snps 2", "--n-causal-snps 3"
   cache: file(FM)
+
+finemapv3_add_z(finemapv3):
+  add_z: TRUE
+  ld_method: "ref_sample"
 
 finemapv3_in_sample(finemapv3):
   ld_method: "in_sample"

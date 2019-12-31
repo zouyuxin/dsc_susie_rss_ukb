@@ -68,8 +68,10 @@ signal_pos = gsub('^.*height.chr\\d*.', '', dataset)
 pos = max(which(snps$POS[choose.idx[overlap.idx]] <= as.integer(signal_pos)))
 X.idx = get_genotype(subset, ncol(X.sample), pos)
 X.sample = X.sample[, X.idx]
+maf.sample = maf.sample[X.idx]
 if(all(!is.na(X.ref))){
   X.ref = X.ref[,X.idx]
+  maf.ref = maf.ref[X.idx]
 }
 
 

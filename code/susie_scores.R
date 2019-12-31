@@ -67,7 +67,7 @@ susie_scores_multiple = function(res, truth) {
     valid[r] = out$valid
     top[r] = out$top
     overlap[r] = out$has_overlap
-    niter[r] = out$niter
+    niter[r] = res[[r]]$niter
     if(is.null(susieR::susie_get_objective(res[[r]]))){
       objective[r] = NA
       converged[r] = NA

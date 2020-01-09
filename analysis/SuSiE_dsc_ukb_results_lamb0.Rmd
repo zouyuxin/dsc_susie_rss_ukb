@@ -140,10 +140,10 @@ print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 
 #### CS
 
-![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_cs_plots.png)
+![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_cs_plots.png)
 
 ```{r fig.align='center', fig.width=20, results='asis'}
-output = 'docs/assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_cs.rds'
+output = 'docs/assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_cs.rds'
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ```

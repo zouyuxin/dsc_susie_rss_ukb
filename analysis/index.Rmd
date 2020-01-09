@@ -8,4 +8,10 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+* The result using GWASsample = 10000, REFsample = 500:
+
+    - [lambda = 0](SuSiE_dsc_ukb_results_lamb0.html)
+    
+    - [lambda = $10^{-4}$](SuSiE_dsc_ukb_results_lamb1e-4.html)
+
+    - [lambda = 0.1](SuSiE_dsc_ukb_results_lamb0.1.html)

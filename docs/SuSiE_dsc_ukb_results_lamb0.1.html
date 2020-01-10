@@ -1,0 +1,3247 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Yuxin Zou" />
+
+<meta name="date" content="2020-01-08" />
+
+<title>SuSiE-RSS lambda = 0.1</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">dsc_susie_rss_ukb</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">SuSiE-RSS lambda = 0.1</h1>
+<h4 class="author"><em>Yuxin Zou</em></h4>
+<h4 class="date"><em>01/08/2020</em></h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-01-10
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>dsc_susie_rss_ukb/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200107code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200107)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200107code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200107)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree3048e02ea29cdc52c4669796f27958135479dc61targetblank3048e02a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/3048e02ea29cdc52c4669796f27958135479dc61" target="_blank">3048e02</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree3048e02ea29cdc52c4669796f27958135479dc61targetblank3048e02a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .sos/
+    Ignored:    00608a5488968579.err
+    Ignored:    00608a5488968579.out
+    Ignored:    006dc101720d0af4.err
+    Ignored:    006dc101720d0af4.out
+    Ignored:    015bcce58664179e.err
+    Ignored:    015bcce58664179e.out
+    Ignored:    01c5137557b46c28.err
+    Ignored:    01c5137557b46c28.out
+    Ignored:    02eb5566a56d6584.err
+    Ignored:    02eb5566a56d6584.out
+    Ignored:    031e66e0b1a24cb4.err
+    Ignored:    031e66e0b1a24cb4.out
+    Ignored:    0379e70efd799206.err
+    Ignored:    0379e70efd799206.out
+    Ignored:    0391dcc021f246f3.err
+    Ignored:    0391dcc021f246f3.out
+    Ignored:    03caed86b82f6be2.err
+    Ignored:    03caed86b82f6be2.out
+    Ignored:    03cf201e705532f9.err
+    Ignored:    03cf201e705532f9.out
+    Ignored:    03edccb33e2d4e3e.err
+    Ignored:    03edccb33e2d4e3e.out
+    Ignored:    0405cbd1d2a26ab0.err
+    Ignored:    0405cbd1d2a26ab0.out
+    Ignored:    0446e9d11205ddf2.err
+    Ignored:    0446e9d11205ddf2.out
+    Ignored:    04eeae51415f14ef.err
+    Ignored:    04eeae51415f14ef.out
+    Ignored:    05571307f4f58346.err
+    Ignored:    05571307f4f58346.out
+    Ignored:    05cb14c96026701d.err
+    Ignored:    05cb14c96026701d.out
+    Ignored:    0604cf1db5da6374.err
+    Ignored:    0604cf1db5da6374.out
+    Ignored:    063fa9b80dffd0f7.err
+    Ignored:    063fa9b80dffd0f7.out
+    Ignored:    06b8256296173dfe.err
+    Ignored:    06b8256296173dfe.out
+    Ignored:    06c34e72b07767a5.err
+    Ignored:    06c34e72b07767a5.out
+    Ignored:    06cee88772e4e20f.err
+    Ignored:    06cee88772e4e20f.out
+    Ignored:    070f0b4662564b0f.err
+    Ignored:    070f0b4662564b0f.out
+    Ignored:    077e9b32a84a0263.err
+    Ignored:    077e9b32a84a0263.out
+    Ignored:    08e2a38ae4688e6a.err
+    Ignored:    08e2a38ae4688e6a.out
+    Ignored:    0adcf08ea2a108f7.err
+    Ignored:    0adcf08ea2a108f7.out
+    Ignored:    0b24ba995c109a2d.err
+    Ignored:    0b24ba995c109a2d.out
+    Ignored:    0b3c05fe4c9cbb8b.err
+    Ignored:    0b3c05fe4c9cbb8b.out
+    Ignored:    0ba2c1451c52844e.err
+    Ignored:    0ba2c1451c52844e.out
+    Ignored:    0c07774ca2f617c6.err
+    Ignored:    0c07774ca2f617c6.out
+    Ignored:    0c36aa69522043c8.err
+    Ignored:    0c36aa69522043c8.out
+    Ignored:    0c75e72fbecd9daf.err
+    Ignored:    0c75e72fbecd9daf.out
+    Ignored:    0c7efe9eb66fd767.err
+    Ignored:    0c7efe9eb66fd767.out
+    Ignored:    0d0b05dfcdd0914f.err
+    Ignored:    0d0b05dfcdd0914f.out
+    Ignored:    0d2a4addf2295404.err
+    Ignored:    0d2a4addf2295404.out
+    Ignored:    0d44a1b3305337ab.err
+    Ignored:    0d44a1b3305337ab.out
+    Ignored:    0d64130a153ad0c2.err
+    Ignored:    0d64130a153ad0c2.out
+    Ignored:    0d944e34f65cd2dc.err
+    Ignored:    0d944e34f65cd2dc.out
+    Ignored:    0e5d81a3513f48eb.err
+    Ignored:    0e5d81a3513f48eb.out
+    Ignored:    0ebad934901bf5e3.err
+    Ignored:    0ebad934901bf5e3.out
+    Ignored:    0f537a5e1529b281.err
+    Ignored:    0f537a5e1529b281.out
+    Ignored:    0fb55845a0c95b50.err
+    Ignored:    0fb55845a0c95b50.out
+    Ignored:    0fddaa49446b01bf.err
+    Ignored:    0fddaa49446b01bf.out
+    Ignored:    0ffa5e53e8dbd5cd.err
+    Ignored:    0ffa5e53e8dbd5cd.out
+    Ignored:    10db5ec3e9b70262.err
+    Ignored:    10db5ec3e9b70262.out
+    Ignored:    10f88de029ba2a93.err
+    Ignored:    10f88de029ba2a93.out
+    Ignored:    122de6440875ed55.err
+    Ignored:    122de6440875ed55.out
+    Ignored:    122eb435f926f07e.err
+    Ignored:    122eb435f926f07e.out
+    Ignored:    12610073fae168a0.err
+    Ignored:    12610073fae168a0.out
+    Ignored:    126d3048139ed4b9.err
+    Ignored:    126d3048139ed4b9.out
+    Ignored:    131189d013d08d85.err
+    Ignored:    131189d013d08d85.out
+    Ignored:    132a800579db61d9.err
+    Ignored:    132a800579db61d9.out
+    Ignored:    139f1968485c8e80.err
+    Ignored:    139f1968485c8e80.out
+    Ignored:    147688ad0ee24ef3.err
+    Ignored:    147688ad0ee24ef3.out
+    Ignored:    14f3dbfb7440467c.err
+    Ignored:    14f3dbfb7440467c.out
+    Ignored:    15073b09e925eb58.err
+    Ignored:    15073b09e925eb58.out
+    Ignored:    1580c0dbd7d6e3f1.err
+    Ignored:    1580c0dbd7d6e3f1.out
+    Ignored:    163417e70b47d9f1.err
+    Ignored:    163417e70b47d9f1.out
+    Ignored:    16b057289806e154.err
+    Ignored:    16b057289806e154.out
+    Ignored:    16be6a85152484ad.err
+    Ignored:    16be6a85152484ad.out
+    Ignored:    16e2b4742b212db2.err
+    Ignored:    16e2b4742b212db2.out
+    Ignored:    172514dea022dba9.err
+    Ignored:    172514dea022dba9.out
+    Ignored:    17e5047d6e02cadf.err
+    Ignored:    17e5047d6e02cadf.out
+    Ignored:    180a5736dc95b1ca.err
+    Ignored:    180a5736dc95b1ca.out
+    Ignored:    1835197227d6232e.err
+    Ignored:    1835197227d6232e.out
+    Ignored:    18eba9f45575027e.err
+    Ignored:    18eba9f45575027e.out
+    Ignored:    1992492ed623e9fe.err
+    Ignored:    1992492ed623e9fe.out
+    Ignored:    19bfc5cec2d1b547.err
+    Ignored:    19bfc5cec2d1b547.out
+    Ignored:    19c47c981bf7c9fd.err
+    Ignored:    19c47c981bf7c9fd.out
+    Ignored:    19e01be3024a552f.err
+    Ignored:    19e01be3024a552f.out
+    Ignored:    1abf0c8468d7c744.err
+    Ignored:    1abf0c8468d7c744.out
+    Ignored:    1b05f5f30da9cb7c.err
+    Ignored:    1b05f5f30da9cb7c.out
+    Ignored:    1b178975de5d62f3.err
+    Ignored:    1b178975de5d62f3.out
+    Ignored:    1b4eb6bfa5322c55.err
+    Ignored:    1b4eb6bfa5322c55.out
+    Ignored:    1b8429833f6c66f5.err
+    Ignored:    1b8429833f6c66f5.out
+    Ignored:    1b9c5e18087902ac.err
+    Ignored:    1b9c5e18087902ac.out
+    Ignored:    1b9e3a15b0b4a2c5.err
+    Ignored:    1b9e3a15b0b4a2c5.out
+    Ignored:    1bbb477156f6cc9f.err
+    Ignored:    1bbb477156f6cc9f.out
+    Ignored:    1bf5296589b8c1c2.err
+    Ignored:    1bf5296589b8c1c2.out
+    Ignored:    1d7658f5e03f29dd.err
+    Ignored:    1d7658f5e03f29dd.out
+    Ignored:    1da1005af17c491f.err
+    Ignored:    1da1005af17c491f.out
+    Ignored:    1db612da2b441b23.err
+    Ignored:    1db612da2b441b23.out
+    Ignored:    1e24e81b06d2a8b7.err
+    Ignored:    1e24e81b06d2a8b7.out
+    Ignored:    1ecb50dba9d8ab1b.err
+    Ignored:    1ecb50dba9d8ab1b.out
+    Ignored:    1ecf41c3a39be2ad.err
+    Ignored:    1ecf41c3a39be2ad.out
+    Ignored:    1f5c374bed6b4796.err
+    Ignored:    1f5c374bed6b4796.out
+    Ignored:    1f8025bbc806ee9e.err
+    Ignored:    1f8025bbc806ee9e.out
+    Ignored:    1f9ed1ace4dd8d5c.err
+    Ignored:    1f9ed1ace4dd8d5c.out
+    Ignored:    1fcfe94d0b929ffd.err
+    Ignored:    1fcfe94d0b929ffd.out
+    Ignored:    203813ecb330a41e.err
+    Ignored:    203813ecb330a41e.out
+    Ignored:    20b51e036e903feb.err
+    Ignored:    20b51e036e903feb.out
+    Ignored:    20c4582ed5fc39fb.err
+    Ignored:    20c4582ed5fc39fb.out
+    Ignored:    211687a3bcbd147f.err
+    Ignored:    211687a3bcbd147f.out
+    Ignored:    21cb4d7d8a405930.err
+    Ignored:    21cb4d7d8a405930.out
+    Ignored:    2206d2f36dba8b25.err
+    Ignored:    2206d2f36dba8b25.out
+    Ignored:    22268ab27e5fc293.err
+    Ignored:    22268ab27e5fc293.out
+    Ignored:    2268a7d6c8191c98.err
+    Ignored:    2268a7d6c8191c98.out
+    Ignored:    22b84553069260f3.err
+    Ignored:    22b84553069260f3.out
+    Ignored:    233c7eb059031c95.err
+    Ignored:    233c7eb059031c95.out
+    Ignored:    23bf4e25c33691e7.err
+    Ignored:    23bf4e25c33691e7.out
+    Ignored:    24a6c57f230d8e79.err
+    Ignored:    24a6c57f230d8e79.out
+    Ignored:    24c20e0cc99424fa.err
+    Ignored:    24c20e0cc99424fa.out
+    Ignored:    2511d69ec77657f8.err
+    Ignored:    2511d69ec77657f8.out
+    Ignored:    2524b73a4e4f3b11.err
+    Ignored:    2524b73a4e4f3b11.out
+    Ignored:    2603a0abb60cf135.err
+    Ignored:    2603a0abb60cf135.out
+    Ignored:    2668318de7e14683.err
+    Ignored:    2668318de7e14683.out
+    Ignored:    268225b218e5deda.err
+    Ignored:    268225b218e5deda.out
+    Ignored:    27066cd0549a220a.err
+    Ignored:    27066cd0549a220a.out
+    Ignored:    27b06d92f8d760d9.err
+    Ignored:    27b06d92f8d760d9.out
+    Ignored:    2848444b3efbc0dc.err
+    Ignored:    2848444b3efbc0dc.out
+    Ignored:    288838f503077ea7.err
+    Ignored:    288838f503077ea7.out
+    Ignored:    288dc3d74b1a1dd9.err
+    Ignored:    288dc3d74b1a1dd9.out
+    Ignored:    289b55cb34aa499b.err
+    Ignored:    289b55cb34aa499b.out
+    Ignored:    28d813e56ef14c93.err
+    Ignored:    28d813e56ef14c93.out
+    Ignored:    28f933faf5b19b02.err
+    Ignored:    28f933faf5b19b02.out
+    Ignored:    29870820fea16bd6.err
+    Ignored:    29870820fea16bd6.out
+    Ignored:    298785ed66981949.err
+    Ignored:    298785ed66981949.out
+    Ignored:    29c77a38e3b98927.err
+    Ignored:    29c77a38e3b98927.out
+    Ignored:    2a4fcee72e8c6a00.err
+    Ignored:    2a4fcee72e8c6a00.out
+    Ignored:    2a9133e5af27cf63.err
+    Ignored:    2a9133e5af27cf63.out
+    Ignored:    2ab4a4a97a1cc30d.err
+    Ignored:    2ab4a4a97a1cc30d.out
+    Ignored:    2af310f5eb7104d6.err
+    Ignored:    2af310f5eb7104d6.out
+    Ignored:    2b80e7b83150eef2.err
+    Ignored:    2b80e7b83150eef2.out
+    Ignored:    2bd4ea3c0fe2c6ba.err
+    Ignored:    2bd4ea3c0fe2c6ba.out
+    Ignored:    2bd5c2d715f2dfd2.err
+    Ignored:    2bd5c2d715f2dfd2.out
+    Ignored:    2bf251455dc94696.err
+    Ignored:    2bf251455dc94696.out
+    Ignored:    2c0cc75107ffb794.err
+    Ignored:    2c0cc75107ffb794.out
+    Ignored:    2c72b116a96cbd9a.err
+    Ignored:    2c72b116a96cbd9a.out
+    Ignored:    2cf3ad4299e9ca64.err
+    Ignored:    2cf3ad4299e9ca64.out
+    Ignored:    2d045add0f5060ab.err
+    Ignored:    2d045add0f5060ab.out
+    Ignored:    2d34d69de00fae3c.err
+    Ignored:    2d34d69de00fae3c.out
+    Ignored:    2d752dd13f91e901.err
+    Ignored:    2d752dd13f91e901.out
+    Ignored:    2deec3c475f83274.err
+    Ignored:    2deec3c475f83274.out
+    Ignored:    2def94981ae3cd5a.err
+    Ignored:    2def94981ae3cd5a.out
+    Ignored:    2e0d0a00cd5e36fa.err
+    Ignored:    2e0d0a00cd5e36fa.out
+    Ignored:    2e1bdc87d4aee8cc.err
+    Ignored:    2e1bdc87d4aee8cc.out
+    Ignored:    2e3c0353a7ed1419.err
+    Ignored:    2e3c0353a7ed1419.out
+    Ignored:    2e855285ef4161fe.err
+    Ignored:    2e855285ef4161fe.out
+    Ignored:    2eaa4528f15475bd.err
+    Ignored:    2eaa4528f15475bd.out
+    Ignored:    2f1ef372e33081ee.err
+    Ignored:    2f1ef372e33081ee.out
+    Ignored:    2f81685add1bdb3d.err
+    Ignored:    2f81685add1bdb3d.out
+    Ignored:    2faa8586c55d395a.err
+    Ignored:    2faa8586c55d395a.out
+    Ignored:    305a727a7bc9357a.err
+    Ignored:    305a727a7bc9357a.out
+    Ignored:    30ad4f6e535a1cea.err
+    Ignored:    30ad4f6e535a1cea.out
+    Ignored:    30bc1239c9936531.err
+    Ignored:    30bc1239c9936531.out
+    Ignored:    31363e1cfd6dc9ba.err
+    Ignored:    31363e1cfd6dc9ba.out
+    Ignored:    3153e99f982f6d96.err
+    Ignored:    3153e99f982f6d96.out
+    Ignored:    3194836c8375d11c.err
+    Ignored:    3194836c8375d11c.out
+    Ignored:    326fce774d731c12.err
+    Ignored:    326fce774d731c12.out
+    Ignored:    3281ddabc93ce9f8.err
+    Ignored:    3281ddabc93ce9f8.out
+    Ignored:    32b1bdd0b207f5be.err
+    Ignored:    32b1bdd0b207f5be.out
+    Ignored:    32dd42ca1df0f2e2.err
+    Ignored:    32dd42ca1df0f2e2.out
+    Ignored:    332c69202512e0c3.err
+    Ignored:    332c69202512e0c3.out
+    Ignored:    3356bd2bbe3832a0.err
+    Ignored:    3356bd2bbe3832a0.out
+    Ignored:    339a925835ca7b29.err
+    Ignored:    339a925835ca7b29.out
+    Ignored:    33a987571ba43146.err
+    Ignored:    33a987571ba43146.out
+    Ignored:    33c2ef4a087467c0.err
+    Ignored:    33c2ef4a087467c0.out
+    Ignored:    343ccc2f1ac34523.err
+    Ignored:    343ccc2f1ac34523.out
+    Ignored:    3469f5fb4dd19494.err
+    Ignored:    3469f5fb4dd19494.out
+    Ignored:    34a063df2ba81d44.err
+    Ignored:    34a063df2ba81d44.out
+    Ignored:    34b7928d46f702d2.err
+    Ignored:    34b7928d46f702d2.out
+    Ignored:    34d4241fed244e8d.err
+    Ignored:    34d4241fed244e8d.out
+    Ignored:    3539c2adf1430bb9.err
+    Ignored:    3539c2adf1430bb9.out
+    Ignored:    359f05e0dbca042d.err
+    Ignored:    359f05e0dbca042d.out
+    Ignored:    36669d99ed366239.err
+    Ignored:    36669d99ed366239.out
+    Ignored:    3703384dbf0dd390.err
+    Ignored:    3703384dbf0dd390.out
+    Ignored:    378db9913734a606.err
+    Ignored:    378db9913734a606.out
+    Ignored:    37985d635126e426.err
+    Ignored:    37985d635126e426.out
+    Ignored:    37b52b7b36af6835.err
+    Ignored:    37b52b7b36af6835.out
+    Ignored:    37fd1999924ba91e.err
+    Ignored:    37fd1999924ba91e.out
+    Ignored:    382bf01be473e181.err
+    Ignored:    382bf01be473e181.out
+    Ignored:    38656e367f34582f.err
+    Ignored:    38656e367f34582f.out
+    Ignored:    38f0f8578608c414.err
+    Ignored:    38f0f8578608c414.out
+    Ignored:    39c75a116ae683bb.err
+    Ignored:    39c75a116ae683bb.out
+    Ignored:    3a12e6e53e1c0c43.err
+    Ignored:    3a12e6e53e1c0c43.out
+    Ignored:    3a7aeadf67df4c5a.err
+    Ignored:    3a7aeadf67df4c5a.out
+    Ignored:    3abc641895be5141.err
+    Ignored:    3abc641895be5141.out
+    Ignored:    3abfb76482b845ba.err
+    Ignored:    3abfb76482b845ba.out
+    Ignored:    3b62a471922485ce.err
+    Ignored:    3b62a471922485ce.out
+    Ignored:    3c3c55dad253b569.err
+    Ignored:    3c3c55dad253b569.out
+    Ignored:    3c4e55013ba2334b.err
+    Ignored:    3c4e55013ba2334b.out
+    Ignored:    3c7c23aee9870c60.err
+    Ignored:    3c7c23aee9870c60.out
+    Ignored:    3ca296e59575acb0.err
+    Ignored:    3ca296e59575acb0.out
+    Ignored:    3ca792c7731b9190.err
+    Ignored:    3ca792c7731b9190.out
+    Ignored:    3d2c5650f90d3f6f.err
+    Ignored:    3d2c5650f90d3f6f.out
+    Ignored:    3dbde739d578c30a.err
+    Ignored:    3dbde739d578c30a.out
+    Ignored:    3de4848dec2f4c51.err
+    Ignored:    3de4848dec2f4c51.out
+    Ignored:    3eaefc2f0ee5f414.err
+    Ignored:    3eaefc2f0ee5f414.out
+    Ignored:    3ed48bde4ac0ee28.err
+    Ignored:    3ed48bde4ac0ee28.out
+    Ignored:    3ef47ea56859b1c3.err
+    Ignored:    3ef47ea56859b1c3.out
+    Ignored:    3ef547feafa2554f.err
+    Ignored:    3ef547feafa2554f.out
+    Ignored:    3f07875414155ecc.err
+    Ignored:    3f07875414155ecc.out
+    Ignored:    3f0ff60313e755b2.err
+    Ignored:    3f0ff60313e755b2.out
+    Ignored:    3f58bb79995cfb96.err
+    Ignored:    3f58bb79995cfb96.out
+    Ignored:    3f905e24e30b9dce.err
+    Ignored:    3f905e24e30b9dce.out
+    Ignored:    3fcb9c3b898670a5.err
+    Ignored:    3fcb9c3b898670a5.out
+    Ignored:    40b0fd78ade6eaed.err
+    Ignored:    40b0fd78ade6eaed.out
+    Ignored:    410b5960c23fb4a7.err
+    Ignored:    410b5960c23fb4a7.out
+    Ignored:    414da8bd74a5ccdd.err
+    Ignored:    414da8bd74a5ccdd.out
+    Ignored:    4151c77520e9633a.err
+    Ignored:    4151c77520e9633a.out
+    Ignored:    416649c7a05d0513.err
+    Ignored:    416649c7a05d0513.out
+    Ignored:    41919f1c6570a336.err
+    Ignored:    41919f1c6570a336.out
+    Ignored:    41a23a822c5c963f.err
+    Ignored:    41a23a822c5c963f.out
+    Ignored:    41a48e48be56d214.err
+    Ignored:    41a48e48be56d214.out
+    Ignored:    4222d444b5f9ddb8.err
+    Ignored:    4222d444b5f9ddb8.out
+    Ignored:    422ccbbdf3d9ed52.err
+    Ignored:    422ccbbdf3d9ed52.out
+    Ignored:    4241d5d9f7cdd296.err
+    Ignored:    4241d5d9f7cdd296.out
+    Ignored:    428ee24f4b3549c1.err
+    Ignored:    428ee24f4b3549c1.out
+    Ignored:    42a25dad2cd85604.err
+    Ignored:    42a25dad2cd85604.out
+    Ignored:    430a3675436e18fa.err
+    Ignored:    430a3675436e18fa.out
+    Ignored:    4475df3f0768d803.err
+    Ignored:    4475df3f0768d803.out
+    Ignored:    447b09bf81f9aa35.err
+    Ignored:    447b09bf81f9aa35.out
+    Ignored:    44b6171e6b0f5c5e.err
+    Ignored:    44b6171e6b0f5c5e.out
+    Ignored:    450987780ed7ce2f.err
+    Ignored:    450987780ed7ce2f.out
+    Ignored:    450c2f6a647ca064.err
+    Ignored:    450c2f6a647ca064.out
+    Ignored:    45474e187c37b2d3.err
+    Ignored:    45474e187c37b2d3.out
+    Ignored:    45612af62f69e599.err
+    Ignored:    45612af62f69e599.out
+    Ignored:    4562e0cfdaf24781.err
+    Ignored:    4562e0cfdaf24781.out
+    Ignored:    4592152425550fe7.err
+    Ignored:    4592152425550fe7.out
+    Ignored:    45feb34a047a4045.err
+    Ignored:    45feb34a047a4045.out
+    Ignored:    4607fcd3e9c3716e.err
+    Ignored:    4607fcd3e9c3716e.out
+    Ignored:    46132029616c2ec5.err
+    Ignored:    46132029616c2ec5.out
+    Ignored:    4651e12afd859c9f.err
+    Ignored:    4651e12afd859c9f.out
+    Ignored:    4732a42ea36a3cc4.err
+    Ignored:    4732a42ea36a3cc4.out
+    Ignored:    484d1ba689b42d3d.err
+    Ignored:    484d1ba689b42d3d.out
+    Ignored:    489c7a410f89f3fd.err
+    Ignored:    489c7a410f89f3fd.out
+    Ignored:    48b6d3f9dd0d184a.err
+    Ignored:    48b6d3f9dd0d184a.out
+    Ignored:    48dbdd0fff03ecd0.err
+    Ignored:    48dbdd0fff03ecd0.out
+    Ignored:    4945c2acf560ad37.err
+    Ignored:    4945c2acf560ad37.out
+    Ignored:    49613382f8d3a773.err
+    Ignored:    49613382f8d3a773.out
+    Ignored:    4979d93e2c6f4cee.err
+    Ignored:    4979d93e2c6f4cee.out
+    Ignored:    4a838e2600994ac2.err
+    Ignored:    4a838e2600994ac2.out
+    Ignored:    4abf1bb8d845c2e1.err
+    Ignored:    4abf1bb8d845c2e1.out
+    Ignored:    4ae0eddf57f926c4.err
+    Ignored:    4ae0eddf57f926c4.out
+    Ignored:    4af55296d0d4d342.err
+    Ignored:    4af55296d0d4d342.out
+    Ignored:    4b2d4209c9a1ff96.err
+    Ignored:    4b2d4209c9a1ff96.out
+    Ignored:    4b339c994d3ea4e2.err
+    Ignored:    4b339c994d3ea4e2.out
+    Ignored:    4b62911407cd0a92.err
+    Ignored:    4b62911407cd0a92.out
+    Ignored:    4c453bb6e0690b7e.err
+    Ignored:    4c453bb6e0690b7e.out
+    Ignored:    4c513df69ccf9d52.err
+    Ignored:    4c513df69ccf9d52.out
+    Ignored:    4c8f4cad761a2056.err
+    Ignored:    4c8f4cad761a2056.out
+    Ignored:    4ca1e523ce2b3b9c.err
+    Ignored:    4ca1e523ce2b3b9c.out
+    Ignored:    4d066d1db3edaf93.err
+    Ignored:    4d066d1db3edaf93.out
+    Ignored:    4d19c124b3a8f382.err
+    Ignored:    4d19c124b3a8f382.out
+    Ignored:    4d76c923cb17beaf.err
+    Ignored:    4d76c923cb17beaf.out
+    Ignored:    4e5294e60f5af01e.err
+    Ignored:    4e5294e60f5af01e.out
+    Ignored:    4e71e0306422cf04.err
+    Ignored:    4e71e0306422cf04.out
+    Ignored:    4e7d82af5f28e521.err
+    Ignored:    4e7d82af5f28e521.out
+    Ignored:    4ee49b32977f3f9a.err
+    Ignored:    4ee49b32977f3f9a.out
+    Ignored:    4ee5840158484081.err
+    Ignored:    4ee5840158484081.out
+    Ignored:    4f5be9fa7cbdcabe.err
+    Ignored:    4f5be9fa7cbdcabe.out
+    Ignored:    4f6f64acb68f9a1b.err
+    Ignored:    4f6f64acb68f9a1b.out
+    Ignored:    4fa5c865dfa0817f.err
+    Ignored:    4fa5c865dfa0817f.out
+    Ignored:    5002eb4f8a066f6d.err
+    Ignored:    5002eb4f8a066f6d.out
+    Ignored:    501b413e9d94b15e.err
+    Ignored:    501b413e9d94b15e.out
+    Ignored:    502e6a6a0c7d4910.err
+    Ignored:    502e6a6a0c7d4910.out
+    Ignored:    5099b91d2ddccde8.err
+    Ignored:    5099b91d2ddccde8.out
+    Ignored:    5111145ac42aba73.err
+    Ignored:    5111145ac42aba73.out
+    Ignored:    515a8fe8b0f05de0.err
+    Ignored:    515a8fe8b0f05de0.out
+    Ignored:    516489eb77d433c6.err
+    Ignored:    516489eb77d433c6.out
+    Ignored:    5184f29db4b9e7dd.err
+    Ignored:    5184f29db4b9e7dd.out
+    Ignored:    519836b0477a2ac8.err
+    Ignored:    519836b0477a2ac8.out
+    Ignored:    51b3b036e361a7c0.err
+    Ignored:    51b3b036e361a7c0.out
+    Ignored:    51c84023d74b698b.err
+    Ignored:    51c84023d74b698b.out
+    Ignored:    525c32c7fb05a431.err
+    Ignored:    525c32c7fb05a431.out
+    Ignored:    5262cb81ab607ec2.err
+    Ignored:    5262cb81ab607ec2.out
+    Ignored:    528fa7dcc0ed6a09.err
+    Ignored:    528fa7dcc0ed6a09.out
+    Ignored:    52aa8528908065ed.err
+    Ignored:    52aa8528908065ed.out
+    Ignored:    533e807069cedf06.err
+    Ignored:    533e807069cedf06.out
+    Ignored:    540e2237956218a9.err
+    Ignored:    540e2237956218a9.out
+    Ignored:    541817c7d661db36.err
+    Ignored:    541817c7d661db36.out
+    Ignored:    545e7418f2a53fd4.err
+    Ignored:    545e7418f2a53fd4.out
+    Ignored:    546b7ecb7e065f5a.err
+    Ignored:    546b7ecb7e065f5a.out
+    Ignored:    549cc4b21d929390.err
+    Ignored:    549cc4b21d929390.out
+    Ignored:    5505eee997cd39db.err
+    Ignored:    5505eee997cd39db.out
+    Ignored:    552115ad50ecd082.err
+    Ignored:    552115ad50ecd082.out
+    Ignored:    55c90b4dafc6c21f.err
+    Ignored:    55c90b4dafc6c21f.out
+    Ignored:    56049d371eb59da3.err
+    Ignored:    56049d371eb59da3.out
+    Ignored:    56b97aeea1a8aba9.err
+    Ignored:    56b97aeea1a8aba9.out
+    Ignored:    576971e68c9c9afa.err
+    Ignored:    576971e68c9c9afa.out
+    Ignored:    5778646f4db38f7a.err
+    Ignored:    5778646f4db38f7a.out
+    Ignored:    57a9a26d13139fe5.err
+    Ignored:    57a9a26d13139fe5.out
+    Ignored:    57b9890581e0667b.err
+    Ignored:    57b9890581e0667b.out
+    Ignored:    57babaa907d69e0c.err
+    Ignored:    57babaa907d69e0c.out
+    Ignored:    57de8f831e8b3aaa.err
+    Ignored:    57de8f831e8b3aaa.out
+    Ignored:    583c0a85346b3b60.err
+    Ignored:    583c0a85346b3b60.out
+    Ignored:    589b8b98eb04a1ba.err
+    Ignored:    589b8b98eb04a1ba.out
+    Ignored:    58a38d1b29567e31.err
+    Ignored:    58a38d1b29567e31.out
+    Ignored:    591259018f657e41.err
+    Ignored:    591259018f657e41.out
+    Ignored:    598a07fd4252fd8d.err
+    Ignored:    598a07fd4252fd8d.out
+    Ignored:    5a7bb5bc5e6f9459.err
+    Ignored:    5a7bb5bc5e6f9459.out
+    Ignored:    5a8a124a8905c91a.err
+    Ignored:    5a8a124a8905c91a.out
+    Ignored:    5ac0e703af3bf2d0.err
+    Ignored:    5ac0e703af3bf2d0.out
+    Ignored:    5c49b635a7534f2c.err
+    Ignored:    5c49b635a7534f2c.out
+    Ignored:    5c59e01228ac2dbb.err
+    Ignored:    5c59e01228ac2dbb.out
+    Ignored:    5d55cf19768a0f64.err
+    Ignored:    5d55cf19768a0f64.out
+    Ignored:    5d927dd0d9997fd9.err
+    Ignored:    5d927dd0d9997fd9.out
+    Ignored:    5e58eed5ce90436c.err
+    Ignored:    5e58eed5ce90436c.out
+    Ignored:    5e591444a8a70fb1.err
+    Ignored:    5e591444a8a70fb1.out
+    Ignored:    5e60e2248557a3d0.err
+    Ignored:    5e60e2248557a3d0.out
+    Ignored:    5e68db271e58d57e.err
+    Ignored:    5e68db271e58d57e.out
+    Ignored:    5ed960e8bc4f2fd1.err
+    Ignored:    5ed960e8bc4f2fd1.out
+    Ignored:    5eec4cb872e3ddb7.err
+    Ignored:    5eec4cb872e3ddb7.out
+    Ignored:    5efea4ee4655e71b.err
+    Ignored:    5efea4ee4655e71b.out
+    Ignored:    5f308a4f198f6695.err
+    Ignored:    5f308a4f198f6695.out
+    Ignored:    5f7a397fdbd7211c.err
+    Ignored:    5f7a397fdbd7211c.out
+    Ignored:    5f8e14066bbf5e34.err
+    Ignored:    5f8e14066bbf5e34.out
+    Ignored:    5fb8f5178b406e7f.err
+    Ignored:    5fb8f5178b406e7f.out
+    Ignored:    6041b5ef76d84467.err
+    Ignored:    6041b5ef76d84467.out
+    Ignored:    60558234cab5f018.err
+    Ignored:    60558234cab5f018.out
+    Ignored:    60bdf9ceeeb1e766.err
+    Ignored:    60bdf9ceeeb1e766.out
+    Ignored:    60d66678e3944b48.err
+    Ignored:    60d66678e3944b48.out
+    Ignored:    6119ae60e819150d.err
+    Ignored:    6119ae60e819150d.out
+    Ignored:    619c130710cb4c32.err
+    Ignored:    619c130710cb4c32.out
+    Ignored:    61e5217bc31abc7b.err
+    Ignored:    61e5217bc31abc7b.out
+    Ignored:    61f3a7681a6286df.err
+    Ignored:    61f3a7681a6286df.out
+    Ignored:    61f97b3e9cfa24de.err
+    Ignored:    61f97b3e9cfa24de.out
+    Ignored:    6216aea00b7efb4b.err
+    Ignored:    6216aea00b7efb4b.out
+    Ignored:    62610b9c428a3cd7.err
+    Ignored:    62610b9c428a3cd7.out
+    Ignored:    62af0824787a5617.err
+    Ignored:    62af0824787a5617.out
+    Ignored:    6329f6f38a735a09.err
+    Ignored:    6329f6f38a735a09.out
+    Ignored:    632eaa6709ce6495.err
+    Ignored:    632eaa6709ce6495.out
+    Ignored:    63b8dc7be2ffa802.err
+    Ignored:    63b8dc7be2ffa802.out
+    Ignored:    64921c26f2545407.err
+    Ignored:    64921c26f2545407.out
+    Ignored:    64a5e0583234e102.err
+    Ignored:    64a5e0583234e102.out
+    Ignored:    64bf67f297ee6341.err
+    Ignored:    64bf67f297ee6341.out
+    Ignored:    64ff396697786059.err
+    Ignored:    64ff396697786059.out
+    Ignored:    6549dbe3f6a56a71.err
+    Ignored:    6549dbe3f6a56a71.out
+    Ignored:    66452db0f7683158.err
+    Ignored:    66452db0f7683158.out
+    Ignored:    66f71223a0fb4a0a.err
+    Ignored:    66f71223a0fb4a0a.out
+    Ignored:    671d91f1bea58b3a.err
+    Ignored:    671d91f1bea58b3a.out
+    Ignored:    673273b124f6ea99.err
+    Ignored:    673273b124f6ea99.out
+    Ignored:    67f2a34e619b031f.err
+    Ignored:    67f2a34e619b031f.out
+    Ignored:    6844d7caaa06269f.err
+    Ignored:    6844d7caaa06269f.out
+    Ignored:    685613760066bd61.err
+    Ignored:    685613760066bd61.out
+    Ignored:    6859ac1a6912d019.err
+    Ignored:    6859ac1a6912d019.out
+    Ignored:    687fbe3ec0752207.err
+    Ignored:    687fbe3ec0752207.out
+    Ignored:    68deb3a46e6dd8be.err
+    Ignored:    68deb3a46e6dd8be.out
+    Ignored:    6903ff8a6aa1ff50.err
+    Ignored:    6903ff8a6aa1ff50.out
+    Ignored:    693c0ee0290b1ec9.err
+    Ignored:    693c0ee0290b1ec9.out
+    Ignored:    693de7a2129201cd.err
+    Ignored:    693de7a2129201cd.out
+    Ignored:    694165e1cbc9caef.err
+    Ignored:    694165e1cbc9caef.out
+    Ignored:    6973daef350d3404.err
+    Ignored:    6973daef350d3404.out
+    Ignored:    6991cfaf92bb49c9.err
+    Ignored:    6991cfaf92bb49c9.out
+    Ignored:    69c1519253251816.err
+    Ignored:    69c1519253251816.out
+    Ignored:    69e97c72533ec03b.err
+    Ignored:    69e97c72533ec03b.out
+    Ignored:    69ee60a6eb179260.err
+    Ignored:    69ee60a6eb179260.out
+    Ignored:    6a32ea35dbd4907f.err
+    Ignored:    6a32ea35dbd4907f.out
+    Ignored:    6a49d5ff38fd07b3.err
+    Ignored:    6a49d5ff38fd07b3.out
+    Ignored:    6a505c58f3e841b1.err
+    Ignored:    6a505c58f3e841b1.out
+    Ignored:    6aadadb185bcbe5e.err
+    Ignored:    6aadadb185bcbe5e.out
+    Ignored:    6ad8f540fecc6146.err
+    Ignored:    6ad8f540fecc6146.out
+    Ignored:    6b3085e660f058cc.err
+    Ignored:    6b3085e660f058cc.out
+    Ignored:    6b5af98384048dfe.err
+    Ignored:    6b5af98384048dfe.out
+    Ignored:    6b8af48d7e11ccbf.err
+    Ignored:    6b8af48d7e11ccbf.out
+    Ignored:    6beaf30d23c10c31.err
+    Ignored:    6beaf30d23c10c31.out
+    Ignored:    6c047acc078dff1e.err
+    Ignored:    6c047acc078dff1e.out
+    Ignored:    6c3183c21cbe5d5e.err
+    Ignored:    6c3183c21cbe5d5e.out
+    Ignored:    6cc20a2fa3bfa718.err
+    Ignored:    6cc20a2fa3bfa718.out
+    Ignored:    6dab55e747028bef.err
+    Ignored:    6dab55e747028bef.out
+    Ignored:    6db97c9bc91c0657.err
+    Ignored:    6db97c9bc91c0657.out
+    Ignored:    6e2a8ab159672f02.err
+    Ignored:    6e2a8ab159672f02.out
+    Ignored:    6e51aeeedff87ad3.err
+    Ignored:    6e51aeeedff87ad3.out
+    Ignored:    6ec600c0b0ead1e2.err
+    Ignored:    6ec600c0b0ead1e2.out
+    Ignored:    6f6c00acb18a0926.err
+    Ignored:    6f6c00acb18a0926.out
+    Ignored:    6f9bb1e0805381c4.err
+    Ignored:    6f9bb1e0805381c4.out
+    Ignored:    6fe1ee1cbf98729b.err
+    Ignored:    6fe1ee1cbf98729b.out
+    Ignored:    7022040c3c0ea026.err
+    Ignored:    7022040c3c0ea026.out
+    Ignored:    70324c86ec83facf.err
+    Ignored:    70324c86ec83facf.out
+    Ignored:    70f1a54a595da1ed.err
+    Ignored:    70f1a54a595da1ed.out
+    Ignored:    710d1a7d3647dfd8.err
+    Ignored:    710d1a7d3647dfd8.out
+    Ignored:    712772dc0bf51a50.err
+    Ignored:    712772dc0bf51a50.out
+    Ignored:    7144b0a31f89b0f1.err
+    Ignored:    7144b0a31f89b0f1.out
+    Ignored:    716d7efab0136a5f.err
+    Ignored:    716d7efab0136a5f.out
+    Ignored:    717c79040310876c.err
+    Ignored:    717c79040310876c.out
+    Ignored:    720d16c775762f55.err
+    Ignored:    720d16c775762f55.out
+    Ignored:    72e49694aa70cd22.err
+    Ignored:    72e49694aa70cd22.out
+    Ignored:    73305d00cc803f35.err
+    Ignored:    73305d00cc803f35.out
+    Ignored:    7343a75941b00c02.err
+    Ignored:    7343a75941b00c02.out
+    Ignored:    73892c1133bd7b1d.err
+    Ignored:    73892c1133bd7b1d.out
+    Ignored:    739fbfed1c2c81f7.err
+    Ignored:    739fbfed1c2c81f7.out
+    Ignored:    73ad91d5f6de32c8.err
+    Ignored:    73ad91d5f6de32c8.out
+    Ignored:    73d806dd34dcbf65.err
+    Ignored:    73d806dd34dcbf65.out
+    Ignored:    748ca2070481aef2.err
+    Ignored:    748ca2070481aef2.out
+    Ignored:    74f10b7a836bad96.err
+    Ignored:    74f10b7a836bad96.out
+    Ignored:    75735e5a76b93df7.err
+    Ignored:    75735e5a76b93df7.out
+    Ignored:    75a924d24fa9445b.err
+    Ignored:    75a924d24fa9445b.out
+    Ignored:    75fe1dc7130ed352.err
+    Ignored:    75fe1dc7130ed352.out
+    Ignored:    7698bfb10f605e68.err
+    Ignored:    7698bfb10f605e68.out
+    Ignored:    77118ac52d6f8892.err
+    Ignored:    77118ac52d6f8892.out
+    Ignored:    780a077913a90a61.err
+    Ignored:    780a077913a90a61.out
+    Ignored:    7818da640d656387.err
+    Ignored:    7818da640d656387.out
+    Ignored:    7858bd80106b7f3a.err
+    Ignored:    7858bd80106b7f3a.out
+    Ignored:    790608c6e3b5985c.err
+    Ignored:    790608c6e3b5985c.out
+    Ignored:    791b320134b27fb0.err
+    Ignored:    791b320134b27fb0.out
+    Ignored:    7988a9209708b249.err
+    Ignored:    7988a9209708b249.out
+    Ignored:    799dc25cecf065b5.err
+    Ignored:    799dc25cecf065b5.out
+    Ignored:    79f2646ab243dfe3.err
+    Ignored:    79f2646ab243dfe3.out
+    Ignored:    79ff8d000b3691e0.err
+    Ignored:    79ff8d000b3691e0.out
+    Ignored:    7a40f0297fcabe45.err
+    Ignored:    7a40f0297fcabe45.out
+    Ignored:    7a501e4f45b3fcf7.err
+    Ignored:    7a501e4f45b3fcf7.out
+    Ignored:    7a8022759f27d9ff.err
+    Ignored:    7a8022759f27d9ff.out
+    Ignored:    7a8e30c41061f308.err
+    Ignored:    7a8e30c41061f308.out
+    Ignored:    7abe715d897a21a5.err
+    Ignored:    7abe715d897a21a5.out
+    Ignored:    7adc90383961424a.err
+    Ignored:    7adc90383961424a.out
+    Ignored:    7b1237775a1b5f93.err
+    Ignored:    7b1237775a1b5f93.out
+    Ignored:    7b202cb7ff8e25dc.err
+    Ignored:    7b202cb7ff8e25dc.out
+    Ignored:    7b20d283c31cdb4a.err
+    Ignored:    7b20d283c31cdb4a.out
+    Ignored:    7b946ba193cdc347.err
+    Ignored:    7b946ba193cdc347.out
+    Ignored:    7bc27ef426021e86.err
+    Ignored:    7bc27ef426021e86.out
+    Ignored:    7be2db498d376685.err
+    Ignored:    7be2db498d376685.out
+    Ignored:    7bfc52015d14a74e.err
+    Ignored:    7bfc52015d14a74e.out
+    Ignored:    7c1fe4b93d7ae97d.err
+    Ignored:    7c1fe4b93d7ae97d.out
+    Ignored:    7c4ac616309315f3.err
+    Ignored:    7c4ac616309315f3.out
+    Ignored:    7d2a97598c828a35.err
+    Ignored:    7d2a97598c828a35.out
+    Ignored:    7e541e90ea9f5d68.err
+    Ignored:    7e541e90ea9f5d68.out
+    Ignored:    7e8374330a1353ef.err
+    Ignored:    7e8374330a1353ef.out
+    Ignored:    7f3702bb935aad98.err
+    Ignored:    7f3702bb935aad98.out
+    Ignored:    7f3c1a2e76ebded4.err
+    Ignored:    7f3c1a2e76ebded4.out
+    Ignored:    7fc132a3e3952fec.err
+    Ignored:    7fc132a3e3952fec.out
+    Ignored:    7fc6f15f0d733453.err
+    Ignored:    7fc6f15f0d733453.out
+    Ignored:    7ffcb352388184ad.err
+    Ignored:    7ffcb352388184ad.out
+    Ignored:    813525301d7f5357.err
+    Ignored:    813525301d7f5357.out
+    Ignored:    813e71f8811d0605.err
+    Ignored:    813e71f8811d0605.out
+    Ignored:    8156453ac7d110f9.err
+    Ignored:    8156453ac7d110f9.out
+    Ignored:    81647c5b284fae89.err
+    Ignored:    81647c5b284fae89.out
+    Ignored:    81b96b564cbbae7d.err
+    Ignored:    81b96b564cbbae7d.out
+    Ignored:    81ba35cc7799a14b.err
+    Ignored:    81ba35cc7799a14b.out
+    Ignored:    821f358bda837648.err
+    Ignored:    821f358bda837648.out
+    Ignored:    823e37d9769377d2.err
+    Ignored:    823e37d9769377d2.out
+    Ignored:    8276e8889503db8e.err
+    Ignored:    8276e8889503db8e.out
+    Ignored:    8284489eb2e808ad.err
+    Ignored:    8284489eb2e808ad.out
+    Ignored:    82bafb8931577887.err
+    Ignored:    82bafb8931577887.out
+    Ignored:    837e933e64fc51f3.err
+    Ignored:    837e933e64fc51f3.out
+    Ignored:    83af289a6b95890e.err
+    Ignored:    83af289a6b95890e.out
+    Ignored:    840e0b7b8b8e2ff3.err
+    Ignored:    840e0b7b8b8e2ff3.out
+    Ignored:    843e5df2c2e1a4cb.err
+    Ignored:    843e5df2c2e1a4cb.out
+    Ignored:    851c9e30f3f315a4.err
+    Ignored:    851c9e30f3f315a4.out
+    Ignored:    857296064acb4d27.err
+    Ignored:    857296064acb4d27.out
+    Ignored:    8605b870db473e10.err
+    Ignored:    8605b870db473e10.out
+    Ignored:    86664c338f9e0c48.err
+    Ignored:    86664c338f9e0c48.out
+    Ignored:    86b43018ecc8e2be.err
+    Ignored:    86b43018ecc8e2be.out
+    Ignored:    86bf9232e288d840.err
+    Ignored:    86bf9232e288d840.out
+    Ignored:    872863d41c1b8b53.err
+    Ignored:    872863d41c1b8b53.out
+    Ignored:    87be43090f9868c9.err
+    Ignored:    87be43090f9868c9.out
+    Ignored:    87c0620db357328b.err
+    Ignored:    87c0620db357328b.out
+    Ignored:    883310f6451f40b0.err
+    Ignored:    883310f6451f40b0.out
+    Ignored:    886b8b9721f919a1.err
+    Ignored:    886b8b9721f919a1.out
+    Ignored:    88a3fe34484ffa56.err
+    Ignored:    88a3fe34484ffa56.out
+    Ignored:    88e48bf6545f8a7c.err
+    Ignored:    88e48bf6545f8a7c.out
+    Ignored:    88f8c9d9f65be4be.err
+    Ignored:    88f8c9d9f65be4be.out
+    Ignored:    8964fb7927669ce6.err
+    Ignored:    8964fb7927669ce6.out
+    Ignored:    8974f7beeea98b6a.err
+    Ignored:    8974f7beeea98b6a.out
+    Ignored:    89761431a37abf8c.err
+    Ignored:    89761431a37abf8c.out
+    Ignored:    89ac93d1d88ba613.err
+    Ignored:    89ac93d1d88ba613.out
+    Ignored:    89fdbd3c9c65f0b1.err
+    Ignored:    89fdbd3c9c65f0b1.out
+    Ignored:    8a33434a6cf63c04.err
+    Ignored:    8a33434a6cf63c04.out
+    Ignored:    8b5b3715fed80529.err
+    Ignored:    8b5b3715fed80529.out
+    Ignored:    8b66a0cd42582f01.err
+    Ignored:    8b66a0cd42582f01.out
+    Ignored:    8b82c73b539115c6.err
+    Ignored:    8b82c73b539115c6.out
+    Ignored:    8bfac2e22129f31f.err
+    Ignored:    8bfac2e22129f31f.out
+    Ignored:    8c12a0098fc69d72.err
+    Ignored:    8c12a0098fc69d72.out
+    Ignored:    8c2ff3ba52ed0fee.err
+    Ignored:    8c2ff3ba52ed0fee.out
+    Ignored:    8c9a625066812d17.err
+    Ignored:    8c9a625066812d17.out
+    Ignored:    8cba01ff84c14fcb.err
+    Ignored:    8cba01ff84c14fcb.out
+    Ignored:    8cde20794acd9c88.err
+    Ignored:    8cde20794acd9c88.out
+    Ignored:    8dd4871f533eee44.err
+    Ignored:    8dd4871f533eee44.out
+    Ignored:    8dde30a5fe9e256f.err
+    Ignored:    8dde30a5fe9e256f.out
+    Ignored:    8e059b6ffad21a7b.err
+    Ignored:    8e059b6ffad21a7b.out
+    Ignored:    8e92a728077ce52d.err
+    Ignored:    8e92a728077ce52d.out
+    Ignored:    8ea57789708eac0a.err
+    Ignored:    8ea57789708eac0a.out
+    Ignored:    8ea9e8ecafb3a031.err
+    Ignored:    8ea9e8ecafb3a031.out
+    Ignored:    8ed0362344dfaf63.err
+    Ignored:    8ed0362344dfaf63.out
+    Ignored:    916293c7a85aa926.err
+    Ignored:    916293c7a85aa926.out
+    Ignored:    91c99a0b7f933b9d.err
+    Ignored:    91c99a0b7f933b9d.out
+    Ignored:    92752cfa076f0264.err
+    Ignored:    92752cfa076f0264.out
+    Ignored:    936e6aecafbdea7f.err
+    Ignored:    936e6aecafbdea7f.out
+    Ignored:    941802eda4b0ebd4.err
+    Ignored:    941802eda4b0ebd4.out
+    Ignored:    941b56758fe5ca01.err
+    Ignored:    941b56758fe5ca01.out
+    Ignored:    942220148181a95f.err
+    Ignored:    942220148181a95f.out
+    Ignored:    9434a136a4482aad.err
+    Ignored:    9434a136a4482aad.out
+    Ignored:    9455a37f2c956d83.err
+    Ignored:    9455a37f2c956d83.out
+    Ignored:    946482cfacf72dab.err
+    Ignored:    946482cfacf72dab.out
+    Ignored:    956362f1fad77f70.err
+    Ignored:    956362f1fad77f70.out
+    Ignored:    95bd7d4235aba210.err
+    Ignored:    95bd7d4235aba210.out
+    Ignored:    95e34ec0548823d9.err
+    Ignored:    95e34ec0548823d9.out
+    Ignored:    962fe677983e8ace.err
+    Ignored:    962fe677983e8ace.out
+    Ignored:    980b5f850cb761f4.err
+    Ignored:    980b5f850cb761f4.out
+    Ignored:    989bf8096506164f.err
+    Ignored:    989bf8096506164f.out
+    Ignored:    989e5bb9e2375f30.err
+    Ignored:    989e5bb9e2375f30.out
+    Ignored:    98e6f83a68c84c4a.err
+    Ignored:    98e6f83a68c84c4a.out
+    Ignored:    99959c565d309b1d.err
+    Ignored:    99959c565d309b1d.out
+    Ignored:    99fbe932c7b8a44e.err
+    Ignored:    99fbe932c7b8a44e.out
+    Ignored:    9a09b4ae4c2555db.err
+    Ignored:    9a09b4ae4c2555db.out
+    Ignored:    9a4376a03538695f.err
+    Ignored:    9a4376a03538695f.out
+    Ignored:    9a73fccc209cf23b.err
+    Ignored:    9a73fccc209cf23b.out
+    Ignored:    9ae9c86d634e9aab.err
+    Ignored:    9ae9c86d634e9aab.out
+    Ignored:    9b1ea33b2b1ddd90.err
+    Ignored:    9b1ea33b2b1ddd90.out
+    Ignored:    9b82f9d167e4ad7b.err
+    Ignored:    9b82f9d167e4ad7b.out
+    Ignored:    9c0ae8da725a6c4c.err
+    Ignored:    9c0ae8da725a6c4c.out
+    Ignored:    9c0b70e3f7d66f9f.err
+    Ignored:    9c0b70e3f7d66f9f.out
+    Ignored:    9c319bc82ba56fde.err
+    Ignored:    9c319bc82ba56fde.out
+    Ignored:    9c782c0d95ff0171.err
+    Ignored:    9c782c0d95ff0171.out
+    Ignored:    9d12a6bdc181900e.err
+    Ignored:    9d12a6bdc181900e.out
+    Ignored:    9d1b741a673c9b99.err
+    Ignored:    9d1b741a673c9b99.out
+    Ignored:    9d5e1a3eaa6189d5.err
+    Ignored:    9d5e1a3eaa6189d5.out
+    Ignored:    9d72868b72d771fd.err
+    Ignored:    9d72868b72d771fd.out
+    Ignored:    9df8c0caebca02ce.err
+    Ignored:    9df8c0caebca02ce.out
+    Ignored:    9e41917c3cad7429.err
+    Ignored:    9e41917c3cad7429.out
+    Ignored:    9e5dde6bee498fe1.err
+    Ignored:    9e5dde6bee498fe1.out
+    Ignored:    9e72928a56f32cd8.err
+    Ignored:    9e72928a56f32cd8.out
+    Ignored:    9eebc21a7d2329fb.err
+    Ignored:    9eebc21a7d2329fb.out
+    Ignored:    9f25865c8160486d.err
+    Ignored:    9f25865c8160486d.out
+    Ignored:    9f25cf5596b25f01.err
+    Ignored:    9f25cf5596b25f01.out
+    Ignored:    9f58a811eb9ab6ab.err
+    Ignored:    9f58a811eb9ab6ab.out
+    Ignored:    9f7f74ca894aab7a.err
+    Ignored:    9f7f74ca894aab7a.out
+    Ignored:    9fa6fa5d80318eed.err
+    Ignored:    9fa6fa5d80318eed.out
+    Ignored:    9fcbef986c10c244.err
+    Ignored:    9fcbef986c10c244.out
+    Ignored:    M200_6fc2b70f4ab61fe5.err
+    Ignored:    M200_6fc2b70f4ab61fe5.out
+    Ignored:    a015f15d9cef644e.err
+    Ignored:    a015f15d9cef644e.out
+    Ignored:    a07a1bba9a34647b.err
+    Ignored:    a07a1bba9a34647b.out
+    Ignored:    a07db141f8fdf38d.err
+    Ignored:    a07db141f8fdf38d.out
+    Ignored:    a09fbe945e019ed1.err
+    Ignored:    a09fbe945e019ed1.out
+    Ignored:    a1b3773ec013e0ee.err
+    Ignored:    a1b3773ec013e0ee.out
+    Ignored:    a1fc85215462c016.err
+    Ignored:    a1fc85215462c016.out
+    Ignored:    a22e71e9cc9a6b9a.err
+    Ignored:    a22e71e9cc9a6b9a.out
+    Ignored:    a23ffa95f214138b.err
+    Ignored:    a23ffa95f214138b.out
+    Ignored:    a2492eb78c5bdf5c.err
+    Ignored:    a2492eb78c5bdf5c.out
+    Ignored:    a27cd09363ed046e.err
+    Ignored:    a27cd09363ed046e.out
+    Ignored:    a2b5998c9ca62f18.err
+    Ignored:    a2b5998c9ca62f18.out
+    Ignored:    a2dbdac105ce7576.err
+    Ignored:    a2dbdac105ce7576.out
+    Ignored:    a30d9148b29e3a9b.err
+    Ignored:    a30d9148b29e3a9b.out
+    Ignored:    a31e81071f634cc1.err
+    Ignored:    a31e81071f634cc1.out
+    Ignored:    a39f10afb9a8d353.err
+    Ignored:    a39f10afb9a8d353.out
+    Ignored:    a3e3ab11fc5a546d.err
+    Ignored:    a3e3ab11fc5a546d.out
+    Ignored:    a42747a4b6c7e48e.err
+    Ignored:    a42747a4b6c7e48e.out
+    Ignored:    a427b51ca861ed7f.err
+    Ignored:    a427b51ca861ed7f.out
+    Ignored:    a4750bb97bf1c291.err
+    Ignored:    a4750bb97bf1c291.out
+    Ignored:    a49c91c33b797bc9.err
+    Ignored:    a49c91c33b797bc9.out
+    Ignored:    a4f6d0b7fa24c70c.err
+    Ignored:    a4f6d0b7fa24c70c.out
+    Ignored:    a50d01e5fba67dab.err
+    Ignored:    a50d01e5fba67dab.out
+    Ignored:    a5867661fa4a54b0.err
+    Ignored:    a5867661fa4a54b0.out
+    Ignored:    a5e60283ae70dd76.err
+    Ignored:    a5e60283ae70dd76.out
+    Ignored:    a5efc36f41072f46.err
+    Ignored:    a5efc36f41072f46.out
+    Ignored:    a6bac9a997132c70.err
+    Ignored:    a6bac9a997132c70.out
+    Ignored:    a72ed79d1d2a4488.err
+    Ignored:    a72ed79d1d2a4488.out
+    Ignored:    a7699a19d1d084fe.err
+    Ignored:    a7699a19d1d084fe.out
+    Ignored:    a76bb1ee43d0759d.err
+    Ignored:    a76bb1ee43d0759d.out
+    Ignored:    a7cd08ba59c7c62b.err
+    Ignored:    a7cd08ba59c7c62b.out
+    Ignored:    a838271f3a23223d.err
+    Ignored:    a838271f3a23223d.out
+    Ignored:    a88be193f02a366c.err
+    Ignored:    a88be193f02a366c.out
+    Ignored:    a891464411f8487a.err
+    Ignored:    a891464411f8487a.out
+    Ignored:    a8bd437a0d02a266.err
+    Ignored:    a8bd437a0d02a266.out
+    Ignored:    a912c9560f5b153e.err
+    Ignored:    a912c9560f5b153e.out
+    Ignored:    a9292f3c30c68a46.err
+    Ignored:    a9292f3c30c68a46.out
+    Ignored:    a964aa5fca36e9e9.err
+    Ignored:    a964aa5fca36e9e9.out
+    Ignored:    a9e0dcfef2cc4924.err
+    Ignored:    a9e0dcfef2cc4924.out
+    Ignored:    a9e30c7389e96e56.err
+    Ignored:    a9e30c7389e96e56.out
+    Ignored:    aaa85ecd6c5b164b.err
+    Ignored:    aaa85ecd6c5b164b.out
+    Ignored:    ab29430c61e4d919.err
+    Ignored:    ab29430c61e4d919.out
+    Ignored:    ab33f5ea50c48e64.err
+    Ignored:    ab33f5ea50c48e64.out
+    Ignored:    abaee17e505b75fb.err
+    Ignored:    abaee17e505b75fb.out
+    Ignored:    abd64922e8a3e537.err
+    Ignored:    abd64922e8a3e537.out
+    Ignored:    abd943922e7b502a.err
+    Ignored:    abd943922e7b502a.out
+    Ignored:    abe5336096165d6d.err
+    Ignored:    abe5336096165d6d.out
+    Ignored:    acb58b617c914f83.err
+    Ignored:    acb58b617c914f83.out
+    Ignored:    accf3cb99330afb1.err
+    Ignored:    accf3cb99330afb1.out
+    Ignored:    acf9884238459e51.err
+    Ignored:    acf9884238459e51.out
+    Ignored:    ad23578a5337ddb1.err
+    Ignored:    ad23578a5337ddb1.out
+    Ignored:    ad38a1f5cabb4a9a.err
+    Ignored:    ad38a1f5cabb4a9a.out
+    Ignored:    ae60fb1072ae87ca.err
+    Ignored:    ae60fb1072ae87ca.out
+    Ignored:    ae920b3f82d7ba44.err
+    Ignored:    ae920b3f82d7ba44.out
+    Ignored:    afdfe073c5b24ca2.err
+    Ignored:    afdfe073c5b24ca2.out
+    Ignored:    b01461bf53ecfee4.err
+    Ignored:    b01461bf53ecfee4.out
+    Ignored:    b077d72340b0eb32.err
+    Ignored:    b077d72340b0eb32.out
+    Ignored:    b09fda778988be20.err
+    Ignored:    b09fda778988be20.out
+    Ignored:    b0e0489dc9cbc880.err
+    Ignored:    b0e0489dc9cbc880.out
+    Ignored:    b0e15eb598e51d1d.err
+    Ignored:    b0e15eb598e51d1d.out
+    Ignored:    b1469623214407ed.err
+    Ignored:    b1469623214407ed.out
+    Ignored:    b19eb8e17701bbaf.err
+    Ignored:    b19eb8e17701bbaf.out
+    Ignored:    b1acd251184f29d5.err
+    Ignored:    b1acd251184f29d5.out
+    Ignored:    b3210397ec58a367.err
+    Ignored:    b3210397ec58a367.out
+    Ignored:    b34d0aa69e6eeb24.err
+    Ignored:    b34d0aa69e6eeb24.out
+    Ignored:    b38bd70f560a607b.err
+    Ignored:    b38bd70f560a607b.out
+    Ignored:    b394777eed77d37b.err
+    Ignored:    b394777eed77d37b.out
+    Ignored:    b3b124b100838a3d.err
+    Ignored:    b3b124b100838a3d.out
+    Ignored:    b4182cd9d4ff7647.err
+    Ignored:    b4182cd9d4ff7647.out
+    Ignored:    b43bde00d1fbb226.err
+    Ignored:    b43bde00d1fbb226.out
+    Ignored:    b4810b7c6bd9e92c.err
+    Ignored:    b4810b7c6bd9e92c.out
+    Ignored:    b50f61f1e7ebdb9b.err
+    Ignored:    b50f61f1e7ebdb9b.out
+    Ignored:    b5b213513d292f5f.err
+    Ignored:    b5b213513d292f5f.out
+    Ignored:    b65278c4bdd61846.err
+    Ignored:    b65278c4bdd61846.out
+    Ignored:    b667de349cb6d27d.err
+    Ignored:    b667de349cb6d27d.out
+    Ignored:    b7126ecf9ffd6faa.err
+    Ignored:    b7126ecf9ffd6faa.out
+    Ignored:    b7add6bd97998d8f.err
+    Ignored:    b7add6bd97998d8f.out
+    Ignored:    b7dad15d7878cbf7.err
+    Ignored:    b7dad15d7878cbf7.out
+    Ignored:    b7f44943427f7bd5.err
+    Ignored:    b7f44943427f7bd5.out
+    Ignored:    b7f474b4edfdd8cb.err
+    Ignored:    b7f474b4edfdd8cb.out
+    Ignored:    b8540c492d2287a3.err
+    Ignored:    b8540c492d2287a3.out
+    Ignored:    b857ffd3ac6b6364.err
+    Ignored:    b857ffd3ac6b6364.out
+    Ignored:    b86f7d32703a9821.err
+    Ignored:    b86f7d32703a9821.out
+    Ignored:    b875882eab4b3d28.err
+    Ignored:    b875882eab4b3d28.out
+    Ignored:    b8cbdcaaac69215e.err
+    Ignored:    b8cbdcaaac69215e.out
+    Ignored:    b9816da1607bc63d.err
+    Ignored:    b9816da1607bc63d.out
+    Ignored:    ba136521c23944f0.err
+    Ignored:    ba136521c23944f0.out
+    Ignored:    ba26318fda75c467.err
+    Ignored:    ba26318fda75c467.out
+    Ignored:    ba27b81bfcb0df78.err
+    Ignored:    ba27b81bfcb0df78.out
+    Ignored:    bacf92248417a7cd.err
+    Ignored:    bacf92248417a7cd.out
+    Ignored:    bb4ae14bbb22862e.err
+    Ignored:    bb4ae14bbb22862e.out
+    Ignored:    bb90b5e5c4d142b8.err
+    Ignored:    bb90b5e5c4d142b8.out
+    Ignored:    bb9f2716a55dd518.err
+    Ignored:    bb9f2716a55dd518.out
+    Ignored:    bba8212900b76ea4.err
+    Ignored:    bba8212900b76ea4.out
+    Ignored:    bccd2d295a017c50.err
+    Ignored:    bccd2d295a017c50.out
+    Ignored:    bd29b864ce1d9639.err
+    Ignored:    bd29b864ce1d9639.out
+    Ignored:    bdb48d62bbcf2fb6.err
+    Ignored:    bdb48d62bbcf2fb6.out
+    Ignored:    bdc6e1316ca5cee0.err
+    Ignored:    bdc6e1316ca5cee0.out
+    Ignored:    be811914384f194f.err
+    Ignored:    be811914384f194f.out
+    Ignored:    be82db365bd05a2b.err
+    Ignored:    be82db365bd05a2b.out
+    Ignored:    bebd0254bf2e5d5c.err
+    Ignored:    bebd0254bf2e5d5c.out
+    Ignored:    beefdf470a6a63ab.err
+    Ignored:    beefdf470a6a63ab.out
+    Ignored:    bf3080b963c4b74e.err
+    Ignored:    bf3080b963c4b74e.out
+    Ignored:    bfb7c78e91d42a6e.err
+    Ignored:    bfb7c78e91d42a6e.out
+    Ignored:    bff55f5d8f7fde70.err
+    Ignored:    bff55f5d8f7fde70.out
+    Ignored:    c06848fa09c7a60e.err
+    Ignored:    c06848fa09c7a60e.out
+    Ignored:    c08d4903c5031ff9.err
+    Ignored:    c08d4903c5031ff9.out
+    Ignored:    c0bd4fa100087382.err
+    Ignored:    c0bd4fa100087382.out
+    Ignored:    c0d216e780ed11ce.err
+    Ignored:    c0d216e780ed11ce.out
+    Ignored:    c1286ed4556841b9.err
+    Ignored:    c1286ed4556841b9.out
+    Ignored:    c142d218b40e5664.err
+    Ignored:    c142d218b40e5664.out
+    Ignored:    c1717b2cca0e92f6.err
+    Ignored:    c1717b2cca0e92f6.out
+    Ignored:    c1724c332a46a2b0.err
+    Ignored:    c1724c332a46a2b0.out
+    Ignored:    c199aadbaeb0c5d0.err
+    Ignored:    c199aadbaeb0c5d0.out
+    Ignored:    c2e79601c6539e24.err
+    Ignored:    c2e79601c6539e24.out
+    Ignored:    c3635aa533b2d3e8.err
+    Ignored:    c3635aa533b2d3e8.out
+    Ignored:    c36d2fb2465b9a4e.err
+    Ignored:    c36d2fb2465b9a4e.out
+    Ignored:    c36fa7e5bd92a74f.err
+    Ignored:    c36fa7e5bd92a74f.out
+    Ignored:    c44cbc1f66d4b23b.err
+    Ignored:    c44cbc1f66d4b23b.out
+    Ignored:    c52741da451708e4.err
+    Ignored:    c52741da451708e4.out
+    Ignored:    c5b510000a63029b.err
+    Ignored:    c5b510000a63029b.out
+    Ignored:    c5df876ea93ca312.err
+    Ignored:    c5df876ea93ca312.out
+    Ignored:    c5fd32cd67e6e8eb.err
+    Ignored:    c5fd32cd67e6e8eb.out
+    Ignored:    c63207d1b7681b74.err
+    Ignored:    c63207d1b7681b74.out
+    Ignored:    c653f30ae0aef010.err
+    Ignored:    c653f30ae0aef010.out
+    Ignored:    c6bff8b5ebfe2379.err
+    Ignored:    c6bff8b5ebfe2379.out
+    Ignored:    c6eb058e29cdf4e1.err
+    Ignored:    c6eb058e29cdf4e1.out
+    Ignored:    c70e99351cd5e3ec.err
+    Ignored:    c70e99351cd5e3ec.out
+    Ignored:    c711166e3a0599ef.err
+    Ignored:    c711166e3a0599ef.out
+    Ignored:    c764f2a5da865186.err
+    Ignored:    c764f2a5da865186.out
+    Ignored:    c7d1bbe5944e9087.err
+    Ignored:    c7d1bbe5944e9087.out
+    Ignored:    c85110afc2d39155.err
+    Ignored:    c85110afc2d39155.out
+    Ignored:    c8f156d35ac30e62.err
+    Ignored:    c8f156d35ac30e62.out
+    Ignored:    c9e257e175b1e8df.err
+    Ignored:    c9e257e175b1e8df.out
+    Ignored:    ca5da8ec37f4d81e.err
+    Ignored:    ca5da8ec37f4d81e.out
+    Ignored:    cb5d3c9037f54562.err
+    Ignored:    cb5d3c9037f54562.out
+    Ignored:    cc305597d37ac473.err
+    Ignored:    cc305597d37ac473.out
+    Ignored:    ccf56157f0601bec.err
+    Ignored:    ccf56157f0601bec.out
+    Ignored:    cd81dc6c0a9f2ded.err
+    Ignored:    cd81dc6c0a9f2ded.out
+    Ignored:    cd94610ba7629a67.err
+    Ignored:    cd94610ba7629a67.out
+    Ignored:    cdd70beb6923131b.err
+    Ignored:    cdd70beb6923131b.out
+    Ignored:    ce708eb6c60c8db5.err
+    Ignored:    ce708eb6c60c8db5.out
+    Ignored:    ce7c7c7c1280f614.err
+    Ignored:    ce7c7c7c1280f614.out
+    Ignored:    cedab0b36959df19.err
+    Ignored:    cedab0b36959df19.out
+    Ignored:    cef8df7f6525adcd.err
+    Ignored:    cef8df7f6525adcd.out
+    Ignored:    cf09ea722bbbe886.err
+    Ignored:    cf09ea722bbbe886.out
+    Ignored:    cf6eede95405c143.err
+    Ignored:    cf6eede95405c143.out
+    Ignored:    d01ca622a87607e7.err
+    Ignored:    d01ca622a87607e7.out
+    Ignored:    d020ca166b5dcf28.err
+    Ignored:    d020ca166b5dcf28.out
+    Ignored:    d0a5b25d51c8dc0d.err
+    Ignored:    d0a5b25d51c8dc0d.out
+    Ignored:    d1093b708ecb7341.err
+    Ignored:    d1093b708ecb7341.out
+    Ignored:    d11c6429c55b3eb5.err
+    Ignored:    d11c6429c55b3eb5.out
+    Ignored:    d135744855d8a402.err
+    Ignored:    d135744855d8a402.out
+    Ignored:    d13e89589112e3a2.err
+    Ignored:    d13e89589112e3a2.out
+    Ignored:    d1c832fd3b3fcf07.err
+    Ignored:    d1c832fd3b3fcf07.out
+    Ignored:    d2526adadf1d82a0.err
+    Ignored:    d2526adadf1d82a0.out
+    Ignored:    d26707d3742a282a.err
+    Ignored:    d26707d3742a282a.out
+    Ignored:    d28dd97de2edac71.err
+    Ignored:    d28dd97de2edac71.out
+    Ignored:    d32af11c81d6afee.err
+    Ignored:    d32af11c81d6afee.out
+    Ignored:    d338cdb823fef003.err
+    Ignored:    d338cdb823fef003.out
+    Ignored:    d341fabb9df8eedd.err
+    Ignored:    d341fabb9df8eedd.out
+    Ignored:    d39a96de92a12cb0.err
+    Ignored:    d39a96de92a12cb0.out
+    Ignored:    d3c252ca922a8e2d.err
+    Ignored:    d3c252ca922a8e2d.out
+    Ignored:    d3ec82cf13beed22.err
+    Ignored:    d3ec82cf13beed22.out
+    Ignored:    d4996ce36401bbcc.err
+    Ignored:    d4996ce36401bbcc.out
+    Ignored:    d49d922f80ebbf6c.err
+    Ignored:    d49d922f80ebbf6c.out
+    Ignored:    d49de5cc74588c50.err
+    Ignored:    d49de5cc74588c50.out
+    Ignored:    d4e6c9e552d2c75c.err
+    Ignored:    d4e6c9e552d2c75c.out
+    Ignored:    d51093ff8ea0726c.err
+    Ignored:    d51093ff8ea0726c.out
+    Ignored:    d53a9183bbffa960.err
+    Ignored:    d53a9183bbffa960.out
+    Ignored:    d54fcc4e1e4e199f.err
+    Ignored:    d54fcc4e1e4e199f.out
+    Ignored:    d58f4b5a733a8f0a.err
+    Ignored:    d58f4b5a733a8f0a.out
+    Ignored:    d610a048de6889ab.err
+    Ignored:    d610a048de6889ab.out
+    Ignored:    d628e66936b768ed.err
+    Ignored:    d628e66936b768ed.out
+    Ignored:    d658c4123f6b8b4b.err
+    Ignored:    d658c4123f6b8b4b.out
+    Ignored:    d66a61c8a3b87ed2.err
+    Ignored:    d66a61c8a3b87ed2.out
+    Ignored:    d68493eec520fd9e.err
+    Ignored:    d68493eec520fd9e.out
+    Ignored:    d6ae8bdb762d93a0.err
+    Ignored:    d6ae8bdb762d93a0.out
+    Ignored:    d752aa837b4eaf9d.err
+    Ignored:    d752aa837b4eaf9d.out
+    Ignored:    d792303e0dfa01cf.err
+    Ignored:    d792303e0dfa01cf.out
+    Ignored:    d7b67bc625e1309c.err
+    Ignored:    d7b67bc625e1309c.out
+    Ignored:    d7e4e8713fed0bb1.err
+    Ignored:    d7e4e8713fed0bb1.out
+    Ignored:    d8968f8cd7c2328c.err
+    Ignored:    d8968f8cd7c2328c.out
+    Ignored:    d8e8d265f61e8c93.err
+    Ignored:    d8e8d265f61e8c93.out
+    Ignored:    d97a477467440c31.err
+    Ignored:    d97a477467440c31.out
+    Ignored:    da1ac05a36f78102.err
+    Ignored:    da1ac05a36f78102.out
+    Ignored:    db03abc5ad9ae969.err
+    Ignored:    db03abc5ad9ae969.out
+    Ignored:    dbad84c733c7cd5e.err
+    Ignored:    dbad84c733c7cd5e.out
+    Ignored:    dbb162fe57d4d2e0.err
+    Ignored:    dbb162fe57d4d2e0.out
+    Ignored:    dbdb745b8e09b43d.err
+    Ignored:    dbdb745b8e09b43d.out
+    Ignored:    dc4ff8a722140c3d.err
+    Ignored:    dc4ff8a722140c3d.out
+    Ignored:    dc734a88639efe73.err
+    Ignored:    dc734a88639efe73.out
+    Ignored:    dcaafc4b8fb45814.err
+    Ignored:    dcaafc4b8fb45814.out
+    Ignored:    dd27a3a87d346d6f.err
+    Ignored:    dd27a3a87d346d6f.out
+    Ignored:    dd46e520cbd2d6b3.err
+    Ignored:    dd46e520cbd2d6b3.out
+    Ignored:    de4b34fafafe4170.err
+    Ignored:    de4b34fafafe4170.out
+    Ignored:    df3730add8223f7f.err
+    Ignored:    df3730add8223f7f.out
+    Ignored:    df42ac635703f1f7.err
+    Ignored:    df42ac635703f1f7.out
+    Ignored:    df43292d09ec8b95.err
+    Ignored:    df43292d09ec8b95.out
+    Ignored:    df677a17152aad09.err
+    Ignored:    df677a17152aad09.out
+    Ignored:    dfd1f4bd59e02181.err
+    Ignored:    dfd1f4bd59e02181.out
+    Ignored:    dffd3797d5e82d97.err
+    Ignored:    dffd3797d5e82d97.out
+    Ignored:    e04965c8d90d1ff7.err
+    Ignored:    e04965c8d90d1ff7.out
+    Ignored:    e0f4403ae7af21ab.err
+    Ignored:    e0f4403ae7af21ab.out
+    Ignored:    e0fc463495254d35.err
+    Ignored:    e0fc463495254d35.out
+    Ignored:    e12ddcce921a0211.err
+    Ignored:    e12ddcce921a0211.out
+    Ignored:    e17c2e1cfff8345b.err
+    Ignored:    e17c2e1cfff8345b.out
+    Ignored:    e1bc91598451813a.err
+    Ignored:    e1bc91598451813a.out
+    Ignored:    e1d1e5120d6044f9.err
+    Ignored:    e1d1e5120d6044f9.out
+    Ignored:    e1de4833c7a75269.err
+    Ignored:    e1de4833c7a75269.out
+    Ignored:    e20571287d51cb78.err
+    Ignored:    e20571287d51cb78.out
+    Ignored:    e280de3438a50710.err
+    Ignored:    e280de3438a50710.out
+    Ignored:    e3658b3e918215a1.err
+    Ignored:    e3658b3e918215a1.out
+    Ignored:    e495ebbb86008140.err
+    Ignored:    e495ebbb86008140.out
+    Ignored:    e4a0c2ae554f90ad.err
+    Ignored:    e4a0c2ae554f90ad.out
+    Ignored:    e4a23ff42272e620.err
+    Ignored:    e4a23ff42272e620.out
+    Ignored:    e4f3c5b1dca85d3e.err
+    Ignored:    e4f3c5b1dca85d3e.out
+    Ignored:    e4fef08a390ad320.err
+    Ignored:    e4fef08a390ad320.out
+    Ignored:    e54110cd052b044e.err
+    Ignored:    e54110cd052b044e.out
+    Ignored:    e55dc5371c28a58d.err
+    Ignored:    e55dc5371c28a58d.out
+    Ignored:    e5c0457364866efa.err
+    Ignored:    e5c0457364866efa.out
+    Ignored:    e5ca341683c0dc91.err
+    Ignored:    e5ca341683c0dc91.out
+    Ignored:    e68c4ebce3541b87.err
+    Ignored:    e68c4ebce3541b87.out
+    Ignored:    e72a06649963ec6c.err
+    Ignored:    e72a06649963ec6c.out
+    Ignored:    e7941073c843716c.err
+    Ignored:    e7941073c843716c.out
+    Ignored:    e7c1cda6818256a2.err
+    Ignored:    e7c1cda6818256a2.out
+    Ignored:    e8429438309aafe4.err
+    Ignored:    e8429438309aafe4.out
+    Ignored:    e853c7c3d2168f16.err
+    Ignored:    e853c7c3d2168f16.out
+    Ignored:    e8675b355078f912.err
+    Ignored:    e8675b355078f912.out
+    Ignored:    e8ffbb85f028e724.err
+    Ignored:    e8ffbb85f028e724.out
+    Ignored:    e91efe76a5fb1de3.err
+    Ignored:    e91efe76a5fb1de3.out
+    Ignored:    e93b167a77f42a56.err
+    Ignored:    e93b167a77f42a56.out
+    Ignored:    e96c0f8cf402d7d4.err
+    Ignored:    e96c0f8cf402d7d4.out
+    Ignored:    e992024210cf9422.err
+    Ignored:    e992024210cf9422.out
+    Ignored:    e99edddee351eb06.err
+    Ignored:    e99edddee351eb06.out
+    Ignored:    e9c1dc504a62f25c.err
+    Ignored:    e9c1dc504a62f25c.out
+    Ignored:    e9ca5cb62806bced.err
+    Ignored:    e9ca5cb62806bced.out
+    Ignored:    e9f0dc255e7098a0.err
+    Ignored:    e9f0dc255e7098a0.out
+    Ignored:    ea654893f258905c.err
+    Ignored:    ea654893f258905c.out
+    Ignored:    eaa4e91f22c3c87b.err
+    Ignored:    eaa4e91f22c3c87b.out
+    Ignored:    eb0c03612e514a8c.err
+    Ignored:    eb0c03612e514a8c.out
+    Ignored:    eb2180772819d589.err
+    Ignored:    eb2180772819d589.out
+    Ignored:    eb5c53fa253552c2.err
+    Ignored:    eb5c53fa253552c2.out
+    Ignored:    eb63731bd2824557.err
+    Ignored:    eb63731bd2824557.out
+    Ignored:    ebaee5a13c7d9646.err
+    Ignored:    ebaee5a13c7d9646.out
+    Ignored:    ebbf891074905d5f.err
+    Ignored:    ebbf891074905d5f.out
+    Ignored:    ec3c4f7956f65583.err
+    Ignored:    ec3c4f7956f65583.out
+    Ignored:    ec826a85b0fe2b93.err
+    Ignored:    ec826a85b0fe2b93.out
+    Ignored:    ecad3c45a56bae6b.err
+    Ignored:    ecad3c45a56bae6b.out
+    Ignored:    ecdb233e7ae83ef4.err
+    Ignored:    ecdb233e7ae83ef4.out
+    Ignored:    ece38c6f84fc8c57.err
+    Ignored:    ece38c6f84fc8c57.out
+    Ignored:    ed20f615675c645d.err
+    Ignored:    ed20f615675c645d.out
+    Ignored:    ed2392a38d21b1fa.err
+    Ignored:    ed2392a38d21b1fa.out
+    Ignored:    ed4b13459934662f.err
+    Ignored:    ed4b13459934662f.out
+    Ignored:    ed7f4a19e0682342.err
+    Ignored:    ed7f4a19e0682342.out
+    Ignored:    edb3e1525979ae06.err
+    Ignored:    edb3e1525979ae06.out
+    Ignored:    ede8e370320490af.err
+    Ignored:    ede8e370320490af.out
+    Ignored:    ee15e4a24cca1eb9.err
+    Ignored:    ee15e4a24cca1eb9.out
+    Ignored:    eeca609c887c4649.err
+    Ignored:    eeca609c887c4649.out
+    Ignored:    eef1e54ad925f5ad.err
+    Ignored:    eef1e54ad925f5ad.out
+    Ignored:    eef3c44b1f132285.err
+    Ignored:    eef3c44b1f132285.out
+    Ignored:    ef1dc4564e536dc3.err
+    Ignored:    ef1dc4564e536dc3.out
+    Ignored:    ef3d6e3ecf2a65db.err
+    Ignored:    ef3d6e3ecf2a65db.out
+    Ignored:    ef4ef3509469dcc2.err
+    Ignored:    ef4ef3509469dcc2.out
+    Ignored:    efb32f4304fbf0de.err
+    Ignored:    efb32f4304fbf0de.out
+    Ignored:    efe5708a85382510.err
+    Ignored:    efe5708a85382510.out
+    Ignored:    f0cf1b845e76351e.err
+    Ignored:    f0cf1b845e76351e.out
+    Ignored:    f2295c38abfc7d5b.err
+    Ignored:    f2295c38abfc7d5b.out
+    Ignored:    f26fa828d39a80a8.err
+    Ignored:    f26fa828d39a80a8.out
+    Ignored:    f2a20143b37c9184.err
+    Ignored:    f2a20143b37c9184.out
+    Ignored:    f2bcee4f3cd3e8e5.err
+    Ignored:    f2bcee4f3cd3e8e5.out
+    Ignored:    f381ab62183ca0f8.err
+    Ignored:    f381ab62183ca0f8.out
+    Ignored:    f3cc876b2f73583c.err
+    Ignored:    f3cc876b2f73583c.out
+    Ignored:    f40d90cecf1fb199.err
+    Ignored:    f40d90cecf1fb199.out
+    Ignored:    f4339ac4dd37ee60.err
+    Ignored:    f4339ac4dd37ee60.out
+    Ignored:    f444303994953188.err
+    Ignored:    f444303994953188.out
+    Ignored:    f4a671b91ed021d0.err
+    Ignored:    f4a671b91ed021d0.out
+    Ignored:    f53eac58a901da9b.err
+    Ignored:    f53eac58a901da9b.out
+    Ignored:    f5415d6a341a5f1a.err
+    Ignored:    f5415d6a341a5f1a.out
+    Ignored:    f54e563c68e75377.err
+    Ignored:    f54e563c68e75377.out
+    Ignored:    f5835a0e133e0681.err
+    Ignored:    f5835a0e133e0681.out
+    Ignored:    f59368925fc5a638.err
+    Ignored:    f59368925fc5a638.out
+    Ignored:    f59b47d2dedd9693.err
+    Ignored:    f59b47d2dedd9693.out
+    Ignored:    f66938f0eb729533.err
+    Ignored:    f66938f0eb729533.out
+    Ignored:    f7309d6343ea8e16.err
+    Ignored:    f7309d6343ea8e16.out
+    Ignored:    f75a69ec030f98dc.err
+    Ignored:    f75a69ec030f98dc.out
+    Ignored:    f795d12280b4a355.err
+    Ignored:    f795d12280b4a355.out
+    Ignored:    f7c7a9eed653c095.err
+    Ignored:    f7c7a9eed653c095.out
+    Ignored:    f7d07a0307eb242b.err
+    Ignored:    f7d07a0307eb242b.out
+    Ignored:    f80825f10e641869.err
+    Ignored:    f80825f10e641869.out
+    Ignored:    f95c9e728f949b81.err
+    Ignored:    f95c9e728f949b81.out
+    Ignored:    f9b0293c4f793ef9.err
+    Ignored:    f9b0293c4f793ef9.out
+    Ignored:    fabcc2e108757779.err
+    Ignored:    fabcc2e108757779.out
+    Ignored:    fb24022a13e66dc2.err
+    Ignored:    fb24022a13e66dc2.out
+    Ignored:    fb761bdfc05876c3.err
+    Ignored:    fb761bdfc05876c3.out
+    Ignored:    fb9c09b30910393e.err
+    Ignored:    fb9c09b30910393e.out
+    Ignored:    fba46b2275d0805d.err
+    Ignored:    fba46b2275d0805d.out
+    Ignored:    fbb87de75fa902ac.err
+    Ignored:    fbb87de75fa902ac.out
+    Ignored:    fbcc55386161dbc6.err
+    Ignored:    fbcc55386161dbc6.out
+    Ignored:    fc57880fc3e576cd.err
+    Ignored:    fc57880fc3e576cd.out
+    Ignored:    fccc9ebd48d92f05.err
+    Ignored:    fccc9ebd48d92f05.out
+    Ignored:    fd1dd9f41137672d.err
+    Ignored:    fd1dd9f41137672d.out
+    Ignored:    fd2f06f277231b82.err
+    Ignored:    fd2f06f277231b82.out
+    Ignored:    fd5aa912d9b40c60.err
+    Ignored:    fd5aa912d9b40c60.out
+    Ignored:    fd5d5d2fc9b91860.err
+    Ignored:    fd5d5d2fc9b91860.out
+    Ignored:    fdb9aff5a8a00294.err
+    Ignored:    fdb9aff5a8a00294.out
+    Ignored:    fe92103a85663bc6.err
+    Ignored:    fe92103a85663bc6.out
+    Ignored:    ff50b59f01abf74a.err
+    Ignored:    ff50b59f01abf74a.out
+    Ignored:    ff761e3a3a25eb66.err
+    Ignored:    ff761e3a3a25eb66.out
+    Ignored:    genotype_dir
+    Ignored:    output/
+    Ignored:    results/
+    Ignored:    slurm-64894387.out
+
+Untracked files:
+    Untracked:  data/ukb_genotypes_files_top20.txt
+    Untracked:  dsc.finemap.rss.ukb.default.job.log
+    Untracked:  dsc.finemap.rss.ukb.largeregion.job.log
+    Untracked:  dsc_cluster_submit.sbatch
+    Untracked:  dsc_cluster_submit_full.sbatch
+
+Unstaged changes:
+    Modified:   .gitignore
+    Modified:   code/fit_susie.R
+    Modified:   code/susie_scores.R
+    Modified:   modules/data.dsc
+    Modified:   modules/fit.dsc
+    Modified:   susie_rss_ukb.dsc
+    Modified:   yuxin_midway.yml
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/a4f2c1cb0e27e8f1b5b291260a440d464b26a68e/analysis/SuSiE_dsc_ukb_results_lamb0.1.Rmd" target="_blank">a4f2c1c</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-01-10
+</td>
+<td>
+add analysis files
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/498c4fa9e6bf945d1ea4657db5a52d23aa7b31db/analysis/SuSiE_dsc_ukb_results_lamb0.1.Rmd" target="_blank">498c4fa</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-01-09
+</td>
+<td>
+generate results
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code>library(dplyr)
+library(kableExtra)</code></pre>
+<div id="in-sample" class="section level2">
+<h2>IN sample</h2>
+<div id="not-estimate-residual-variance" class="section level3">
+<h3>NOT Estimate residual variance</h3>
+<div id="pip-calibration" class="section level4">
+<h4>PIP calibration</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_pipcali.png" />
+
+</div>
+</div>
+<div id="pip-comparison" class="section level4">
+<h4>PIP comparison</h4>
+<p><img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVSsusie.png" /> <img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVScaviar.png" /> <img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVSfinemap.png" /></p>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVSfinemapv3.png" />
+
+</div>
+</div>
+<div id="power" class="section level4">
+<h4>Power</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all_power_combine.png" />
+
+</div>
+</div>
+<div id="roc" class="section level4">
+<h4>ROC</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all_roc_combine.png" />
+
+</div>
+</div>
+<div id="cs" class="section level4">
+<h4>CS</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_cs_plots.png" />
+
+</div>
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_cs.rds&#39;
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+n_signal
+</th>
+<th style="text-align:right;">
+susie_overlap
+</th>
+<th style="text-align:right;">
+susierss_overlap
+</th>
+<th style="text-align:right;">
+susie_fail
+</th>
+<th style="text-align:right;">
+susierss_fail
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="estimate-residual-variance" class="section level3">
+<h3>Estimate residual variance</h3>
+<div id="pip-calibration-1" class="section level4">
+<h4>PIP calibration</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_pipcali.png" />
+
+</div>
+</div>
+<div id="pip-comparison-1" class="section level4">
+<h4>PIP comparison</h4>
+<p><img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVSsusie.png" /> <img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVScaviar.png" /> <img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVSfinemap.png" /></p>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVSfinemapv3.png" />
+
+</div>
+</div>
+<div id="power-1" class="section level4">
+<h4>Power</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all_power_combine.png" />
+
+</div>
+</div>
+<div id="roc-1" class="section level4">
+<h4>ROC</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all_roc_combine.png" />
+
+</div>
+</div>
+<div id="cs-1" class="section level4">
+<h4>CS</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_cs_plots.png" />
+
+</div>
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_cs.rds&#39;
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+n_signal
+</th>
+<th style="text-align:right;">
+susie_overlap
+</th>
+<th style="text-align:right;">
+susierss_overlap
+</th>
+<th style="text-align:right;">
+susie_fail
+</th>
+<th style="text-align:right;">
+susierss_fail
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="out-sample" class="section level2">
+<h2>OUT sample</h2>
+<div id="not-estimate-residual-variance-1" class="section level3">
+<h3>NOT Estimate residual variance</h3>
+<div id="pip-calibration-2" class="section level4">
+<h4>PIP calibration</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_pipcali.png" />
+
+</div>
+</div>
+<div id="pip-comparison-2" class="section level4">
+<h4>PIP comparison</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVSsusie.png" />
+
+</div>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVScaviar.png" />
+
+</div>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemap.png" />
+
+</div>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemapv3.png" />
+
+</div>
+</div>
+<div id="power-2" class="section level4">
+<h4>Power</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all_power_combine.png" />
+
+</div>
+</div>
+<div id="roc-2" class="section level4">
+<h4>ROC</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all_roc_combine.png" />
+
+</div>
+</div>
+<div id="cs-2" class="section level4">
+<h4>CS</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_cs_plots.png" />
+
+</div>
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_cs.rds&#39;
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+n_signal
+</th>
+<th style="text-align:right;">
+susie_overlap
+</th>
+<th style="text-align:right;">
+susierss_overlap
+</th>
+<th style="text-align:right;">
+susie_fail
+</th>
+<th style="text-align:right;">
+susierss_fail
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="estimate-residual-variance-1" class="section level3">
+<h3>Estimate residual variance</h3>
+<div id="pip-calibration-3" class="section level4">
+<h4>PIP calibration</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_pipcali.png" />
+
+</div>
+</div>
+<div id="pip-comparison-3" class="section level4">
+<h4>PIP comparison</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVSsusie.png" />
+
+</div>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVScaviar.png" />
+
+</div>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemap.png" />
+
+</div>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemapv3.png" />
+
+</div>
+</div>
+<div id="power-3" class="section level4">
+<h4>Power</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all_power_combine.png" />
+
+</div>
+</div>
+<div id="roc-3" class="section level4">
+<h4>ROC</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all_roc_combine.png" />
+
+</div>
+</div>
+<div id="cs-3" class="section level4">
+<h4>CS</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_cs_plots.png" />
+
+</div>
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_cs.rds&#39;
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+n_signal
+</th>
+<th style="text-align:right;">
+susie_overlap
+</th>
+<th style="text-align:right;">
+susierss_overlap
+</th>
+<th style="text-align:right;">
+susie_fail
+</th>
+<th style="text-align:right;">
+susierss_fail
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="out-sample-addz" class="section level2">
+<h2>OUT sample ADDZ</h2>
+<div id="not-estimate-residual-variance-2" class="section level3">
+<h3>NOT Estimate residual variance</h3>
+<div id="pip-calibration-4" class="section level4">
+<h4>PIP calibration</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_pipcali.png" />
+
+</div>
+</div>
+<div id="pip-comparison-4" class="section level4">
+<h4>PIP comparison</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVSsusie.png" />
+
+</div>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVScaviar.png" />
+
+</div>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemap.png" />
+
+</div>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemapv3.png" />
+
+</div>
+</div>
+<div id="power-4" class="section level4">
+<h4>Power</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all_power_combine.png" />
+
+</div>
+</div>
+<div id="roc-4" class="section level4">
+<h4>ROC</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all_roc_combine.png" />
+
+</div>
+</div>
+<div id="cs-4" class="section level4">
+<h4>CS</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_cs_plots.png" />
+
+</div>
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_cs.rds&#39;
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+n_signal
+</th>
+<th style="text-align:right;">
+susie_overlap
+</th>
+<th style="text-align:right;">
+susierss_overlap
+</th>
+<th style="text-align:right;">
+susie_fail
+</th>
+<th style="text-align:right;">
+susierss_fail
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="estimate-residual-variance-2" class="section level3">
+<h3>Estimate residual variance</h3>
+<div id="pip-calibration-5" class="section level4">
+<h4>PIP calibration</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_pipcali.png" />
+
+</div>
+</div>
+<div id="pip-comparison-5" class="section level4">
+<h4>PIP comparison</h4>
+<p><img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVSsusie.png" /> <img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVScaviar.png" /></p>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemap.png" />
+
+</div>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemapv3.png" />
+
+</div>
+</div>
+<div id="power-5" class="section level4">
+<h4>Power</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all_power_combine.png" />
+
+</div>
+</div>
+<div id="roc-5" class="section level4">
+<h4>ROC</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all_roc_combine.png" />
+
+</div>
+</div>
+<div id="cs-5" class="section level4">
+<h4>CS</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_cs_plots.png" />
+
+</div>
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_cs.rds&#39;
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+n_signal
+</th>
+<th style="text-align:right;">
+susie_overlap
+</th>
+<th style="text-align:right;">
+susierss_overlap
+</th>
+<th style="text-align:right;">
+susie_fail
+</th>
+<th style="text-align:right;">
+susierss_fail
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.1 (2018-07-02)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Scientific Linux 7.4 (Nitrogen)
+
+Matrix products: default
+BLAS/LAPACK: /software/openblas-0.2.19-el7-x86_64/lib/libopenblas_haswellp-r0.2.19.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] kableExtra_1.1.0 dplyr_0.8.0.1   
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.3        highr_0.7         pillar_1.4.3     
+ [4] compiler_3.5.1    later_0.7.5       git2r_0.26.1     
+ [7] workflowr_1.6.0   tools_3.5.1       zeallot_0.1.0    
+[10] digest_0.6.23     viridisLite_0.3.0 evaluate_0.12    
+[13] tibble_2.1.3      lifecycle_0.1.0   pkgconfig_2.0.3  
+[16] rlang_0.4.2       rstudioapi_0.10   yaml_2.2.0       
+[19] stringr_1.4.0     httr_1.3.1        knitr_1.20       
+[22] xml2_1.2.0        fs_1.3.1          vctrs_0.2.1      
+[25] hms_0.5.2         webshot_0.5.1     rprojroot_1.3-2  
+[28] tidyselect_0.2.5  glue_1.3.1        R6_2.4.1         
+[31] rmarkdown_1.10    purrr_0.3.2       readr_1.3.1      
+[34] magrittr_1.5      whisker_0.3-2     backports_1.1.5  
+[37] scales_1.1.0      promises_1.0.1    htmltools_0.3.6  
+[40] assertthat_0.2.1  rvest_0.3.2       colorspace_1.4-1 
+[43] httpuv_1.4.5      stringi_1.4.3     munsell_0.5.0    
+[46] crayon_1.3.4     </code></pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

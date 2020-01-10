@@ -41,7 +41,7 @@ library(kableExtra)
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs_plots.png)
 
 ```{r fig.align='center', fig.width=20, results='asis'}
-output = 'docs/assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs.rds'
+output = 'results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs.rds'
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ```
@@ -55,7 +55,7 @@ print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 #### PIP comparison
 
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVSsusie.png)
-![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFTRUE_lamb1e-04_rssVScaviar.png)
+![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVScaviar.png)
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVSfinemap.png)
 
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVSfinemapv3.png)
@@ -73,7 +73,7 @@ print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs_plots.png)
 
 ```{r fig.align='center', fig.width=20, results='asis'}
-output = 'docs/assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs.rds'
+output = 'results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs.rds'
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ```
@@ -109,7 +109,7 @@ print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs_plots.png)
 
 ```{r fig.align='center', fig.width=20, results='asis'}
-output = 'docs/assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs.rds'
+output = 'results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs.rds'
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ```
@@ -143,7 +143,7 @@ print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs_plots.png)
 
 ```{r fig.align='center', fig.width=20, results='asis'}
-output = 'docs/assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs.rds'
+output = 'results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs.rds'
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ```
@@ -179,7 +179,7 @@ print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs_plots.png)
 
 ```{r fig.align='center', fig.width=20, results='asis'}
-output = 'docs/assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs.rds'
+output = 'results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs.rds'
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ```
@@ -212,7 +212,7 @@ print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs_plots.png)
 
 ```{r fig.align='center', fig.width=20, results='asis'}
-output = 'docs/assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs.rds'
+output = 'results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs.rds'
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ```

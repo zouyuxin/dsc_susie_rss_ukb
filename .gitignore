@@ -1,5 +1,4 @@
 **/.sos
-*.html
 genotype_dir
 output/
 *.err

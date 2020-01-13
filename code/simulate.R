@@ -31,11 +31,10 @@ sim_gaussian = function(X, pve, effect_num, effects){
     y = X %*% beta
     sigma = sqrt(var(y)*(1-pve)/pve)
     epsilon = rnorm(n, mean = 0, sd = sigma)
-    sim.y = y + epsilon
-    Y = (sim.y - mean(sim.y))/sd(sim.y)
+    y = y + epsilon
   }
 
-  return(list(Y = Y, sigma = sigma, sigma_std = sigma/sd(sim.y),
+  return(list(Y = y, sigma = sigma,
               beta = beta, mean_corX = mean_corX))
 }
 
@@ -49,7 +48,7 @@ sim_gaussian_multiple = function(X, pve, effect_num, effects, n_traits=1) {
     else Y = cbind(Y, as.matrix(res$Y))
     if (is.null(meta$true_coef)) meta$true_coef = as.matrix(res$beta)
     else meta$true_coef = cbind(meta$true_coef, as.matrix(res$beta))
-    meta$residual_variance[r] = res$sigma_std
+    meta$residual_variance[r] = res$sigma
   }
   return(list(Y=Y, meta=meta))
 }

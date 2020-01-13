@@ -35,6 +35,7 @@ lite_data(full_data):
 
 small_data(full_data):
   tag: "1k"
+  maf_thresh: 0
   subset: 1000
 
 tiny_data(full_data):

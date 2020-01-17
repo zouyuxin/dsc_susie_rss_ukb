@@ -1,0 +1,140 @@
+---
+title: "SuSiE problem"
+author: "Yuxin Zou"
+date: "01/15/2020"
+output:
+  workflowr::wflow_html:
+    code_folding: hide
+---
+
+```{r}
+library(susieR)
+```
+
+This data has 3 signals. SuSiE found none of them and 1 false positive CS.
+
+```{r}
+dat = readRDS('data/susie_rss_ukb_default_problem/small_data_51.rds')
+sim = readRDS('data/susie_rss_ukb_default_problem/small_data_51_sim_gaussian_3.rds')
+sumstat = susieR:::univariate_regression(dat$X_sample, sim$Y)
+R = cor(dat$X_sample)
+```
+
+```{r}
+z_scores <- sumstat$betahat / sumstat$sebetahat
+susie_plot(z_scores, y = "z", b=sim$meta$true_coef)
+```
+
+The underlying causal variables are 266, 373 and 573. The effects are `r sim$meta$true_coef[sim$meta$true_coef!=0]`. The z scores are `r z_scores[sim$meta$true_coef!=0]`.
+
+The correlation between the strongest signal and causal variables are:
+```{r}
+R[c(304, which(sim$meta$true_coef!=0)), c(304, which(sim$meta$true_coef!=0))]
+```
+
+SuSiE model (estimate prior variance, not estimate residual variance):
+```{r}
+mod = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T)
+```
+The objective is `r mod$elbo[mod$niter]`.
+
+```{r}
+susie_plot(mod, y='PIP', b = sim$meta$true_coef)
+```
+
+If we initialize at the truth:
+```{r}
+s_init = susie_init_coef(which(sim$meta$true_coef!=0), sim$meta$true_coef[sim$meta$true_coef!=0], nrow(sim$meta$true_coef))
+mod_init = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init)
+```
+The objective is `r mod_init$elbo[mod_init$niter]`.
+
+```{r}
+susie_plot(mod_init, y='PIP', b = sim$meta$true_coef)
+```
+
+What about susie_auto?
+```{r}
+mod_auto = susie_auto(dat$X_sample, sim$Y)
+```
+The objective is `r mod_auto$elbo[mod_auto$niter]`.
+
+```{r}
+susie_plot(mod_auto, y='PIP', b = sim$meta$true_coef)
+```
+
+
+RSS model:
+```{r}
+mod_rss = susie_rss(z_scores, R, estimate_residual_variance = F, check_z = FALSE)
+```
+The objective is `r mod_rss$elbo[mod_rss$niter]`.
+
+```{r}
+susie_plot(mod_rss, y='PIP', b = sim$meta$true_coef)
+```
+
+If we initialize at truth:
+```{r}
+s_init = susie_init_coef(which(sim$meta$true_coef!=0), sim$meta$true_coef[sim$meta$true_coef!=0] /sumstat$sebetahat[sim$meta$true_coef!=0], nrow(sim$meta$true_coef))
+mod_rss_init = susie_rss(z_scores, R, estimate_residual_variance = F, s_init =  s_init, check_z = F)
+```
+The objective is `r mod_rss_init$elbo[mod_rss_init$niter]`.
+
+```{r}
+susie_plot(mod_rss_init, y='PIP', b = sim$meta$true_coef)
+```
+
+## Another failure example
+
+This data has 3 signals. SuSiE found none of them and 2 false positive CSs.
+
+```{r}
+dat = readRDS('data/susie_rss_ukb_default_problem/small_data_109.rds')
+sim = readRDS('data/susie_rss_ukb_default_problem/small_data_109_sim_gaussian_3.rds')
+sumstat = susieR:::univariate_regression(dat$X_sample, sim$Y)
+R = cor(dat$X_sample)
+```
+
+```{r}
+z_scores <- sumstat$betahat / sumstat$sebetahat
+susie_plot(z_scores, y = "z", b=sim$meta$true_coef)
+```
+
+The underlying causal variables are 266, 373 and 573. The effects are `r sim$meta$true_coef[sim$meta$true_coef!=0]`. The z scores are `r z_scores[sim$meta$true_coef!=0]`.
+
+The correlation between the strongest signal and causal variables are:
+```{r}
+R[c(234, which(sim$meta$true_coef!=0)), c(234, which(sim$meta$true_coef!=0))]
+```
+
+SuSiE model (estimate prior variance, not estimate residual variance):
+```{r}
+mod = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T)
+```
+The objective is `r mod$elbo[mod$niter]`.
+
+```{r}
+susie_plot(mod, y='PIP', b = sim$meta$true_coef)
+```
+
+If we initialize at the truth:
+```{r}
+s_init = susie_init_coef(which(sim$meta$true_coef!=0), sim$meta$true_coef[sim$meta$true_coef!=0], nrow(sim$meta$true_coef))
+mod_init = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init)
+```
+The objective is `r mod_init$elbo[mod_init$niter]`.
+
+```{r}
+susie_plot(mod_init, y='PIP', b = sim$meta$true_coef)
+```
+
+What about susie_auto?
+```{r}
+mod_auto = susie_auto(dat$X_sample, sim$Y)
+```
+The objective is `r mod_auto$elbo[mod_auto$niter]`.
+
+```{r}
+susie_plot(mod_auto, y='PIP', b = sim$meta$true_coef)
+```

@@ -28,6 +28,12 @@ library(kableExtra)
 
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_rssVSfinemapv3.png)
 
+![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_susieVScaviar.png)
+
+![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_susieVSfinemap.png)
+
+![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_susieVSfinemapv3.png)
+
 #### Power
 
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all_power_combine.png)
@@ -59,6 +65,12 @@ print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_rssVSfinemap.png)
 
 ![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_rssVSfinemapv3.png)
+
+![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_susieVScaviar.png)
+
+![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_susieVSfinemap.png)
+
+![](assets/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_susieVSfinemapv3.png)
 
 #### Power
 

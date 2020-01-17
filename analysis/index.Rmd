@@ -15,3 +15,5 @@ editor_options:
     - [lambda = $10^{-4}$](SuSiE_dsc_ukb_results_lamb1e-4.html)
 
     - [lambda = 0.1](SuSiE_dsc_ukb_results_lamb0.1.html)
+
+* [One problem example](SuSiE_dsc_ukb_default_problem.html)

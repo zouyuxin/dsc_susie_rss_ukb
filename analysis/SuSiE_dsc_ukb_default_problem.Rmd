@@ -12,6 +12,8 @@ library(susieR)
 library(glmnet)
 ```
 
+## One failure example
+
 This data has 3 signals. SuSiE found none of them and 1 false positive CS.
 
 ```{r}

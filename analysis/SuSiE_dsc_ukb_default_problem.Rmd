@@ -9,7 +9,10 @@ output:
 
 ```{r}
 library(susieR)
+library(glmnet)
 ```
+
+## One failure example
 
 This data has 3 signals. SuSiE found none of them and 1 false positive CS.
 
@@ -36,18 +39,24 @@ SuSiE model (estimate prior variance, not estimate residual variance):
 ```{r}
 mod = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T)
 ```
-The objective is `r mod$elbo[mod$niter]`.
+The objective is `r mod$elbo[mod$niter]`. The CS is
+```{r}
+summary(mod)$cs
+```
 
 ```{r}
 susie_plot(mod, y='PIP', b = sim$meta$true_coef)
 ```
 
-If we initialize at the truth:
+If we initialize at the truth, the model found 2 CSs with true signals.
 ```{r}
 s_init = susie_init_coef(which(sim$meta$true_coef!=0), sim$meta$true_coef[sim$meta$true_coef!=0], nrow(sim$meta$true_coef))
 mod_init = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init)
 ```
-The objective is `r mod_init$elbo[mod_init$niter]`.
+The objective is `r mod_init$elbo[mod_init$niter]`. The CSs are
+```{r}
+summary(mod_init)$cs
+```
 
 ```{r}
 susie_plot(mod_init, y='PIP', b = sim$meta$true_coef)
@@ -57,18 +66,40 @@ What about susie_auto?
 ```{r}
 mod_auto = susie_auto(dat$X_sample, sim$Y)
 ```
-The objective is `r mod_auto$elbo[mod_auto$niter]`.
+The objective is `r mod_auto$elbo[mod_auto$niter]`. The CSs are
+```{r}
+summary(mod_auto)$cs
+```
 
 ```{r}
 susie_plot(mod_auto, y='PIP', b = sim$meta$true_coef)
 ```
 
+If we initialize using LASSO, the model found 2 CSs with true signals.
+```{r}
+fit.lasso = glmnet(dat$X_sample, sim$Y, family="gaussian", alpha=1, dfmax = 10)
+lasso.b = fit.lasso$beta[,max(which(fit.lasso$df <= 10))]
+s_init = susie_init_coef(which(lasso.b!=0), sumstat$betahat[lasso.b!=0], nrow(sim$meta$true_coef))
+mod_init_lasso = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init, max_iter = 500)
+```
 
-RSS model:
+The objective is `r mod_init_lasso$elbo[mod_init_lasso$niter]`. The CSs are
+```{r}
+summary(mod_init_lasso)$cs
+```
+
+```{r}
+susie_plot(mod_init_lasso, y='PIP', b = sim$meta$true_coef)
+```
+
+**RSS model**:
 ```{r}
 mod_rss = susie_rss(z_scores, R, estimate_residual_variance = F, check_z = FALSE)
 ```
-The objective is `r mod_rss$elbo[mod_rss$niter]`.
+The objective is `r mod_rss$elbo[mod_rss$niter]`. The CS is 
+```{r}
+summary(mod_rss)$cs
+```
 
 ```{r}
 susie_plot(mod_rss, y='PIP', b = sim$meta$true_coef)
@@ -79,10 +110,36 @@ If we initialize at truth:
 s_init = susie_init_coef(which(sim$meta$true_coef!=0), sim$meta$true_coef[sim$meta$true_coef!=0] /sumstat$sebetahat[sim$meta$true_coef!=0], nrow(sim$meta$true_coef))
 mod_rss_init = susie_rss(z_scores, R, estimate_residual_variance = F, s_init =  s_init, check_z = F)
 ```
-The objective is `r mod_rss_init$elbo[mod_rss_init$niter]`.
+The objective is `r mod_rss_init$elbo[mod_rss_init$niter]`. The CSs are
+```{r}
+summary(mod_rss_init)$cs
+```
 
 ```{r}
 susie_plot(mod_rss_init, y='PIP', b = sim$meta$true_coef)
+```
+
+If we initialize using LASSO,
+```{r}
+eigenR = eigen(R, symmetric = T)
+eigenR$values[abs(eigenR$values) < 1e-08] = 0
+R = eigenR$vectors %*% (t(eigenR$vectors) * eigenR$values)
+diag(R) = 1
+P = t(eigenR$vectors[,eigenR$values!=0]) * eigenR$values[eigenR$values!=0]^(-0.5)
+
+fit.lasso = glmnet(t(eigenR$vectors[,eigenR$values!=0]) * eigenR$values[eigenR$values!=0]^(0.5) , P%*%z_scores, alpha = 1, dfmax = 10)
+lasso.b = fit.lasso$beta[,max(which(fit.lasso$df <= 10))]
+s_init = susie_init_coef(which(lasso.b!=0), z_scores[lasso.b!=0], nrow(sim$meta$true_coef))
+mod_rss_init_lasso = susie_rss(z_scores, R, estimate_residual_variance = F, s_init = s_init, max_iter = 500, check_z = F)
+```
+
+The objective is `r mod_rss_init_lasso$elbo[mod_rss_init_lasso$niter]`. The CSs are
+```{r}
+summary(mod_rss_init_lasso)$cs
+```
+
+```{r}
+susie_plot(mod_rss_init_lasso, y='PIP', b = sim$meta$true_coef)
 ```
 
 ## Another failure example
@@ -112,7 +169,10 @@ SuSiE model (estimate prior variance, not estimate residual variance):
 ```{r}
 mod = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T)
 ```
-The objective is `r mod$elbo[mod$niter]`.
+The objective is `r mod$elbo[mod$niter]`. The CSs are
+```{r}
+summary(mod)$cs
+```
 
 ```{r}
 susie_plot(mod, y='PIP', b = sim$meta$true_coef)
@@ -123,7 +183,10 @@ If we initialize at the truth:
 s_init = susie_init_coef(which(sim$meta$true_coef!=0), sim$meta$true_coef[sim$meta$true_coef!=0], nrow(sim$meta$true_coef))
 mod_init = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init)
 ```
-The objective is `r mod_init$elbo[mod_init$niter]`.
+The objective is `r mod_init$elbo[mod_init$niter]`. The CSs are
+```{r}
+summary(mod_init)$cs
+```
 
 ```{r}
 susie_plot(mod_init, y='PIP', b = sim$meta$true_coef)
@@ -133,8 +196,80 @@ What about susie_auto?
 ```{r}
 mod_auto = susie_auto(dat$X_sample, sim$Y)
 ```
-The objective is `r mod_auto$elbo[mod_auto$niter]`.
+The objective is `r mod_auto$elbo[mod_auto$niter]`. The CSs are
+```{r}
+summary(mod_auto)$cs
+```
 
 ```{r}
 susie_plot(mod_auto, y='PIP', b = sim$meta$true_coef)
+```
+
+If we initialize using LASSO,
+```{r}
+fit.lasso = glmnet(dat$X_sample, sim$Y, family="gaussian", alpha=1, dfmax = 10)
+lasso.b = fit.lasso$beta[,max(which(fit.lasso$df <= 10))]
+s_init = susie_init_coef(which(lasso.b!=0), sumstat$betahat[lasso.b!=0], nrow(sim$meta$true_coef))
+mod_init_lasso = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init, max_iter = 500)
+```
+
+The objective is `r mod_init_lasso$elbo[mod_init_lasso$niter]`. The CSs are
+```{r}
+summary(mod_init_lasso)$cs
+```
+
+```{r}
+susie_plot(mod_init_lasso, y='PIP', b = sim$meta$true_coef)
+```
+
+The objective became lower. It found 3 CSs and non of them contain true signals.
+
+**RSS model**:
+```{r}
+mod_rss = susie_rss(z_scores, R, estimate_residual_variance = F, check_z = FALSE)
+```
+The objective is `r mod_rss$elbo[mod_rss$niter]`. The CSs are
+```{r}
+summary(mod_rss)$cs
+```
+
+```{r}
+susie_plot(mod_rss, y='PIP', b = sim$meta$true_coef)
+```
+
+If we initialize at truth:
+```{r}
+s_init = susie_init_coef(which(sim$meta$true_coef!=0), sim$meta$true_coef[sim$meta$true_coef!=0] /sumstat$sebetahat[sim$meta$true_coef!=0], nrow(sim$meta$true_coef))
+mod_rss_init = susie_rss(z_scores, R, estimate_residual_variance = F, s_init =  s_init, check_z = F)
+```
+The objective is `r mod_rss_init$elbo[mod_rss_init$niter]`. The CSs are
+```{r}
+summary(mod_rss_init)$cs
+```
+
+```{r}
+susie_plot(mod_rss_init, y='PIP', b = sim$meta$true_coef)
+```
+
+If we initialize using LASSO,
+```{r}
+eigenR = eigen(R, symmetric = T)
+eigenR$values[abs(eigenR$values) < 1e-08] = 0
+R = eigenR$vectors %*% (t(eigenR$vectors) * eigenR$values)
+diag(R) = 1
+P = t(eigenR$vectors[,eigenR$values!=0]) * eigenR$values[eigenR$values!=0]^(-0.5)
+
+fit.lasso = glmnet(t(eigenR$vectors[,eigenR$values!=0]) * eigenR$values[eigenR$values!=0]^(0.5) , P%*%z_scores, alpha = 1, dfmax = 10)
+lasso.b = fit.lasso$beta[,max(which(fit.lasso$df <= 10))]
+s_init = susie_init_coef(which(lasso.b!=0), z_scores[lasso.b!=0], nrow(sim$meta$true_coef))
+mod_rss_init_lasso = susie_rss(z_scores, R, estimate_residual_variance = F, s_init = s_init, max_iter = 500, check_z = F)
+```
+
+The objective is `r mod_rss_init_lasso$elbo[mod_rss_init_lasso$niter]`. The CSs are
+```{r}
+summary(mod_rss_init_lasso)$cs
+```
+
+```{r}
+susie_plot(mod_rss_init_lasso, y='PIP', b = sim$meta$true_coef)
 ```

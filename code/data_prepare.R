@@ -1,6 +1,16 @@
 library(data.table)
 library(Matrix)
 library(readr)
+library(digest)
+# get unique seed for this genotype
+str_to_int = function(x){
+  h = digest(x, algo = "xxhash32")
+  xx = strsplit(tolower(h), "")[[1L]]
+  pos = match(xx, c(0L:9L, letters[1L:6L]))
+  sum((pos - 1L) * 4^(rev(seq_along(xx) - 1)))
+}
+seed = str_to_int(dataset)
+
 # read genotypes
 geno <- fread(paste0(dataset, '.raw.gz'),sep = "\t", 
               header = TRUE, stringsAsFactors = FALSE)

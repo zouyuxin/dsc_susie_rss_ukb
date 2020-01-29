@@ -28,6 +28,7 @@ full_data: sim_utils.R + data_prepare.R
   $N_ref: nrow(X.ref)
   $maf: list(in_sample=maf.sample, ref_sample=maf.ref)
   $ld: list(in_sample=ld_sample_file, ref_sample=ld_ref_file)
+  $seed: seed
 
 lite_data(full_data):
   tag: "2k"

@@ -1,7 +1,9 @@
 sim_gaussian: simulate.R + \
                 R(neale_effects = readRDS(effects);
+                set.seed(seed);
                 res=sim_gaussian_multiple(X, pve, n_signal, neale_effects$beta, n_traits))
   @CONF: R_libs = susieR
+  seed: $seed
   X: $X_sample
   pve: 0.01
   n_signal: 1,2,3,4,5

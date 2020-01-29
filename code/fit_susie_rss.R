@@ -5,6 +5,7 @@ susie_rss_analyze = function(z, R, L, lambda, s_init, estimate_residual_variance
                            lambda=lambda,
                            s_init=s_init,
                            estimate_residual_variance = estimate_residual_variance,
+                           check_z = FALSE,
                            max_iter = 200),
                  error = function(e) list(sets = NULL, pip=NULL))
   return(fit)
@@ -31,17 +32,4 @@ susie_rss_multiple = function(Z, R, L, lambda, s_init, estimate_residual_varianc
   return(list(fitted=fitted, posterior=posterior))
 }
 
-library(data.table);
-z = sumstats$bhat/sumstats$shat;
-r = as.matrix(fread(ld[[ld_method]]));
-if (add_z) {
-  if (ld_method == 'out_sample') {
-    if (is.null(N_ref)) stop("Cannot use add_z out sample LD when N_ref is not available (NULL)")
-    r = cov2cor(r*(N_ref-1) + tcrossprod(z));
-    r = (r + t(r))/2;
-  }else if(ld_method == 'ref_sample'){
-    r = cov2cor(r*(N_sample-1) + tcrossprod(z));
-    r = (r + t(r))/2;
-  }
-}
 res = susie_rss_multiple(z, r, L, lamb, s_init, estimate_residual_variance)

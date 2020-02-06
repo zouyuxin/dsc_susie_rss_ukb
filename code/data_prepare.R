@@ -155,6 +155,13 @@ if (all(!is.na(X.ref))) {
   r.ref = NA
 }
 
+if(all(!is.na(X.ref))){
+  r.Fdist = Matrix::norm(r.sample - r.ref, type='F')
+  r.Mdist = max(abs(r.sample - r.ref))
+}else{
+  r.Fdist = r.Mdist = NA
+}
+
 write.table(r.sample, ld_sample_file, quote=F, col.names=F, row.names=F)
 write.table(r.ref, ld_ref_file, quote=F, col.names=F, row.names=F)
 

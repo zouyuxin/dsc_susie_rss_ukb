@@ -1,5 +1,5 @@
 library(data.table);
-z = sumstats$bhat / sumstats$shat;
+z = as.matrix(sumstats$bhat / sumstats$shat);
 if(addz == TRUE && ld_method == 'ref_sample'){
   r = as.matrix(fread(ld[[ld_method]]));
   if (is.null(N_ref)) stop("Cannot use add_z out sample LD when N_ref is not available (NULL)")

@@ -107,7 +107,7 @@ susie_plot(mod_rss, y='PIP', b = sim$meta$true_coef)
 
 If we initialize at truth:
 ```{r}
-s_init = susie_init_coef(which(sim$meta$true_coef!=0), sim$meta$true_coef[sim$meta$true_coef!=0] /sumstat$sebetahat[sim$meta$true_coef!=0], nrow(sim$meta$true_coef))
+s_init = susie_init_coef(which(sim$meta$true_coef!=0), sim$meta$true_coef[sim$meta$true_coef!=0] * sqrt(nrow(sim$Y)), nrow(sim$meta$true_coef))
 mod_rss_init = susie_rss(z_scores, R, estimate_residual_variance = F, s_init =  s_init, check_z = F)
 ```
 The objective is `r mod_rss_init$elbo[mod_rss_init$niter]`. The CSs are
@@ -239,7 +239,7 @@ susie_plot(mod_rss, y='PIP', b = sim$meta$true_coef)
 
 If we initialize at truth:
 ```{r}
-s_init = susie_init_coef(which(sim$meta$true_coef!=0), sim$meta$true_coef[sim$meta$true_coef!=0] /sumstat$sebetahat[sim$meta$true_coef!=0], nrow(sim$meta$true_coef))
+s_init = susie_init_coef(which(sim$meta$true_coef!=0), sim$meta$true_coef[sim$meta$true_coef!=0] * sqrt(nrow(sim$Y)), nrow(sim$meta$true_coef))
 mod_rss_init = susie_rss(z_scores, R, estimate_residual_variance = F, s_init =  s_init, check_z = F)
 ```
 The objective is `r mod_rss_init$elbo[mod_rss_init$niter]`. The CSs are

@@ -13,7 +13,7 @@
 
 <meta name="date" content="2020-02-10" />
 
-<title>SuSiE-RSS lambda = 1e-4 (initialize with oracle)</title>
+<title>SuSiE-RSS lambda = 1e-4 (initialize with lasso)</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -325,7 +325,7 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">SuSiE-RSS lambda = 1e-4 (initialize with oracle)</h1>
+<h1 class="title toc-ignore">SuSiE-RSS lambda = 1e-4 (initialize with lasso)</h1>
 <h4 class="author"><em>Yuxin Zou</em></h4>
 <h4 class="date"><em>02/10/2020</em></h4>
 
@@ -996,27 +996,10 @@ Message
 <tbody>
 <tr>
 <td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/965e00d43ddf535f424e027cdcda2d2d11580967/docs/SuSiE_dsc_ukb_results_initoracle_lamb1e-4.html" target="_blank">965e00d</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-10
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/909b091b06e3251ec3367bdc3cc0ad410e7d7801/analysis/SuSiE_dsc_ukb_results_initoracle_lamb1e-4.Rmd" target="_blank">909b091</a>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/79703180404aad714e94965b7172b1794b4b786f/analysis/SuSiE_dsc_ukb_results_initlasso_lamb1e-4.Rmd" target="_blank">7970318</a>
 </td>
 <td>
 zouyuxin
@@ -1025,7 +1008,7 @@ zouyuxin
 2020-02-10
 </td>
 <td>
-wflow_publish(c(“analysis/SuSiE_dsc_ukb_results_noinit_lamb0.Rmd”, “analysis/SuSiE_dsc_ukb_results_initoracle_lamb1e-4.Rmd”,
+wflow_publish(c(“analysis/SuSiE_dsc_ukb_results_noinit_lamb1e-4.Rmd”,
 </td>
 </tr>
 </tbody>
@@ -1044,41 +1027,41 @@ library(kableExtra)</code></pre>
 <div id="pip-calibration" class="section level4">
 <h4>PIP calibration</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_pipcali.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_pipcali.png" />
 </div>
 </div>
 <div id="pip-comparison" class="section level4">
 <h4>PIP comparison</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_rssVSsusie.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_rssVSsusie.png" />
 </div>
-<p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_rssVScaviar.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_rssVSfinemap.png" /></p>
+<p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_rssVScaviar.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_rssVSfinemap.png" /></p>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_rssVSfinemapv3.png" />
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_susieVScaviar.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_rssVSfinemapv3.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_susieVSfinemap.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_susieVScaviar.png" />
 </div>
-<p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_susieVSfinemapv3.png" /> #### Power</p>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all_power_combine.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_susieVSfinemap.png" />
+</div>
+<p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_susieVSfinemapv3.png" /> #### Power</p>
+<div class="figure">
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all_power_combine.png" />
 </div>
 </div>
 <div id="roc" class="section level4">
 <h4>ROC</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all_roc_combine.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all_roc_combine.png" />
 </div>
 </div>
 <div id="cs" class="section level4">
 <h4>CS</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs_plots.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs_plots.png" />
 </div>
-<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs.rds&#39;
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -1110,13 +1093,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-0
+692
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+12
 </td>
 </tr>
 <tr>
@@ -1127,13 +1110,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-0
+823
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+10
 </td>
 </tr>
 <tr>
@@ -1144,13 +1127,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-0
+142
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+8
 </td>
 </tr>
 <tr>
@@ -1161,13 +1144,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-74
+875
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+10
 </td>
 </tr>
 <tr>
@@ -1178,13 +1161,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-13
+227
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+7
 </td>
 </tr>
 </tbody>
@@ -1196,43 +1179,43 @@ susierss_fail
 <div id="pip-calibration-1" class="section level4">
 <h4>PIP calibration</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_pipcali.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_pipcali.png" />
 </div>
 </div>
 <div id="pip-comparison-1" class="section level4">
 <h4>PIP comparison</h4>
-<p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVSsusie.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVScaviar.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVSfinemap.png" /></p>
+<p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVSsusie.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVScaviar.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVSfinemap.png" /></p>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVSfinemapv3.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVSfinemapv3.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_susieVScaviar.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_susieVScaviar.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_susieVSfinemap.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_susieVSfinemap.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_susieVSfinemapv3.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_susieVSfinemapv3.png" />
 </div>
 </div>
 <div id="power" class="section level4">
 <h4>Power</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all_power_combine.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all_power_combine.png" />
 </div>
 </div>
 <div id="roc-1" class="section level4">
 <h4>ROC</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all_roc_combine.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all_roc_combine.png" />
 </div>
 </div>
 <div id="cs-1" class="section level4">
 <h4>CS</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs_plots.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs_plots.png" />
 </div>
-<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs.rds&#39;
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -1264,13 +1247,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-0
+644
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+15
 </td>
 </tr>
 <tr>
@@ -1281,13 +1264,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-0
+106
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+11
 </td>
 </tr>
 <tr>
@@ -1298,13 +1281,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-0
+248
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+10
 </td>
 </tr>
 <tr>
@@ -1315,13 +1298,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-23
+420
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+12
 </td>
 </tr>
 <tr>
@@ -1332,13 +1315,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-64
+367
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+9
 </td>
 </tr>
 </tbody>
@@ -1353,42 +1336,42 @@ susierss_fail
 <div id="pip-calibration-2" class="section level4">
 <h4>PIP calibration</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_pipcali.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_pipcali.png" />
 </div>
 </div>
 <div id="pip-comparison-2" class="section level4">
 <h4>PIP comparison</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_rssVSsusie.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_rssVSsusie.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_rssVScaviar.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_rssVScaviar.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_rssVSfinemap.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_rssVSfinemap.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_rssVSfinemapv3.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_rssVSfinemapv3.png" />
 </div>
 </div>
 <div id="power-1" class="section level4">
 <h4>Power</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all_power_combine.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all_power_combine.png" />
 </div>
 </div>
 <div id="roc-2" class="section level4">
 <h4>ROC</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all_roc_combine.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all_roc_combine.png" />
 </div>
 </div>
 <div id="cs-2" class="section level4">
 <h4>CS</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs_plots.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs_plots.png" />
 </div>
-<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs.rds&#39;
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -1420,13 +1403,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-0
+434
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+15
 </td>
 </tr>
 <tr>
@@ -1437,13 +1420,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-0
+358
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+14
 </td>
 </tr>
 <tr>
@@ -1454,13 +1437,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-59
+195
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+15
 </td>
 </tr>
 <tr>
@@ -1471,13 +1454,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-127
+468
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+12
 </td>
 </tr>
 <tr>
@@ -1488,13 +1471,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-183
+733
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+17
 </td>
 </tr>
 </tbody>
@@ -1506,42 +1489,42 @@ susierss_fail
 <div id="pip-calibration-3" class="section level4">
 <h4>PIP calibration</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_pipcali.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_pipcali.png" />
 </div>
 </div>
 <div id="pip-comparison-3" class="section level4">
 <h4>PIP comparison</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_rssVSsusie.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_rssVSsusie.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_rssVScaviar.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_rssVScaviar.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_rssVSfinemap.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_rssVSfinemap.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_rssVSfinemapv3.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_rssVSfinemapv3.png" />
 </div>
 </div>
 <div id="power-2" class="section level4">
 <h4>Power</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all_power_combine.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all_power_combine.png" />
 </div>
 </div>
 <div id="roc-3" class="section level4">
 <h4>ROC</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all_roc_combine.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all_roc_combine.png" />
 </div>
 </div>
 <div id="cs-3" class="section level4">
 <h4>CS</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs_plots.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs_plots.png" />
 </div>
-<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs.rds&#39;
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -1573,13 +1556,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-0
+434
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+15
 </td>
 </tr>
 <tr>
@@ -1590,13 +1573,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-0
+358
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+14
 </td>
 </tr>
 <tr>
@@ -1607,13 +1590,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-59
+195
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+15
 </td>
 </tr>
 <tr>
@@ -1624,13 +1607,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-127
+468
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+12
 </td>
 </tr>
 <tr>
@@ -1641,13 +1624,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-183
+733
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+17
 </td>
 </tr>
 </tbody>
@@ -1662,42 +1645,42 @@ susierss_fail
 <div id="pip-calibration-4" class="section level4">
 <h4>PIP calibration</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_pipcali.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_pipcali.png" />
 </div>
 </div>
 <div id="pip-comparison-4" class="section level4">
 <h4>PIP comparison</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_rssVSsusie.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_rssVSsusie.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_rssVScaviar.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_rssVScaviar.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_rssVSfinemap.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_rssVSfinemap.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_rssVSfinemapv3.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_rssVSfinemapv3.png" />
 </div>
 </div>
 <div id="power-3" class="section level4">
 <h4>Power</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all_power_combine.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all_power_combine.png" />
 </div>
 </div>
 <div id="roc-4" class="section level4">
 <h4>ROC</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all_roc_combine.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all_roc_combine.png" />
 </div>
 </div>
 <div id="cs-4" class="section level4">
 <h4>CS</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs_plots.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs_plots.png" />
 </div>
-<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs.rds&#39;
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -1729,13 +1712,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-0
+532
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+19
 </td>
 </tr>
 <tr>
@@ -1746,13 +1729,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-24
+550
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+18
 </td>
 </tr>
 <tr>
@@ -1763,13 +1746,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-58
+381
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+16
 </td>
 </tr>
 <tr>
@@ -1780,13 +1763,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-102
+266
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+13
 </td>
 </tr>
 <tr>
@@ -1797,13 +1780,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-350
+1029
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-1
+9
 </td>
 </tr>
 </tbody>
@@ -1815,37 +1798,37 @@ susierss_fail
 <div id="pip-calibration-5" class="section level4">
 <h4>PIP calibration</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_pipcali.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_pipcali.png" />
 </div>
 </div>
 <div id="pip-comparison-5" class="section level4">
 <h4>PIP comparison</h4>
-<p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_rssVSsusie.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_rssVScaviar.png" /></p>
+<p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_rssVSsusie.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_rssVScaviar.png" /></p>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_rssVSfinemap.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_rssVSfinemap.png" />
 </div>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_rssVSfinemapv3.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_rssVSfinemapv3.png" />
 </div>
 </div>
 <div id="power-4" class="section level4">
 <h4>Power</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all_power_combine.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all_power_combine.png" />
 </div>
 </div>
 <div id="roc-5" class="section level4">
 <h4>ROC</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all_roc_combine.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all_roc_combine.png" />
 </div>
 </div>
 <div id="cs-5" class="section level4">
 <h4>CS</h4>
 <div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs_plots.png" />
+<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs_plots.png" />
 </div>
-<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs.rds&#39;
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -1877,13 +1860,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-0
+532
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+19
 </td>
 </tr>
 <tr>
@@ -1894,13 +1877,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-24
+550
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+18
 </td>
 </tr>
 <tr>
@@ -1911,13 +1894,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-58
+381
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+16
 </td>
 </tr>
 <tr>
@@ -1928,13 +1911,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-102
+266
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0
+13
 </td>
 </tr>
 <tr>
@@ -1945,13 +1928,13 @@ susierss_fail
 0
 </td>
 <td style="text-align:right;">
-350
+1029
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-1
+9
 </td>
 </tr>
 </tbody>

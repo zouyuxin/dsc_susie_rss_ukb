@@ -93,6 +93,9 @@ susie10(susie):
   maxL: 15
   prior_var: 0, 0.1
 
+susie_simple(susie):
+  init: NA
+
 #------------------------------
 # SuSiE with summary statistics
 #------------------------------
@@ -121,6 +124,6 @@ susie_rss_large(susie_rss):
   L: 15
 
 susie_rss_simple(susie_rss):
-  L: 10
   lamb: 0
+  init: NA
 

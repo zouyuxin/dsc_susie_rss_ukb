@@ -36,9 +36,9 @@ DSC:
 
 default:
   queue: midway2
-  instances_per_job: 5
+  instances_per_job: 10
   nodes_per_job: 1
-  instances_per_node: 10
+  instances_per_node: 5
   cpus_per_instance: 1
   mem_per_instance: 2G
   time_per_instance: 10m
@@ -58,23 +58,31 @@ small_data:
   time_per_instance: 30m
 
 sim_gaussian:
-  instances_per_node: 2
-  mem_per_instance: 20G
-  time_per_instance: 30m
+  queue: stephenslab
+  instances_per_node: 1
+  instances_per_job: 1
+  mem_per_instance: 100G
+  time_per_instance: 60m
 
 get_sumstats:
   queue: stephenslab
-  instances_per_node: 5
-  instances_per_job: 10
-  mem_per_instance: 5G
-  time_per_instance: 240m
+  instances_per_node: 1
+  instances_per_job: 1
+  mem_per_instance: 100G
+  time_per_instance: 60m
 
 susie:
+  time_per_instance: 240m
+  instances_per_job: 10
+  instances_per_node: 5
+  mem_per_instance: 5G
+
+susie_simple:
   queue: stephenslab
   time_per_instance: 240m
-  instances_per_job: 2
-  instances_per_node: 5
-  mem_per_instance: 20G
+  instances_per_job: 1
+  instances_per_node: 1
+  mem_per_instance: 50G
 
 susie_rss:
   time_per_instance: 121m
@@ -82,27 +90,12 @@ susie_rss:
   mem_per_instance: 5G
 
 susie_rss_simple:
-  time_per_instance: 241m
+  time_per_instance: 361m
   instances_per_job: 1
   instances_per_node: 1
-  mem_per_instance: 25G
-
-susie_rss_add_z:
-  time_per_instance: 121m
-  instances_per_job: 5
-  mem_per_instance: 5G
-
-susie_rss_simple_add_z:
-  time_per_instance: 241m
-  instances_per_job: 1
-  instances_per_node: 1
-  mem_per_instance: 25G
+  mem_per_instance: 40G
 
 susie_suff_stat:
-  time_per_instance: 61m
-  instances_per_job: 80
-
-susie_suff_stat_add_z:
   time_per_instance: 61m
   instances_per_job: 80
 
@@ -111,40 +104,20 @@ finemap:
   mem_per_instance: 5G
 
 finemap_simple:
-  time_per_instance: 241m
+  time_per_instance: 361m
   instances_per_node: 1
   instances_per_job: 1
-  mem_per_instance: 25G
-
-finemap_add_z:
-  time_per_instance: 121m
-  mem_per_instance: 5G
-
-finemap_simple_add_z:
-  time_per_instance: 241m
-  instances_per_node: 1
-  instances_per_job: 1
-  mem_per_instance: 25G
+  mem_per_instance: 40G
 
 finemapv3:
   time_per_instance: 121m
   mem_per_instance: 5G
 
 finemapv3_simple:
-  time_per_instance: 241m
+  time_per_instance: 361m
   instances_per_node: 1
   instances_per_job: 1
-  mem_per_instance: 25G
-
-finemapv3_add_z:
-  time_per_instance: 121m
-  mem_per_instance: 5G
-
-finemapv3_simple_add_z:
-  time_per_instance: 241m
-  instances_per_node: 1
-  instances_per_job: 1
-  mem_per_instance: 25G
+  mem_per_instance: 40G
 
 caviar:
   cpus_per_instance: 2
@@ -154,23 +127,10 @@ caviar:
 
 caviar_simple:
   cpus_per_instance: 2
-  time_per_instance: 6h
+  time_per_instance: 8h
   instances_per_job: 1
   instances_per_node: 1
-  mem_per_instance: 25G
-
-caviar_add_z:
-  cpus_per_instance: 2
-  time_per_instance: 6h
-  instances_per_job: 10
-  mem_per_instance: 5G
-
-caviar_simple_add_z:
-  cpus_per_instance: 2
-  time_per_instance: 6h
-  instances_per_job: 1
-  instances_per_node: 1
-  mem_per_instance: 25G
+  mem_per_instance: 40G
 
 dap_z:
   time_per_instance: 61m

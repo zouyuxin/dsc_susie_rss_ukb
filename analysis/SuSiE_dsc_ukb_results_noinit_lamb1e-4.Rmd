@@ -1,0 +1,230 @@
+---
+title: "SuSiE-RSS lambda = 1e-4 (no initialization)"
+author: "Yuxin Zou"
+date: "02/10/2020"
+output:
+  workflowr::wflow_html:
+    code_folding: hide
+---
+
+```{r warning=FALSE, message=FALSE}
+library(dplyr)
+library(kableExtra)
+```
+
+## IN sample
+
+### NOT Estimate residual variance
+
+#### PIP calibration
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_pipcali.png)
+
+#### PIP comparison
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_rssVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_rssVScaviar.png)
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_rssVSfinemap.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_rssVSfinemapv3.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_susieVScaviar.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_susieVSfinemap.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_susieVSfinemapv3.png)
+#### Power
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all_power_combine.png)
+
+#### ROC
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all_roc_combine.png)
+
+#### CS
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
+```
+
+### Estimate residual variance
+
+#### PIP calibration
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_pipcali.png)
+
+#### PIP comparison
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVSsusie.png)
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVScaviar.png)
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVSfinemap.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_rssVSfinemapv3.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_susieVScaviar.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_susieVSfinemap.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_susieVSfinemapv3.png)
+
+#### Power
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all_power_combine.png)
+
+#### ROC
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all_roc_combine.png)
+
+#### CS
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
+```
+
+## OUT sample
+
+### NOT Estimate residual variance
+
+#### PIP calibration
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_pipcali.png)
+
+#### PIP comparison
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_rssVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_rssVScaviar.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_rssVSfinemap.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_rssVSfinemapv3.png)
+
+#### Power
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all_power_combine.png)
+
+#### ROC
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all_roc_combine.png)
+
+#### CS
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
+```
+
+### Estimate residual variance
+
+#### PIP calibration
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_pipcali.png)
+
+#### PIP comparison
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_rssVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_rssVScaviar.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_rssVSfinemap.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_rssVSfinemapv3.png)
+
+#### Power
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all_power_combine.png)
+
+#### ROC
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all_roc_combine.png)
+
+#### CS
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
+```
+
+## OUT sample ADDZ
+
+### NOT Estimate residual variance
+
+#### PIP calibration
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_pipcali.png)
+
+#### PIP comparison
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_rssVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_rssVScaviar.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_rssVSfinemap.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_rssVSfinemapv3.png)
+
+#### Power
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all_power_combine.png)
+
+#### ROC
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all_roc_combine.png)
+
+#### CS
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
+```
+
+### Estimate residual variance
+
+#### PIP calibration
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_pipcali.png)
+
+#### PIP comparison
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_rssVSsusie.png)
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_rssVScaviar.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_rssVSfinemap.png)
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_rssVSfinemapv3.png)
+
+#### Power
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all_power_combine.png)
+
+#### ROC
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all_roc_combine.png)
+
+#### CS
+
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))
+```

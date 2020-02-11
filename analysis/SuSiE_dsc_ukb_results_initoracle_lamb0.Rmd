@@ -24,7 +24,7 @@ library(kableExtra)
 
 ![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0_rssVSsusie.png)
 ![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0_rssVScaviar.png)
-![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_FALSE_ldin_sample_ERFALSE_lamb0_rssVSfinemap.png)
+![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0_rssVSfinemap.png)
 
 ![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0_rssVSfinemapv3.png)
 

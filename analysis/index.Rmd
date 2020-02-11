@@ -8,6 +8,36 @@ editor_options:
   chunk_output_type: console
 ---
 
+* [RESULR from 2020.2.8 (add initialization; fix set seed issue)] 
+
+  The result using GWASsample = 10000, REFsample = 500:
+
+    - $\lambda = 0$:
+        
+        [default initialization](SuSiE_dsc_ukb_results_noinit_lamb0.html)
+        
+        [initialize with oracle](SuSiE_dsc_ukb_results_initoracle_lamb0.html)
+        
+        [initialize with lasso](SuSiE_dsc_ukb_results_initlasso_lamb0.html)
+    
+    - $\lambda = 10^{-4}$:
+        
+        [default initialization](SuSiE_dsc_ukb_results_noinit_lamb1e-4.html)
+        
+        [initialize with oracle](SuSiE_dsc_ukb_results_initoracle_lamb1e-4.html)
+        
+        [initialize with lasso](SuSiE_dsc_ukb_results_initlasso_lamb1e-4.html)
+        
+    - $\lambda = 0.1$:
+        
+        [default initialization](SuSiE_dsc_ukb_results_noinit_lamb0.1.html)
+        
+        [initialize with oracle](SuSiE_dsc_ukb_results_initoracle_lamb0.1.html)
+        
+        [initialize with lasso](SuSiE_dsc_ukb_results_initlasso_lamb0.1.html)
+
+---------------------
+
 * The result using GWASsample = 10000, REFsample = 500:
 
     - [lambda = 0](SuSiE_dsc_ukb_results_lamb0.html)

@@ -8,7 +8,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-* [RESULR from 2020.2.8 (add initialization; fix set seed issue)] 
+* RESULT from 2020.2.8 (add initialization; fix set seed issue)
 
   The result using GWASsample = 10000, REFsample = 500:
 

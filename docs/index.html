@@ -264,10 +264,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree264e4eb584626d715acf9f21bffa1985d6f82152targetblank264e4eba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/264e4eb584626d715acf9f21bffa1985d6f82152" target="_blank">264e4eb</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree5f84648fdfa098334ac55519941c3ad437e2ad7ftargetblank5f84648a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/5f84648fdfa098334ac55519941c3ad437e2ad7f" target="_blank">5f84648</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree264e4eb584626d715acf9f21bffa1985d6f82152targetblank264e4eba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree5f84648fdfa098334ac55519941c3ad437e2ad7ftargetblank5f84648a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -277,6 +277,8 @@ Ignored files:
     Ignored:    .sos/
     Ignored:    0106b4b278ed6b7a.err
     Ignored:    0106b4b278ed6b7a.out
+    Ignored:    01c32d6b8b215b92.err
+    Ignored:    01c32d6b8b215b92.out
     Ignored:    0408dbd6ed436057.err
     Ignored:    0408dbd6ed436057.out
     Ignored:    0a7944bd43d348b8.err
@@ -369,6 +371,8 @@ Ignored files:
     Ignored:    4a1f82c3a85840c6.out
     Ignored:    4aa9dfddf8f25447.err
     Ignored:    4aa9dfddf8f25447.out
+    Ignored:    4ab78d41c680ebd8.err
+    Ignored:    4ab78d41c680ebd8.out
     Ignored:    4afc512b82df77fa.err
     Ignored:    4afc512b82df77fa.out
     Ignored:    4d37590f1a8e960d.err
@@ -1044,6 +1048,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/5f84648fdfa098334ac55519941c3ad437e2ad7f/analysis/index.Rmd" target="_blank">5f84648</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-02-10
+</td>
+<td>
+wflow_publish(“analysis/index.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/4128ae49f3a7e7741a009a4ffa91519d05581bed/docs/index.html" target="_blank">4128ae4</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-02-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/264e4eb584626d715acf9f21bffa1985d6f82152/analysis/index.Rmd" target="_blank">264e4eb</a>
 </td>
 <td>
@@ -1186,7 +1224,7 @@ Start workflowr project.
 <li>RESULT from 2020.2.8 (add initialization; fix set seed issue)</li>
 </ul>
 <p>The result using GWASsample = 10000, REFsample = 500:</p>
-<pre><code>- $\lambda = 0$:
+<pre><code>- lambda = 0:
     
     [default initialization](SuSiE_dsc_ukb_results_noinit_lamb0.html)
     
@@ -1194,7 +1232,7 @@ Start workflowr project.
     
     [initialize with lasso](SuSiE_dsc_ukb_results_initlasso_lamb0.html)
 
-- $\lambda = 10^{-4}$:
+- lambda = $10^{-4}$:
     
     [default initialization](SuSiE_dsc_ukb_results_noinit_lamb1e-4.html)
     
@@ -1202,7 +1240,7 @@ Start workflowr project.
     
     [initialize with lasso](SuSiE_dsc_ukb_results_initlasso_lamb1e-4.html)
     
-- $\lambda = 0.1$:
+- lambda = 0.1:
     
     [default initialization](SuSiE_dsc_ukb_results_noinit_lamb0.1.html)
     

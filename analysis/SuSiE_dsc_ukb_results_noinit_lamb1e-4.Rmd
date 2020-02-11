@@ -34,6 +34,7 @@ library(kableExtra)
 ![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_susieVSfinemap.png)
 
 ![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_susieVSfinemapv3.png)
+
 #### Power
 
 ![](../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all_power_combine.png)

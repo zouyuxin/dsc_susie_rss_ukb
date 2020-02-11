@@ -12,7 +12,7 @@ editor_options:
 
   The result using GWASsample = 10000, REFsample = 500:
 
-    - $\lambda = 0$:
+    - lambda = 0:
         
         [default initialization](SuSiE_dsc_ukb_results_noinit_lamb0.html)
         
@@ -20,7 +20,7 @@ editor_options:
         
         [initialize with lasso](SuSiE_dsc_ukb_results_initlasso_lamb0.html)
     
-    - $\lambda = 10^{-4}$:
+    - lambda = $10^{-4}$:
         
         [default initialization](SuSiE_dsc_ukb_results_noinit_lamb1e-4.html)
         
@@ -28,7 +28,7 @@ editor_options:
         
         [initialize with lasso](SuSiE_dsc_ukb_results_initlasso_lamb1e-4.html)
         
-    - $\lambda = 0.1$:
+    - lambda = 0.1:
         
         [default initialization](SuSiE_dsc_ukb_results_noinit_lamb0.1.html)
         

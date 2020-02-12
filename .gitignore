@@ -7,3 +7,4 @@ output/
 results/**/*.rds
 !results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/*.rds
 !results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/*.rds
+.Rproj.user/*

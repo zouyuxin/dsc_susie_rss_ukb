@@ -79,10 +79,10 @@ susie:
 
 susie_simple:
   queue: stephenslab
-  time_per_instance: 240m
+  time_per_instance: 400m
   instances_per_job: 1
   instances_per_node: 1
-  mem_per_instance: 50G
+  mem_per_instance: 80G
 
 susie_rss:
   time_per_instance: 121m
@@ -90,10 +90,10 @@ susie_rss:
   mem_per_instance: 5G
 
 susie_rss_simple:
-  time_per_instance: 361m
+  time_per_instance: 401m
   instances_per_job: 1
   instances_per_node: 1
-  mem_per_instance: 40G
+  mem_per_instance: 80G
 
 susie_suff_stat:
   time_per_instance: 61m
@@ -104,7 +104,7 @@ finemap:
   mem_per_instance: 5G
 
 finemap_simple:
-  time_per_instance: 361m
+  time_per_instance: 401m
   instances_per_node: 1
   instances_per_job: 1
   mem_per_instance: 40G
@@ -114,7 +114,7 @@ finemapv3:
   mem_per_instance: 5G
 
 finemapv3_simple:
-  time_per_instance: 361m
+  time_per_instance: 401m
   instances_per_node: 1
   instances_per_job: 1
   mem_per_instance: 40G

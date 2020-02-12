@@ -75,9 +75,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -102,6 +100,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -116,7 +117,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -136,6 +136,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -157,13 +194,71 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
@@ -176,7 +271,6 @@ $(document).ready(function () {
   window.initializeCodeFolding("hide" === "show");
 });
 </script>
-
 
 
 
@@ -254,8 +348,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -264,6 +356,16 @@ div.tocify {
 
 
 </style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
@@ -326,8 +428,8 @@ div.section {
 
 
 <h1 class="title toc-ignore">SuSiE-RSS lambda = 0.1 (initialize with lasso)</h1>
-<h4 class="author"><em>Yuxin Zou</em></h4>
-<h4 class="date"><em>02/10/2020</em></h4>
+<h4 class="author">Yuxin Zou</h4>
+<h4 class="date">02/10/2020</h4>
 
 </div>
 
@@ -362,7 +464,7 @@ div.section {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -443,485 +545,19 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtreef0cbc0942aa319291a30257fa498fb3bbea3a9cbtargetblankf0cbc09a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/f0cbc0942aa319291a30257fa498fb3bbea3a9cb" target="_blank">f0cbc09</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree2525f7416a840f25b1d8be0b0201659927e3cd85targetblank2525f74a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/2525f7416a840f25b1d8be0b0201659927e3cd85" target="_blank">2525f74</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtreef0cbc0942aa319291a30257fa498fb3bbea3a9cbtargetblankf0cbc09a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree2525f7416a840f25b1d8be0b0201659927e3cd85targetblank2525f74a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
-Ignored files:
-    Ignored:    .sos/
-    Ignored:    1173d3c85b3f7916.err
-    Ignored:    1173d3c85b3f7916.out
-    Ignored:    123b17ae22ddfde5.err
-    Ignored:    123b17ae22ddfde5.out
-    Ignored:    2afa4cf0a5732609.err
-    Ignored:    2afa4cf0a5732609.out
-    Ignored:    336ec8e259f99d29.err
-    Ignored:    336ec8e259f99d29.out
-    Ignored:    3b301307a5e2a1bb.err
-    Ignored:    3b301307a5e2a1bb.out
-    Ignored:    48825d4e30f04b41.err
-    Ignored:    48825d4e30f04b41.out
-    Ignored:    581e4a9c7a287593.err
-    Ignored:    581e4a9c7a287593.out
-    Ignored:    581fe7485f7c2a98.err
-    Ignored:    581fe7485f7c2a98.out
-    Ignored:    5b67379680da94d2.err
-    Ignored:    5b67379680da94d2.out
-    Ignored:    5c1c4078b4c495b2.err
-    Ignored:    5c1c4078b4c495b2.out
-    Ignored:    60a4593ceee5467d.err
-    Ignored:    60a4593ceee5467d.out
-    Ignored:    77270ad4f1d56ab4.err
-    Ignored:    77270ad4f1d56ab4.out
-    Ignored:    79b0e0fd89be6337.err
-    Ignored:    79b0e0fd89be6337.out
-    Ignored:    7e58c4d0e3d704ba.err
-    Ignored:    7e58c4d0e3d704ba.out
-    Ignored:    7ead8869de1389d8.err
-    Ignored:    7ead8869de1389d8.out
-    Ignored:    9f3c77005ab8ef7c.err
-    Ignored:    9f3c77005ab8ef7c.out
-    Ignored:    a72315231cbcd5b4.err
-    Ignored:    a72315231cbcd5b4.out
-    Ignored:    ab265572913adac6.err
-    Ignored:    ab265572913adac6.out
-    Ignored:    b872b1cf625feb38.err
-    Ignored:    b872b1cf625feb38.out
-    Ignored:    bd2f28f215952cd4.err
-    Ignored:    bd2f28f215952cd4.out
-    Ignored:    c91faf52ce9aef77.err
-    Ignored:    c91faf52ce9aef77.out
-    Ignored:    data/susie_rss_ukb_default_problem/small_data_51_sim_gaussian_3_caviar.log
-    Ignored:    dsc.finemap.rss.ukb.default.job.log
-    Ignored:    dsc.finemap.rss.ukb.largeregion.job.log
-    Ignored:    e42df44578e56da0.err
-    Ignored:    e42df44578e56da0.out
-    Ignored:    ead8df9efe3c1b1a.err
-    Ignored:    ead8df9efe3c1b1a.out
-    Ignored:    ecd20a1851b6ad3c.err
-    Ignored:    ecd20a1851b6ad3c.out
-    Ignored:    f184878f6c248f36.err
-    Ignored:    f184878f6c248f36.out
-    Ignored:    f30e01fd4f19a04d.err
-    Ignored:    f30e01fd4f19a04d.out
-    Ignored:    f90885cd5e4d43b3.err
-    Ignored:    f90885cd5e4d43b3.out
-    Ignored:    genotype_dir
-    Ignored:    output/
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/.sos/
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_extraction/
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_query.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/.sos/
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_cs.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_extraction/
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_query.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
-    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
-
 Untracked files:
-    Untracked:  dsc_cluster_submit.sbatch
-    Untracked:  dsc_cluster_submit_full.sbatch
-
-Unstaged changes:
-    Modified:   analysis/SuSiE_dsc_ukb_default_problem.Rmd
+    Untracked:  .DS_Store
+    Untracked:  .Rhistory
+    Untracked:  .Rproj.user/
 
 </code></pre>
 <p>
@@ -960,6 +596,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/ac7c41a385df0f593b61155b5ad1084272ce3f21/docs/SuSiE_dsc_ukb_results_initlasso_lamb0.1.html" target="_blank">ac7c41a</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-02-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1011,6 +664,7 @@ library(kableExtra)</code></pre>
 <h4>PIP calibration</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_pipcali.png" />
+
 </div>
 </div>
 <div id="pip-comparison" class="section level4">
@@ -1018,33 +672,40 @@ library(kableExtra)</code></pre>
 <p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVSsusie.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVScaviar.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVSfinemap.png" /></p>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVSfinemapv3.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_susieVScaviar.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_susieVSfinemap.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_susieVSfinemapv3.png" />
+
 </div>
 </div>
 <div id="power" class="section level4">
 <h4>Power</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all_power_combine.png" />
+
 </div>
 </div>
 <div id="roc" class="section level4">
 <h4>ROC</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all_roc_combine.png" />
+
 </div>
 </div>
 <div id="cs" class="section level4">
 <h4>CS</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_cs_plots.png" />
+
 </div>
 <pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_cs.rds&#39;
 result = readRDS(output)
@@ -1165,6 +826,7 @@ susierss_fail
 <h4>PIP calibration</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_pipcali.png" />
+
 </div>
 </div>
 <div id="pip-comparison-1" class="section level4">
@@ -1172,33 +834,40 @@ susierss_fail
 <p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVSsusie.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVScaviar.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVSfinemap.png" /></p>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVSfinemapv3.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_susieVScaviar.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_susieVSfinemap.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_susieVSfinemapv3.png" />
+
 </div>
 </div>
 <div id="power-1" class="section level4">
 <h4>Power</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all_power_combine.png" />
+
 </div>
 </div>
 <div id="roc-1" class="section level4">
 <h4>ROC</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all_roc_combine.png" />
+
 </div>
 </div>
 <div id="cs-1" class="section level4">
 <h4>CS</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_cs_plots.png" />
+
 </div>
 <pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_cs.rds&#39;
 result = readRDS(output)
@@ -1322,39 +991,47 @@ susierss_fail
 <h4>PIP calibration</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_pipcali.png" />
+
 </div>
 </div>
 <div id="pip-comparison-2" class="section level4">
 <h4>PIP comparison</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVSsusie.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVScaviar.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemap.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemapv3.png" />
+
 </div>
 </div>
 <div id="power-2" class="section level4">
 <h4>Power</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all_power_combine.png" />
+
 </div>
 </div>
 <div id="roc-2" class="section level4">
 <h4>ROC</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all_roc_combine.png" />
+
 </div>
 </div>
 <div id="cs-2" class="section level4">
 <h4>CS</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_cs_plots.png" />
+
 </div>
 <pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_cs.rds&#39;
 result = readRDS(output)
@@ -1475,39 +1152,47 @@ susierss_fail
 <h4>PIP calibration</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_pipcali.png" />
+
 </div>
 </div>
 <div id="pip-comparison-3" class="section level4">
 <h4>PIP comparison</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVSsusie.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVScaviar.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemap.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemapv3.png" />
+
 </div>
 </div>
 <div id="power-3" class="section level4">
 <h4>Power</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all_power_combine.png" />
+
 </div>
 </div>
 <div id="roc-3" class="section level4">
 <h4>ROC</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all_roc_combine.png" />
+
 </div>
 </div>
 <div id="cs-3" class="section level4">
 <h4>CS</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_cs_plots.png" />
+
 </div>
 <pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_cs.rds&#39;
 result = readRDS(output)
@@ -1631,39 +1316,47 @@ susierss_fail
 <h4>PIP calibration</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_pipcali.png" />
+
 </div>
 </div>
 <div id="pip-comparison-4" class="section level4">
 <h4>PIP comparison</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVSsusie.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVScaviar.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemap.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemapv3.png" />
+
 </div>
 </div>
 <div id="power-4" class="section level4">
 <h4>Power</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all_power_combine.png" />
+
 </div>
 </div>
 <div id="roc-4" class="section level4">
 <h4>ROC</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all_roc_combine.png" />
+
 </div>
 </div>
 <div id="cs-4" class="section level4">
 <h4>CS</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_cs_plots.png" />
+
 </div>
 <pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_cs.rds&#39;
 result = readRDS(output)
@@ -1784,6 +1477,7 @@ susierss_fail
 <h4>PIP calibration</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_pipcali.png" />
+
 </div>
 </div>
 <div id="pip-comparison-5" class="section level4">
@@ -1791,27 +1485,32 @@ susierss_fail
 <p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVSsusie.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVScaviar.png" /></p>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemap.png" />
+
 </div>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemapv3.png" />
+
 </div>
 </div>
 <div id="power-5" class="section level4">
 <h4>Power</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all_power_combine.png" />
+
 </div>
 </div>
 <div id="roc-5" class="section level4">
 <h4>ROC</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all_roc_combine.png" />
+
 </div>
 </div>
 <div id="cs-5" class="section level4">
 <h4>CS</h4>
 <div class="figure">
 <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_cs_plots.png" />
+
 </div>
 <pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_cs.rds&#39;
 result = readRDS(output)
@@ -1932,43 +1631,39 @@ susierss_fail
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 3.5.1 (2018-07-02)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Scientific Linux 7.4 (Nitrogen)
+<pre><code>R version 3.5.3 (2019-03-11)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS  10.15.3
 
 Matrix products: default
-BLAS/LAPACK: /software/openblas-0.2.19-el7-x86_64/lib/libopenblas_haswellp-r0.2.19.so
+BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
 
 locale:
- [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
- [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
- [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] kableExtra_1.1.0 dplyr_0.8.0.1   
+[1] kableExtra_1.1.0 dplyr_0.8.1     
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.3        highr_0.7         pillar_1.4.3     
- [4] compiler_3.5.1    later_0.7.5       git2r_0.26.1     
- [7] workflowr_1.6.0   tools_3.5.1       zeallot_0.1.0    
-[10] digest_0.6.23     viridisLite_0.3.0 evaluate_0.12    
-[13] tibble_2.1.3      lifecycle_0.1.0   pkgconfig_2.0.3  
-[16] rlang_0.4.2       rstudioapi_0.10   yaml_2.2.0       
-[19] stringr_1.4.0     httr_1.3.1        knitr_1.20       
-[22] xml2_1.2.0        fs_1.3.1          vctrs_0.2.1      
+ [1] Rcpp_1.0.3        highr_0.8         compiler_3.5.3   
+ [4] pillar_1.4.2      later_0.8.0       git2r_0.26.1     
+ [7] workflowr_1.5.0   tools_3.5.3       zeallot_0.1.0    
+[10] digest_0.6.23     viridisLite_0.3.0 evaluate_0.13    
+[13] tibble_2.1.3      pkgconfig_2.0.3   rlang_0.4.2      
+[16] rstudioapi_0.10   yaml_2.2.0        xfun_0.7         
+[19] stringr_1.4.0     httr_1.4.0        knitr_1.23       
+[22] xml2_1.2.0        fs_1.3.1          vctrs_0.2.0      
 [25] hms_0.5.2         webshot_0.5.1     rprojroot_1.3-2  
 [28] tidyselect_0.2.5  glue_1.3.1        R6_2.4.1         
-[31] rmarkdown_1.10    purrr_0.3.2       readr_1.3.1      
+[31] rmarkdown_1.13    purrr_0.3.3       readr_1.3.1      
 [34] magrittr_1.5      whisker_0.3-2     backports_1.1.5  
-[37] scales_1.1.0      promises_1.0.1    htmltools_0.3.6  
-[40] assertthat_0.2.1  rvest_0.3.2       colorspace_1.4-1 
-[43] httpuv_1.4.5      stringi_1.4.3     munsell_0.5.0    
+[37] scales_1.0.0      promises_1.0.1    htmltools_0.3.6  
+[40] assertthat_0.2.1  rvest_0.3.4       colorspace_1.4-1 
+[43] httpuv_1.5.1      stringi_1.4.3     munsell_0.5.0    
 [46] crayon_1.3.4     </code></pre>
 </div>
 </div>

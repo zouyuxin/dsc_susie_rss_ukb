@@ -57,7 +57,7 @@ dap_z: fit_dap.py + Python(z = sumstats['bhat']/sumstats['shat'];
   $posterior: posterior
 
 susie: initialize.R + R(if(is.na(init)){
-                          s_init = list()
+                          s_init = NA
                         }else if(init == 'oracle'){
                           s_init = init_susie_true($(meta)$true_coef)
                         }else if(init == 'lasso'){

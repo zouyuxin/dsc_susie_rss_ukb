@@ -25,6 +25,7 @@ summary(caviar_out$DSC_TIME)
 summary(finemap_out$DSC_TIME)
 summary(finemapv3_out$DSC_TIME)
 
-
+summary(susie_out$r_Fdist)
+summary(susie_out$r_Mdist)
 
 

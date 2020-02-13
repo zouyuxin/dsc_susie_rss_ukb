@@ -12,7 +12,7 @@ for (r in 1:ncol(Y)) {
                                estimate_prior_variance=TRUE,
                                null_weight=null_weight,
                                coverage=0.95,min_abs_corr=0.5,
-                               tol=1e-3, s_init = s_init)
+                               tol=1e-3, s_init = s_init[[r]])
   } else {
       fitted[[r]] <- susie(X,Y[,r],
                                L=maxL,
@@ -21,7 +21,7 @@ for (r in 1:ncol(Y)) {
                                scaled_prior_variance=prior_var,
                                null_weight=null_weight,
                                coverage=0.95,min_abs_corr=0.5,
-                               tol=1e-3, s_init = s_init)
+                               tol=1e-3, s_init = s_init[[r]])
   }
   posterior[[r]] <- summary(fitted[[r]])
 }

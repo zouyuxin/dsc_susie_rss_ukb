@@ -2,13 +2,14 @@ library(dplyr)
 library(scam)
 ## Functions
 roc_data = function(d1, cutoff = c(pip_cutoff, 1), connect_org = FALSE) {
-  grid = 500
+  grid = 200
   ttv = seq(1:grid)/grid
   ttv = ttv[which(ttv>=cutoff[1] & ttv<=cutoff[2])]
   # see SuSiE-Manuscript issue 2
   d1 = d1[order(d1[,1]), ]
   end = tail(d1[which(d1[,2] == 0),][,1],1)
-  ttv = c(ttv[-length(ttv)], min(ttv[length(ttv)], end))
+  # ttv = c(ttv[-length(ttv)], min(ttv[length(ttv)], end))
+  ttv = ttv[-length(ttv)]
   # end of issue 2
   rst1 = t(sapply(ttv, function(x) c(sum(d1[,2][d1[,1]>=x]), length(d1[,2][d1[,1]>=x]))))
   rst1 = cbind(rst1, sum(d1[,2]), sum(1-d1[,2]))

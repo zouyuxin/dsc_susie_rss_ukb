@@ -1,24 +1,24 @@
 # susierss vs finemap  1 causal
 
-- correlation 0.87
-- 119/173594 (6.86e-02%) differ by 0.1
-- 82/173594 (4.72e-02%) differ by 0.15
-- 62/173594 (3.57e-02%) differ by 0.2
+- correlation 0.78
+- 54/78562 (6.87e-02%) differ by 0.1
+- 33/78562 (4.20e-02%) differ by 0.15
+- 24/78562 (3.05e-02%) differ by 0.2
 
 
 # susierss vs finemap  2 causal
 
-- correlation 0.8
-- 223/183604 (1.21e-01%) differ by 0.1
-- 142/183604 (7.73e-02%) differ by 0.15
-- 99/183604 (5.39e-02%) differ by 0.2
+- correlation 0.78
+- 57/70688 (8.06e-02%) differ by 0.1
+- 42/70688 (5.94e-02%) differ by 0.15
+- 31/70688 (4.39e-02%) differ by 0.2
 
 
 # susierss vs finemap  3 causal
 
-- correlation 0.82
-- 162/181602 (8.92e-02%) differ by 0.1
-- 107/181602 (5.89e-02%) differ by 0.15
-- 65/181602 (3.58e-02%) differ by 0.2
+- correlation 0.76
+- 89/92011 (9.67e-02%) differ by 0.1
+- 51/92011 (5.54e-02%) differ by 0.15
+- 31/92011 (3.37e-02%) differ by 0.2
 
 

@@ -1,24 +1,24 @@
 # susie vs caviar  1 causal
 
-- correlation 0.91
-- 36/169590 (2.12e-02%) differ by 0.1
-- 21/169590 (1.24e-02%) differ by 0.15
-- 12/169590 (7.08e-03%) differ by 0.2
+- correlation 0.82
+- 66/77588 (8.51e-02%) differ by 0.1
+- 45/77588 (5.80e-02%) differ by 0.15
+- 35/77588 (4.51e-02%) differ by 0.2
 
 
 # susie vs caviar  2 causal
 
-- correlation 0.86
-- 119/178599 (6.66e-02%) differ by 0.1
-- 64/178599 (3.58e-02%) differ by 0.15
-- 30/178599 (1.68e-02%) differ by 0.2
+- correlation 0.81
+- 102/70688 (1.44e-01%) differ by 0.1
+- 67/70688 (9.48e-02%) differ by 0.15
+- 41/70688 (5.80e-02%) differ by 0.2
 
 
 # susie vs caviar  3 causal
 
-- correlation 0.85
-- 181/182603 (9.91e-02%) differ by 0.1
-- 83/182603 (4.55e-02%) differ by 0.15
-- 53/182603 (2.90e-02%) differ by 0.2
+- correlation 0.84
+- 107/87006 (1.23e-01%) differ by 0.1
+- 49/87006 (5.63e-02%) differ by 0.15
+- 33/87006 (3.79e-02%) differ by 0.2
 
 

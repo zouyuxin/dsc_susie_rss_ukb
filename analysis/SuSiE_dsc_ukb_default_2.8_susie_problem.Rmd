@@ -1,5 +1,5 @@
 ---
-title: "SuSiE initialize at LASSO problem"
+title: "SuSiE problem"
 author: "Yuxin Zou"
 date: "02/16/2020"
 output:
@@ -11,15 +11,15 @@ output:
 library(susieR)
 library(glmnet)
 ```
-Here are two example data that show probelms of initialize SuSiE using lasso results.
+Here are two example data that show probelms of SuSiE initialization.
 
-There is one signal in these examples.
+There are 2 signals in these examples.
 
-## Converge slowly
+## Example 1
 
 ```{r}
-dat = readRDS('data/susie_rss_ukb_default_2.8_problem/small_data_2.rds')
-sim = readRDS('data/susie_rss_ukb_default_2.8_problem/small_data_2_sim_gaussian_1.rds')
+dat = readRDS('data/susie_rss_ukb_default_2.8_problem/small_data_27.rds')
+sim = readRDS('data/susie_rss_ukb_default_2.8_problem/small_data_27_sim_gaussian_2.rds')
 sumstat = susieR:::univariate_regression(dat$X_sample, sim$Y)
 R = cor(dat$X_sample)
 ```
@@ -29,7 +29,12 @@ z_scores <- sumstat$betahat / sumstat$sebetahat
 susie_plot(z_scores, y = "z", b=sim$meta$true_coef)
 ```
 
-The underlying causal variable is `r which(sim$meta$true_coef!=0)`. The effects are `r sim$meta$true_coef[sim$meta$true_coef!=0]`. The z scores are `r z_scores[sim$meta$true_coef!=0]`.
+The underlying causal variables are `r which(sim$meta$true_coef!=0)`. The effects are `r sim$meta$true_coef[sim$meta$true_coef!=0]`. The z scores are `r z_scores[sim$meta$true_coef!=0]`.
+
+The correlation between the strongest signal and causal variables are:
+```{r}
+R[c(616, which(sim$meta$true_coef!=0)), c(616, which(sim$meta$true_coef!=0))]
+```
 
 SuSiE model (estimate prior variance, not estimate residual variance):
 ```{r}
@@ -47,8 +52,7 @@ summary(mod)$cs
 susie_plot(mod, y='PIP', b = sim$meta$true_coef)
 ```
 
-If we initialize using LASSO result, the model converges **after 369 iterations**.
-
+If we initialize using LASSO result, the model converges after **406** iterations.
 ```{r}
 fit.lasso = glmnet(dat$X_sample, sim$Y, family="gaussian", alpha=1, dfmax = 10)
 lasso.b = fit.lasso$beta[,max(which(fit.lasso$df <= 10))]
@@ -72,11 +76,11 @@ summary(mod_init_lasso)$cs
 susie_plot(mod_init_lasso, y='PIP', b = sim$meta$true_coef)
 ```
 
-## False Positive
+## Example 2
 
 ```{r}
-dat = readRDS('data/susie_rss_ukb_default_2.8_problem/small_data_20.rds')
-sim = readRDS('data/susie_rss_ukb_default_2.8_problem/small_data_20_sim_gaussian_1.rds')
+dat = readRDS('data/susie_rss_ukb_default_2.8_problem/small_data_158.rds')
+sim = readRDS('data/susie_rss_ukb_default_2.8_problem/small_data_158_sim_gaussian_2.rds')
 sumstat = susieR:::univariate_regression(dat$X_sample, sim$Y)
 R = cor(dat$X_sample)
 ```
@@ -102,6 +106,11 @@ summary(mod)$cs
 
 ```{r}
 susie_plot(mod, y='PIP', b = sim$meta$true_coef)
+```
+
+The correlation between the false positive CS and causal variables are:
+```{r}
+R[c(255, which(sim$meta$true_coef!=0)), c(255, which(sim$meta$true_coef!=0))]
 ```
 
 If we initialize using LASSO result,

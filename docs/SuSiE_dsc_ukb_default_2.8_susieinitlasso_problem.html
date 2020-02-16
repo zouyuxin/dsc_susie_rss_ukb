@@ -545,10 +545,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree47838dec80ac5b3a1560f6632126e92f6757fd0etargetblank47838dea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/47838dec80ac5b3a1560f6632126e92f6757fd0e" target="_blank">47838de</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree11bd124656b3cf63b24eb5d2e04a79281a9659e2targetblank11bd124a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/11bd124656b3cf63b24eb5d2e04a79281a9659e2" target="_blank">11bd124</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree47838dec80ac5b3a1560f6632126e92f6757fd0etargetblank47838dea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree11bd124656b3cf63b24eb5d2e04a79281a9659e2targetblank11bd124a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -609,6 +609,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/11bd124656b3cf63b24eb5d2e04a79281a9659e2/analysis/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd" target="_blank">11bd124</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-02-16
+</td>
+<td>
+wflow_publish(“analysis/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/05a42a18489aa342ef5713d4967219df075448d8/docs/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.html" target="_blank">05a42a1</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-02-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/47838dec80ac5b3a1560f6632126e92f6757fd0e/analysis/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd" target="_blank">47838de</a>
 </td>
 <td>
@@ -633,7 +667,7 @@ library(glmnet)</code></pre>
 <pre><code>Loading required package: Matrix</code></pre>
 <pre><code>Loading required package: foreach</code></pre>
 <pre><code>Loaded glmnet 2.0-18</code></pre>
-<p>Here are two example data that show the probelm of initialize SuSiE using lasso results.</p>
+<p>Here are two example data that show probelms of initialize SuSiE using lasso results.</p>
 <p>There is one signal in these examples.</p>
 <div id="converge-slowly" class="section level2">
 <h2>Converge slowly</h2>
@@ -644,28 +678,141 @@ R = cor(dat$X_sample)</code></pre>
 <pre class="r"><code>z_scores &lt;- sumstat$betahat / sumstat$sebetahat
 susie_plot(z_scores, y = &quot;z&quot;, b=sim$meta$true_coef)</code></pre>
 <p><img src="figure/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/05a42a18489aa342ef5713d4967219df075448d8/docs/figure/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd/unnamed-chunk-3-1.png" target="_blank">05a42a1</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-02-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The underlying causal variable is 241. The effects are -0.0286926. The z scores are -8.8471971.</p>
 <p>SuSiE model (estimate prior variance, not estimate residual variance):</p>
 <pre class="r"><code>mod = susie(dat$X_sample, sim$Y[,1], estimate_residual_variance = F, estimate_prior_variance=T,null_weight=0,
                                coverage=0.95,min_abs_corr=0.5,
                                tol=1e-3, s_init=list())</code></pre>
-<p>The objective is 1.638588510^{4}. The CS is</p>
+<p>The objective is 1.63858810^{4}. The CS is</p>
 <pre class="r"><code>summary(mod)$cs</code></pre>
 <pre><code>  cs cs_log10bf cs_avg_r2 cs_min_r2                            variable
 1  1   31.60188  0.983363 0.9575439 203,215,229,236,241,259,264,272,278</code></pre>
 <pre class="r"><code>susie_plot(mod, y=&#39;PIP&#39;, b = sim$meta$true_coef)</code></pre>
 <p><img src="figure/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>If we initialize using LASSO result, the model converges after 369 iterations.</p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/05a42a18489aa342ef5713d4967219df075448d8/docs/figure/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd/unnamed-chunk-6-1.png" target="_blank">05a42a1</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-02-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>If we initialize using LASSO result, the model converges <strong>after 369 iterations</strong>.</p>
 <pre class="r"><code>fit.lasso = glmnet(dat$X_sample, sim$Y, family=&quot;gaussian&quot;, alpha=1, dfmax = 10)
 lasso.b = fit.lasso$beta[,max(which(fit.lasso$df &lt;= 10))]
 s_init = susie_init_coef(which(lasso.b!=0), sumstat$betahat[lasso.b!=0], nrow(sim$meta$true_coef))
-mod_init_lasso = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init, max_iter = 500)</code></pre>
-<p>The objective is 1.638588510^{4}. The CS is</p>
+start.t = proc.time()
+mod_init_lasso = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init, max_iter = 500)
+end.t = proc.time()</code></pre>
+<p>The model uses 400.689 seconds. The objective is 1.63858810^{4}. The CS is</p>
 <pre class="r"><code>summary(mod_init_lasso)$cs</code></pre>
 <pre><code>  cs cs_log10bf cs_avg_r2 cs_min_r2                            variable
 1  2   31.60188  0.983363 0.9575439 203,215,229,236,241,259,264,272,278</code></pre>
 <pre class="r"><code>susie_plot(mod_init_lasso, y=&#39;PIP&#39;, b = sim$meta$true_coef)</code></pre>
 <p><img src="figure/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/05a42a18489aa342ef5713d4967219df075448d8/docs/figure/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd/unnamed-chunk-9-1.png" target="_blank">05a42a1</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-02-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="false-positive" class="section level2">
 <h2>False Positive</h2>
@@ -676,12 +823,49 @@ R = cor(dat$X_sample)</code></pre>
 <pre class="r"><code>z_scores &lt;- sumstat$betahat / sumstat$sebetahat
 susie_plot(z_scores, y = &quot;z&quot;, b=sim$meta$true_coef)</code></pre>
 <p><img src="figure/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/05a42a18489aa342ef5713d4967219df075448d8/docs/figure/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd/unnamed-chunk-11-1.png" target="_blank">05a42a1</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-02-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The underlying causal variable is 109. The effects are -0.0286926. The z scores are -11.0195872.</p>
 <p>SuSiE model (estimate prior variance, not estimate residual variance):</p>
 <pre class="r"><code>mod = susie(dat$X_sample, sim$Y[,1], estimate_residual_variance = F, estimate_prior_variance=T,null_weight=0,
                                coverage=0.95,min_abs_corr=0.5,
                                tol=1e-3, s_init=list())</code></pre>
-<p>The objective is 1.420392310^{4}. The CS is</p>
+<p>The objective is 1.42039210^{4}. The CS is</p>
 <pre class="r"><code>summary(mod)$cs</code></pre>
 <pre><code>  cs cs_log10bf cs_avg_r2 cs_min_r2
 1  1   53.69327 0.9935718 0.9801705
@@ -689,17 +873,91 @@ susie_plot(z_scores, y = &quot;z&quot;, b=sim$meta$true_coef)</code></pre>
 1 84,86,88,89,91,92,94,95,98,99,101,104,106,107,108,109,112,116,117,120,121</code></pre>
 <pre class="r"><code>susie_plot(mod, y=&#39;PIP&#39;, b = sim$meta$true_coef)</code></pre>
 <p><img src="figure/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>If we initialize using LASSO result, the model converges after 369 iterations.</p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
+Past versions of unnamed-chunk-14-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/05a42a18489aa342ef5713d4967219df075448d8/docs/figure/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd/unnamed-chunk-14-1.png" target="_blank">05a42a1</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-02-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>If we initialize using LASSO result,</p>
 <pre class="r"><code>fit.lasso = glmnet(dat$X_sample, sim$Y, family=&quot;gaussian&quot;, alpha=1, dfmax = 10)
 lasso.b = fit.lasso$beta[,max(which(fit.lasso$df &lt;= 10))]
 s_init = susie_init_coef(which(lasso.b!=0), sumstat$betahat[lasso.b!=0], nrow(sim$meta$true_coef))
 mod_init_lasso = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init, max_iter = 500)</code></pre>
-<p>The objective is 1.416505410^{4}. The CS is</p>
+<p>The objective is 1.41650510^{4}. The CS is</p>
 <pre class="r"><code>summary(mod_init_lasso)$cs</code></pre>
 <pre><code>  cs cs_log10bf cs_avg_r2 cs_min_r2 variable
 1  1   11403.89         1         1      101</code></pre>
 <pre class="r"><code>susie_plot(mod_init_lasso, y=&#39;PIP&#39;, b = sim$meta$true_coef)</code></pre>
 <p><img src="figure/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-1">
+Past versions of unnamed-chunk-17-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-17-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/05a42a18489aa342ef5713d4967219df075448d8/docs/figure/SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.Rmd/unnamed-chunk-17-1.png" target="_blank">05a42a1</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-02-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

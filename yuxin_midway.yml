@@ -72,7 +72,7 @@ get_sumstats:
 susie:
   queue: stephenslab
   time_per_instance: 240m
-  instances_per_job: 2
+  instances_per_job: 5
   instances_per_node: 5
   mem_per_instance: 20G
 

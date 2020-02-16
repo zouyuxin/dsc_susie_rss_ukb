@@ -1,0 +1,120 @@
+---
+title: "SuSiE initialize at LASSO problem"
+author: "Yuxin Zou"
+date: "02/16/2020"
+output:
+  workflowr::wflow_html:
+    code_folding: hide
+---
+
+```{r}
+library(susieR)
+library(glmnet)
+```
+Here are two example data that show probelms of initialize SuSiE using lasso results.
+
+There is one signal in these examples.
+
+## Converge slowly
+
+```{r}
+dat = readRDS('data/susie_rss_ukb_default_2.8_problem/small_data_2.rds')
+sim = readRDS('data/susie_rss_ukb_default_2.8_problem/small_data_2_sim_gaussian_1.rds')
+sumstat = susieR:::univariate_regression(dat$X_sample, sim$Y)
+R = cor(dat$X_sample)
+```
+
+```{r}
+z_scores <- sumstat$betahat / sumstat$sebetahat
+susie_plot(z_scores, y = "z", b=sim$meta$true_coef)
+```
+
+The underlying causal variable is `r which(sim$meta$true_coef!=0)`. The effects are `r sim$meta$true_coef[sim$meta$true_coef!=0]`. The z scores are `r z_scores[sim$meta$true_coef!=0]`.
+
+SuSiE model (estimate prior variance, not estimate residual variance):
+```{r}
+mod = susie(dat$X_sample, sim$Y[,1], estimate_residual_variance = F, estimate_prior_variance=T,null_weight=0,
+                               coverage=0.95,min_abs_corr=0.5,
+                               tol=1e-3, s_init=list())
+```
+
+The objective is `r round(mod$elbo[mod$niter],2)`. The CS is
+```{r}
+summary(mod)$cs
+```
+
+```{r}
+susie_plot(mod, y='PIP', b = sim$meta$true_coef)
+```
+
+If we initialize using LASSO result, the model converges **after 369 iterations**.
+
+```{r}
+fit.lasso = glmnet(dat$X_sample, sim$Y, family="gaussian", alpha=1, dfmax = 10)
+lasso.b = fit.lasso$beta[,max(which(fit.lasso$df <= 10))]
+s_init = susie_init_coef(which(lasso.b!=0), sumstat$betahat[lasso.b!=0], nrow(sim$meta$true_coef))
+start.t = proc.time()
+mod_init_lasso = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init, max_iter = 500)
+end.t = proc.time()
+```
+
+The model uses `r (end.t - start.t)['elapsed']` seconds. The objective is `r round(mod_init_lasso$elbo[mod_init_lasso$niter], 2)`. The CS is
+```{r}
+summary(mod_init_lasso)$cs
+```
+
+```{r}
+susie_plot(mod_init_lasso, y='PIP', b = sim$meta$true_coef)
+```
+
+## False Positive
+
+```{r}
+dat = readRDS('data/susie_rss_ukb_default_2.8_problem/small_data_20.rds')
+sim = readRDS('data/susie_rss_ukb_default_2.8_problem/small_data_20_sim_gaussian_1.rds')
+sumstat = susieR:::univariate_regression(dat$X_sample, sim$Y)
+R = cor(dat$X_sample)
+```
+
+```{r}
+z_scores <- sumstat$betahat / sumstat$sebetahat
+susie_plot(z_scores, y = "z", b=sim$meta$true_coef)
+```
+
+The underlying causal variable is `r which(sim$meta$true_coef!=0)`. The effects are `r sim$meta$true_coef[sim$meta$true_coef!=0]`. The z scores are `r z_scores[sim$meta$true_coef!=0]`.
+
+SuSiE model (estimate prior variance, not estimate residual variance):
+```{r}
+mod = susie(dat$X_sample, sim$Y[,1], estimate_residual_variance = F, estimate_prior_variance=T,null_weight=0,
+                               coverage=0.95,min_abs_corr=0.5,
+                               tol=1e-3, s_init=list())
+```
+
+The objective is `r round(mod$elbo[mod$niter],2)`. The CS is
+```{r}
+summary(mod)$cs
+```
+
+```{r}
+susie_plot(mod, y='PIP', b = sim$meta$true_coef)
+```
+
+If we initialize using LASSO result,
+
+```{r}
+fit.lasso = glmnet(dat$X_sample, sim$Y, family="gaussian", alpha=1, dfmax = 10)
+lasso.b = fit.lasso$beta[,max(which(fit.lasso$df <= 10))]
+s_init = susie_init_coef(which(lasso.b!=0), sumstat$betahat[lasso.b!=0], nrow(sim$meta$true_coef))
+mod_init_lasso = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init, max_iter = 500)
+```
+
+The objective is `r round(mod_init_lasso$elbo[mod_init_lasso$niter], 2)`. The CS is
+```{r}
+summary(mod_init_lasso)$cs
+```
+
+```{r}
+susie_plot(mod_init_lasso, y='PIP', b = sim$meta$true_coef)
+```
+
+

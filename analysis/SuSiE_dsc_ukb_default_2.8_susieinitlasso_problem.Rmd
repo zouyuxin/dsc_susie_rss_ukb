@@ -11,7 +11,7 @@ output:
 library(susieR)
 library(glmnet)
 ```
-Here are two example data that show the probelm of initialize SuSiE using lasso results.
+Here are two example data that show probelms of initialize SuSiE using lasso results.
 
 There is one signal in these examples.
 
@@ -38,7 +38,7 @@ mod = susie(dat$X_sample, sim$Y[,1], estimate_residual_variance = F, estimate_pr
                                tol=1e-3, s_init=list())
 ```
 
-The objective is `r mod$elbo[mod$niter]`. The CS is
+The objective is `r round(mod$elbo[mod$niter],2)`. The CS is
 ```{r}
 summary(mod)$cs
 ```
@@ -47,16 +47,18 @@ summary(mod)$cs
 susie_plot(mod, y='PIP', b = sim$meta$true_coef)
 ```
 
-If we initialize using LASSO result, the model converges after 369 iterations.
+If we initialize using LASSO result, the model converges **after 369 iterations**.
 
 ```{r}
 fit.lasso = glmnet(dat$X_sample, sim$Y, family="gaussian", alpha=1, dfmax = 10)
 lasso.b = fit.lasso$beta[,max(which(fit.lasso$df <= 10))]
 s_init = susie_init_coef(which(lasso.b!=0), sumstat$betahat[lasso.b!=0], nrow(sim$meta$true_coef))
+start.t = proc.time()
 mod_init_lasso = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init, max_iter = 500)
+end.t = proc.time()
 ```
 
-The objective is `r mod_init_lasso$elbo[mod_init_lasso$niter]`. The CS is
+The model uses `r (end.t - start.t)['elapsed']` seconds. The objective is `r round(mod_init_lasso$elbo[mod_init_lasso$niter], 2)`. The CS is
 ```{r}
 summary(mod_init_lasso)$cs
 ```
@@ -88,7 +90,7 @@ mod = susie(dat$X_sample, sim$Y[,1], estimate_residual_variance = F, estimate_pr
                                tol=1e-3, s_init=list())
 ```
 
-The objective is `r mod$elbo[mod$niter]`. The CS is
+The objective is `r round(mod$elbo[mod$niter],2)`. The CS is
 ```{r}
 summary(mod)$cs
 ```
@@ -97,7 +99,7 @@ summary(mod)$cs
 susie_plot(mod, y='PIP', b = sim$meta$true_coef)
 ```
 
-If we initialize using LASSO result, the model converges after 369 iterations.
+If we initialize using LASSO result,
 
 ```{r}
 fit.lasso = glmnet(dat$X_sample, sim$Y, family="gaussian", alpha=1, dfmax = 10)
@@ -106,7 +108,7 @@ s_init = susie_init_coef(which(lasso.b!=0), sumstat$betahat[lasso.b!=0], nrow(si
 mod_init_lasso = susie(dat$X_sample, sim$Y, estimate_residual_variance = F, estimate_prior_variance=T, s_init = s_init, max_iter = 500)
 ```
 
-The objective is `r mod_init_lasso$elbo[mod_init_lasso$niter]`. The CS is
+The objective is `r round(mod_init_lasso$elbo[mod_init_lasso$niter], 2)`. The CS is
 ```{r}
 summary(mod_init_lasso)$cs
 ```

@@ -48,9 +48,9 @@ editor_options:
         
         [initialize with lasso](SuSiE_dsc_ukb_results_initlasso_lamb0.1.html)
 
-    - [SuSie Initializz Problem example](SuSiE_dsc_ukb_default_2.8_susie_problem.html)
+    - [SuSie Initialize Problem example](SuSiE_dsc_ukb_default_2.8_susie_problem.html)
       
-        [Initializa with LASSO problem](SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.html)
+        [Initialize with LASSO problem](SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.html)
         
 ---------------------
 

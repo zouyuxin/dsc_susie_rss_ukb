@@ -12,6 +12,18 @@ editor_options:
 
     The result using GWASsample = 10000, REFsample = 500:
 
+    The summary of Frobenius norm between in-sample LD and ref sample LD:
+    
+    | Min.  | 1st Qu. | Median | Mean | 3rd Qu. | Max. |
+    |-------|---------|--------|------|---------|------|
+    | 30.72 | 47.24   | 49.65  | 49.45| 52.18   | 68.92|
+
+    The summary of max norm between in-sample LD and ref sample LD:
+    
+    | Min.  | 1st Qu. | Median | Mean | 3rd Qu. | Max. |
+    |-------|---------|--------|------|---------|------|
+    |0.1990| 0.2615  | 0.2942 |0.3065| 0.3320  | 0.7361|
+    
     - lambda = 0:
         
         [default initialization](SuSiE_dsc_ukb_results_noinit_lamb0.html)
@@ -36,6 +48,10 @@ editor_options:
         
         [initialize with lasso](SuSiE_dsc_ukb_results_initlasso_lamb0.1.html)
 
+    - [SuSie Initializz Problem example](SuSiE_dsc_ukb_default_2.8_susie_problem.html)
+      
+        [Initializa with LASSO problem](SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.html)
+        
 ---------------------
 
 * The result using GWASsample = 10000, REFsample = 500:

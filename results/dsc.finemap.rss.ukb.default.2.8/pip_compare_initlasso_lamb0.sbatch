@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --time=5:00:00
-#SBATCH --partition=broadwl
+#SBATCH --partition=mstephens
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=16
 #SBATCH --mem-per-cpu=3000

@@ -9,16 +9,16 @@
 # susierss vs susie  2 causal
 
 - correlation 0.87
-- 197/190611 (1.03e-01%) differ by 0.1
-- 102/190611 (5.35e-02%) differ by 0.15
-- 63/190611 (3.31e-02%) differ by 0.2
+- 200/198619 (1.01e-01%) differ by 0.1
+- 104/198619 (5.24e-02%) differ by 0.15
+- 65/198619 (3.27e-02%) differ by 0.2
 
 
 # susierss vs susie  ~ 5 3 causal
 
 - correlation 0.88
-- 600/554056 (1.08e-01%) differ by 0.1
-- 318/554056 (5.74e-02%) differ by 0.15
-- 217/554056 (3.92e-02%) differ by 0.2
+- 617/579036 (1.07e-01%) differ by 0.1
+- 327/579036 (5.65e-02%) differ by 0.15
+- 225/579036 (3.89e-02%) differ by 0.2
 
 

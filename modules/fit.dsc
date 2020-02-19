@@ -65,7 +65,7 @@ susie: initialize.R + R(if(is.na(init)){
                         }) + fit_susie.R
   # Prior variance of nonzero effects.
   @CONF: R_libs = susieR
-  maxI: 200
+  maxI: 1000
   maxL: 10
   null_weight: 0
   prior_var: 0

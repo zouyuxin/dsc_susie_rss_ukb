@@ -1,0 +1,154 @@
+---
+title: "SuSiE-RSS different LD"
+author: "Yuxin Zou"
+date: "03/20/2020"
+output:
+  workflowr::wflow_html:
+    code_folding: hide
+---
+
+```{r warning=FALSE, message=FALSE}
+library(dplyr)
+library(kableExtra)
+```
+
+## Original
+
+### NOT Estimate residual variance
+
+#### PIP calibration
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_calibration/susie_rss_ukb_checkLD_pip_AZFALSE_ERFALSE_pipcali.png)
+
+#### PIP comparison
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZFALSE_ERFALSE_rssinsampleVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZFALSE_ERFALSE_rssinsampleZVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZFALSE_ERFALSE_rssrefsampleVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZFALSE_ERFALSE_rssrefsampleZVSsusie.png)
+
+#### Power
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_roc/susie_rss_ukb_checkLD_pip_AZFALSE_ERFALSE_roc_2_power.png)
+
+#### ROC
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_roc/susie_rss_ukb_checkLD_pip_AZFALSE_ERFALSE_roc_2_roc.png)
+
+#### CS
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_cs_compare/susie_rss_ukb_checkLD_pip_AZFALSE_ERFALSE_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_cs_compare/susie_rss_ukb_checkLD_pip_AZFALSE_ERFALSE_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,28:37)],4))))
+```
+
+### Estimate residual variance
+
+#### PIP calibration
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_calibration/susie_rss_ukb_checkLD_pip_AZFALSE_ERTRUE_pipcali.png)
+
+#### PIP comparison
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZFALSE_ERTRUE_rssinsampleVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZFALSE_ERTRUE_rssinsampleZVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZFALSE_ERTRUE_rssrefsampleVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZFALSE_ERTRUE_rssrefsampleZVSsusie.png)
+
+#### Power
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_roc/susie_rss_ukb_checkLD_pip_AZFALSE_ERTRUE_roc_2_power.png)
+
+#### ROC
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_roc/susie_rss_ukb_checkLD_pip_AZFALSE_ERTRUE_roc_2_roc.png)
+
+#### CS
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_cs_compare/susie_rss_ukb_checkLD_pip_AZFALSE_ERTRUE_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_cs_compare/susie_rss_ukb_checkLD_pip_AZFALSE_ERTRUE_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,28:37)],4))))
+```
+
+## Add Z
+
+### NOT Estimate residual variance
+
+#### PIP calibration
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_calibration/susie_rss_ukb_checkLD_pip_AZTRUE_ERFALSE_pipcali.png)
+
+#### PIP comparison
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZTRUE_ERFALSE_rssinsampleVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZTRUE_ERFALSE_rssinsampleZVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZTRUE_ERFALSE_rssrefsampleVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZTRUE_ERFALSE_rssrefsampleZVSsusie.png)
+
+#### Power
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_roc/susie_rss_ukb_checkLD_pip_AZTRUE_ERFALSE_roc_2_power.png)
+
+#### ROC
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_roc/susie_rss_ukb_checkLD_pip_AZTRUE_ERFALSE_roc_2_roc.png)
+
+#### CS
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_cs_compare/susie_rss_ukb_checkLD_pip_AZTRUE_ERFALSE_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_cs_compare/susie_rss_ukb_checkLD_pip_AZTRUE_ERFALSE_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,28:37)],4))))
+```
+
+### Estimate residual variance
+
+#### PIP calibration
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_calibration/susie_rss_ukb_checkLD_pip_AZTRUE_ERTRUE_pipcali.png)
+
+#### PIP comparison
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZTRUE_ERTRUE_rssinsampleVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZTRUE_ERTRUE_rssinsampleZVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZTRUE_ERTRUE_rssrefsampleVSsusie.png)
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_pip_comparison/susie_rss_ukb_checkLD_pip_AZTRUE_ERTRUE_rssrefsampleZVSsusie.png)
+
+#### Power
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_roc/susie_rss_ukb_checkLD_pip_AZTRUE_ERTRUE_roc_2_power.png)
+
+#### ROC
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_roc/susie_rss_ukb_checkLD_pip_AZTRUE_ERTRUE_roc_2_roc.png)
+
+#### CS
+
+![](../results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_cs_compare/susie_rss_ukb_checkLD_pip_AZTRUE_ERTRUE_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/dsc.finemap.rss.ukb.checkLD.20200315/susie_rss_ukb_checkLD_methods_cs_compare/susie_rss_ukb_checkLD_pip_AZTRUE_ERTRUE_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,28:37)],4))))
+```
+

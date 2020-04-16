@@ -54,6 +54,8 @@ editor_options:
         
 * [RESULT](SuSiE_dsc_ukb_checkLD.html) from 2020.03.15 (LD with correction for PCs VS without)
 
+* [RESULT](SuSiE_dsc_ukb_lmvsmix.html) from 2020.04.13 (comparing results using summary statistics from simple linear model vs mixed effect model)
+
 ---------------------
 
 * The result using GWASsample = 10000, REFsample = 500:

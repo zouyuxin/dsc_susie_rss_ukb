@@ -52,6 +52,8 @@ editor_options:
       
         [Initialize with LASSO problem](SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.html)
         
+* [RESULT](SuSiE_dsc_ukb_checkLD.html) from 2020.03.15 (LD with correction for PCs VS without)
+
 ---------------------
 
 * The result using GWASsample = 10000, REFsample = 500:

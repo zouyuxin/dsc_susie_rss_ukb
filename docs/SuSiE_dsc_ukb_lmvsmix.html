@@ -9,9 +9,11 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Yuxin Zou" />
 
+<meta name="date" content="2020-04-16" />
 
-<title>Home</title>
+<title>SuSiE-RSS lm vs mix</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,7 +21,11 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -162,8 +168,111 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -206,9 +315,19 @@ div.section {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
 
 
-<h1 class="title toc-ignore">Home</h1>
+
+<h1 class="title toc-ignore">SuSiE-RSS lm vs mix</h1>
+<h4 class="author"><em>Yuxin Zou</em></h4>
+<h4 class="date"><em>04/16/2020</em></h4>
 
 </div>
 
@@ -236,7 +355,7 @@ div.section {
 <strong>Last updated:</strong> 2020-04-16
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>dsc_susie_rss_ukb/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -258,6 +377,66 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
 <p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200107code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200107)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200107code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200107)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
@@ -688,7 +867,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/558238affe454ff830f6ff47605f4d1c10673aac/analysis/index.Rmd" target="_blank">558238a</a>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/558238affe454ff830f6ff47605f4d1c10673aac/analysis/SuSiE_dsc_ukb_lmvsmix.Rmd" target="_blank">558238a</a>
 </td>
 <td>
 zouyuxin
@@ -700,363 +879,6 @@ zouyuxin
 wflow_publish(c(“analysis/SuSiE_dsc_ukb_lmvsmix.Rmd”, “analysis/index.Rmd”))
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/ed7a3ad26d55c8763e6838b84eedfed5473ccd03/docs/index.html" target="_blank">ed7a3ad</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-04-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/a89ebb1731c3f5a7f1a8d481f27c90649aa75f89/analysis/index.Rmd" target="_blank">a89ebb1</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-04-16
-</td>
-<td>
-wflow_publish(“analysis/index.Rmd”)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/94bd8b9c912c7a9d06d45aec2e2684d732733c8e/docs/index.html" target="_blank">94bd8b9</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-17
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/e3daab8e02e41680277912354b704e904d775f93/analysis/index.Rmd" target="_blank">e3daab8</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-17
-</td>
-<td>
-wflow_publish(“analysis/index.Rmd”)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/309f8bdbf3e7ee5c55807331a597d0c17cf0d5a9/docs/index.html" target="_blank">309f8bd</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/b822edeb10c7366b09b0769083bd0ab419c7ab72/analysis/index.Rmd" target="_blank">b822ede</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-16
-</td>
-<td>
-wflow_publish(“analysis/index.Rmd”)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/718a681c6d72ef86dde4371466f6c32ed63b6411/docs/index.html" target="_blank">718a681</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-12
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/ac7c41a385df0f593b61155b5ad1084272ce3f21/docs/index.html" target="_blank">ac7c41a</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/89e8e4f867e4bfff29c6cb3491ddb4c07bca8dd3/docs/index.html" target="_blank">89e8e4f</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-10
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/45f20296b08e581d80a82b485cc3fd1951b68821/analysis/index.Rmd" target="_blank">45f2029</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-10
-</td>
-<td>
-wflow_publish(“analysis/index.Rmd”)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/16404d9097d94b2897694985fce39242b0d3add0/docs/index.html" target="_blank">16404d9</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-10
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/5f84648fdfa098334ac55519941c3ad437e2ad7f/analysis/index.Rmd" target="_blank">5f84648</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-10
-</td>
-<td>
-wflow_publish(“analysis/index.Rmd”)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/4128ae49f3a7e7741a009a4ffa91519d05581bed/docs/index.html" target="_blank">4128ae4</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-10
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/264e4eb584626d715acf9f21bffa1985d6f82152/analysis/index.Rmd" target="_blank">264e4eb</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-10
-</td>
-<td>
-wflow_publish(“analysis/index.Rmd”)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/2266ece4fa774a33e7b4a58ea2fce1f47a9b2e6c/docs/index.html" target="_blank">2266ece</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-10
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/f1a2b470694d7954cc7525089afc561f944fca4d/analysis/index.Rmd" target="_blank">f1a2b47</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-02-10
-</td>
-<td>
-wflow_publish(“analysis/index.Rmd”)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/3df5ed37a5706883319cf5e22237875f09bdcc8e/docs/index.html" target="_blank">3df5ed3</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-01-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/a17ffe513578e17b3bed6990c1d286c9b0b99e0e/analysis/index.Rmd" target="_blank">a17ffe5</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-01-16
-</td>
-<td>
-wflow_publish(“analysis/index.Rmd”)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/ade2c7a8d4775a239225a9a239b5a30121eb5f89/docs/index.html" target="_blank">ade2c7a</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-01-10
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/498c4fa9e6bf945d1ea4657db5a52d23aa7b31db/analysis/index.Rmd" target="_blank">498c4fa</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-01-09
-</td>
-<td>
-generate results
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/a287a07236214e39fb377184af06f5223e404350/analysis/index.Rmd" target="_blank">a287a07</a>
-</td>
-<td>
-zouyuxin
-</td>
-<td>
-2020-01-07
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -1064,84 +886,473 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<ul>
-<li><p>RESULT from 2020.2.8 (add initialization; fix set seed issue)</p>
-<p>The result using GWASsample = 10000, REFsample = 500:</p>
-<p>The summary of Frobenius norm between in-sample LD and ref sample LD:</p>
-<table>
+<pre class="r"><code>library(dplyr)
+library(kableExtra)</code></pre>
+<p>Mixed effects summary statistics are computed using GCTA. There are 100 data sets, each one has 3 simulated signals with total pve 0.01.</p>
+<div id="original" class="section level2">
+<h2>Original</h2>
+<div id="not-estimate-residual-variance" class="section level3">
+<h3>NOT Estimate residual variance</h3>
+<div id="pip-calibration" class="section level4">
+<h4>PIP calibration</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_pipcali.png" />
+
+</div>
+</div>
+<div id="power" class="section level4">
+<h4>Power</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_roc_2_power.png" />
+
+</div>
+</div>
+<div id="roc" class="section level4">
+<h4>ROC</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_roc_2_roc.png" />
+
+</div>
+</div>
+<div id="cs" class="section level4">
+<h4>CS</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_cs_plots.png" />
+
+</div>
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_cs.rds&#39;
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,23:30)],4))))</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th>Min.</th>
-<th>1st Qu.</th>
-<th>Median</th>
-<th>Mean</th>
-<th>3rd Qu.</th>
-<th>Max.</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+n_signal
+</th>
+<th style="text-align:right;">
+susierss_lm_insample_overlap
+</th>
+<th style="text-align:right;">
+susierss_mix_insample_overlap
+</th>
+<th style="text-align:right;">
+susierss_lm_refsample_overlap
+</th>
+<th style="text-align:right;">
+susierss_mix_refsample_overlap
+</th>
+<th style="text-align:right;">
+susierss_lm_insample_fail
+</th>
+<th style="text-align:right;">
+susierss_mix_insample_fail
+</th>
+<th style="text-align:right;">
+susierss_lm_refsample_fail
+</th>
+<th style="text-align:right;">
+susierss_mix_refsample_fail
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>30.72</td>
-<td>47.24</td>
-<td>49.65</td>
-<td>49.45</td>
-<td>52.18</td>
-<td>68.92</td>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
 </tr>
 </tbody>
 </table>
-<p>The summary of max norm between in-sample LD and ref sample LD:</p>
-<table>
+</div>
+</div>
+<div id="estimate-residual-variance" class="section level3">
+<h3>Estimate residual variance</h3>
+<div id="pip-calibration-1" class="section level4">
+<h4>PIP calibration</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_pipcali.png" />
+
+</div>
+</div>
+<div id="power-1" class="section level4">
+<h4>Power</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_roc_2_power.png" />
+
+</div>
+</div>
+<div id="roc-1" class="section level4">
+<h4>ROC</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_roc_2_roc.png" />
+
+</div>
+</div>
+<div id="cs-1" class="section level4">
+<h4>CS</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_cs_plots.png" />
+
+</div>
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_cs.rds&#39;
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,23:30)],4))))</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th>Min.</th>
-<th>1st Qu.</th>
-<th>Median</th>
-<th>Mean</th>
-<th>3rd Qu.</th>
-<th>Max.</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+n_signal
+</th>
+<th style="text-align:right;">
+susierss_lm_insample_overlap
+</th>
+<th style="text-align:right;">
+susierss_mix_insample_overlap
+</th>
+<th style="text-align:right;">
+susierss_lm_refsample_overlap
+</th>
+<th style="text-align:right;">
+susierss_mix_refsample_overlap
+</th>
+<th style="text-align:right;">
+susierss_lm_insample_fail
+</th>
+<th style="text-align:right;">
+susierss_mix_insample_fail
+</th>
+<th style="text-align:right;">
+susierss_lm_refsample_fail
+</th>
+<th style="text-align:right;">
+susierss_mix_refsample_fail
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>0.1990</td>
-<td>0.2615</td>
-<td>0.2942</td>
-<td>0.3065</td>
-<td>0.3320</td>
-<td>0.7361</td>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li><p>lambda = 0:</p>
-<p><a href="SuSiE_dsc_ukb_results_noinit_lamb0.html">default initialization</a></p>
-<p><a href="SuSiE_dsc_ukb_results_initoracle_lamb0.html">initialize with oracle</a></p>
-<p><a href="SuSiE_dsc_ukb_results_initlasso_lamb0.html">initialize with lasso</a></p></li>
-<li><p>lambda = <span class="math inline">\(10^{-4}\)</span>:</p>
-<p><a href="SuSiE_dsc_ukb_results_noinit_lamb1e-4.html">default initialization</a></p>
-<p><a href="SuSiE_dsc_ukb_results_initoracle_lamb1e-4.html">initialize with oracle</a></p>
-<p><a href="SuSiE_dsc_ukb_results_initlasso_lamb1e-4.html">initialize with lasso</a></p></li>
-<li><p>lambda = 0.1:</p>
-<p><a href="SuSiE_dsc_ukb_results_noinit_lamb0.1.html">default initialization</a></p>
-<p><a href="SuSiE_dsc_ukb_results_initoracle_lamb0.1.html">initialize with oracle</a></p>
-<p><a href="SuSiE_dsc_ukb_results_initlasso_lamb0.1.html">initialize with lasso</a></p></li>
-<li><p><a href="SuSiE_dsc_ukb_default_2.8_susie_problem.html">SuSie Initialize Problem example</a></p>
-<p><a href="SuSiE_dsc_ukb_default_2.8_susieinitlasso_problem.html">Initialize with LASSO problem</a></p></li>
-</ul></li>
-<li><p><a href="SuSiE_dsc_ukb_checkLD.html">RESULT</a> from 2020.03.15 (LD with correction for PCs VS without)</p></li>
-<li><p><a href="SuSiE_dsc_ukb_lmvsmix.html">RESULT</a> from 2020.04.13 (comparing results using summary statistics from simple linear model vs mixed effect model)</p></li>
-</ul>
-<hr />
-<ul>
-<li><p>The result using GWASsample = 10000, REFsample = 500:</p>
-<ul>
-<li><p><a href="SuSiE_dsc_ukb_results_lamb0.html">lambda = 0</a></p></li>
-<li><p><a href="SuSiE_dsc_ukb_results_lamb1e-4.html">lambda = <span class="math inline">\(10^{-4}\)</span></a></p></li>
-<li><p><a href="SuSiE_dsc_ukb_results_lamb0.1.html">lambda = 0.1</a></p></li>
-</ul></li>
-<li><p><a href="SuSiE_dsc_ukb_default_problem.html">One problem example</a></p></li>
-</ul>
+</div>
+</div>
+<div id="add-z" class="section level3">
+<h3>Add Z</h3>
+</div>
+<div id="not-estimate-residual-variance-1" class="section level3">
+<h3>NOT Estimate residual variance</h3>
+<div id="pip-calibration-2" class="section level4">
+<h4>PIP calibration</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_pipcali.png" />
+
+</div>
+</div>
+<div id="power-2" class="section level4">
+<h4>Power</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_roc_2_power.png" />
+
+</div>
+</div>
+<div id="roc-2" class="section level4">
+<h4>ROC</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_roc_2_roc.png" />
+
+</div>
+</div>
+<div id="cs-2" class="section level4">
+<h4>CS</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_cs_plots.png" />
+
+</div>
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_cs.rds&#39;
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,23:30)],4))))</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+n_signal
+</th>
+<th style="text-align:right;">
+susierss_lm_insample_overlap
+</th>
+<th style="text-align:right;">
+susierss_mix_insample_overlap
+</th>
+<th style="text-align:right;">
+susierss_lm_refsample_overlap
+</th>
+<th style="text-align:right;">
+susierss_mix_refsample_overlap
+</th>
+<th style="text-align:right;">
+susierss_lm_insample_fail
+</th>
+<th style="text-align:right;">
+susierss_mix_insample_fail
+</th>
+<th style="text-align:right;">
+susierss_lm_refsample_fail
+</th>
+<th style="text-align:right;">
+susierss_mix_refsample_fail
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="estimate-residual-variance-1" class="section level3">
+<h3>Estimate residual variance</h3>
+<div id="pip-calibration-3" class="section level4">
+<h4>PIP calibration</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_pipcali.png" />
+
+</div>
+</div>
+<div id="power-3" class="section level4">
+<h4>Power</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_roc_2_power.png" />
+
+</div>
+</div>
+<div id="roc-3" class="section level4">
+<h4>ROC</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_roc_2_roc.png" />
+
+</div>
+</div>
+<div id="cs-3" class="section level4">
+<h4>CS</h4>
+<div class="figure">
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_cs_plots.png" />
+
+</div>
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_cs.rds&#39;
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,23:30)],4))))</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+n_signal
+</th>
+<th style="text-align:right;">
+susierss_lm_insample_overlap
+</th>
+<th style="text-align:right;">
+susierss_mix_insample_overlap
+</th>
+<th style="text-align:right;">
+susierss_lm_refsample_overlap
+</th>
+<th style="text-align:right;">
+susierss_mix_refsample_overlap
+</th>
+<th style="text-align:right;">
+susierss_lm_insample_fail
+</th>
+<th style="text-align:right;">
+susierss_mix_insample_fail
+</th>
+<th style="text-align:right;">
+susierss_lm_refsample_fail
+</th>
+<th style="text-align:right;">
+susierss_mix_refsample_fail
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.1 (2018-07-02)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Scientific Linux 7.4 (Nitrogen)
+
+Matrix products: default
+BLAS/LAPACK: /software/openblas-0.2.19-el7-x86_64/lib/libopenblas_haswellp-r0.2.19.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] kableExtra_1.1.0 dplyr_0.8.0.1   
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.3        highr_0.7         pillar_1.4.3     
+ [4] compiler_3.5.1    later_0.7.5       git2r_0.26.1     
+ [7] workflowr_1.6.0   tools_3.5.1       digest_0.6.25    
+[10] viridisLite_0.3.0 evaluate_0.12     tibble_2.1.3     
+[13] lifecycle_0.1.0   pkgconfig_2.0.3   rlang_0.4.4      
+[16] rstudioapi_0.10   yaml_2.2.0        stringr_1.4.0    
+[19] httr_1.3.1        knitr_1.20        xml2_1.2.0       
+[22] fs_1.3.1          vctrs_0.2.3       hms_0.5.3        
+[25] webshot_0.5.1     rprojroot_1.3-2   tidyselect_0.2.5 
+[28] glue_1.3.1        R6_2.4.1          rmarkdown_1.10   
+[31] purrr_0.3.2       readr_1.3.1       magrittr_1.5     
+[34] whisker_0.3-2     backports_1.1.5   scales_1.1.0     
+[37] promises_1.0.1    htmltools_0.3.6   assertthat_0.2.1 
+[40] rvest_0.3.2       colorspace_1.4-1  httpuv_1.4.5     
+[43] stringi_1.4.3     munsell_0.5.0     crayon_1.3.4     </code></pre>
+</div>
+</div>
+</div>
+</div>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
@@ -1157,6 +1368,8 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
+</div>
+</div>
 
 </div>
 

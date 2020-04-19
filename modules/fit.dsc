@@ -16,7 +16,7 @@ caviar: fit_caviar.R + add_z.R + R(posterior = finemap_mcaviar(z,ld_file, args, 
   sumstats: $sumstats
   ld: $ld
   N_ref: $N_ref
-  (addz, ld_method): (FALSE, "in_sample"), (FALSE, "ref_sample"), (TRUE, "ref_sample")
+  (addz, ld_method): (FALSE, "in_sample"), (FALSE, "in_sample_Z"),(FALSE, "ref_sample"), (FALSE, "ref_sample_Z"),(TRUE, "ref_sample")
   ld_ref_z_file: file(ref.z.ld)
   args: "-g 0.001 -c 1", "-g 0.001 -c 2", "-g 0.001 -c 3"
   cache: file(CAVIAR)
@@ -69,10 +69,11 @@ susie: initialize.R + R(if(is.na(init)){
   maxL: 10
   null_weight: 0
   prior_var: 0
-  X: $X_sample
+  X: $X_sample_resid
+  Z: $Z_sample
   Y: $Y
   estimate_residual_variance: TRUE, FALSE
-  init: NA, 'oracle', 'lasso'
+  init: NA
   $posterior: posterior
   $fitted: fitted
 
@@ -108,12 +109,12 @@ susie_rss: add_z_susierss.R + initialize.R + R(if(is.na(init)){
   sumstats: $sumstats
   ld: $ld
   L: 10
-  lamb: 0, 1e-4, 0.1
   n: $N_sample
   N_ref: $N_ref
   estimate_residual_variance: TRUE, FALSE
-  (addz, ld_method): (FALSE, "in_sample"), (FALSE, "ref_sample"), (TRUE, "ref_sample")
-  init: NA, 'oracle', 'lasso'
+  addz: FALSE, TRUE
+  ld_method: "in_sample", "ref_sample"
+  init: NA
   $fitted: res$fitted
   $posterior: res$posterior
 
@@ -122,5 +123,4 @@ susie_rss_large(susie_rss):
 
 susie_rss_simple(susie_rss):
   L: 10
-  lamb: 0
 

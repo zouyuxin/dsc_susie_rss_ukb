@@ -85,7 +85,7 @@ if(all(!is.na(X.ref))){
 }
 
 
-# Remove covariates
+# Load covariates
 # read phenotype files
 pheno.file <- "genotype_dir/height.csv.gz"
 pheno        <- suppressMessages(read_csv(pheno.file))
@@ -100,22 +100,14 @@ match.idx = match(ind$IID, pheno$id)
 pheno = pheno[match.idx,]
 
 remove_Z = function(X, pheno){
-  Z = model.matrix(~ sex + age + age2 + assessment_centre + genotype_measurement_batch +
-                     pc_genetic1 + pc_genetic2 + pc_genetic3 + pc_genetic4 + pc_genetic5 +
+  Z = model.matrix(~ pc_genetic1 + pc_genetic2 + pc_genetic3 + pc_genetic4 + pc_genetic5 +
                      pc_genetic6 + pc_genetic7 + pc_genetic8 + pc_genetic9 + pc_genetic10 +
                      pc_genetic11 + pc_genetic12 + pc_genetic13 + pc_genetic14 + pc_genetic15 +
                      pc_genetic16 + pc_genetic17 + pc_genetic18 + pc_genetic19 + pc_genetic20, 
                    data = pheno)
   # Remove intercept
   Z = Z[,-1]
-  Z = scale(Z, center=T, scale=F)
-  # standardize quantitative columns
-  cols = which(colnames(Z) %in% c("age","pc_genetic1","pc_genetic2","pc_genetic3","pc_genetic4",
-                                  "pc_genetic5","pc_genetic6","pc_genetic7","pc_genetic8","pc_genetic9", 
-                                  "pc_genetic10","pc_genetic11","pc_genetic12","pc_genetic13","pc_genetic14",
-                                  "pc_genetic15","pc_genetic16","pc_genetic17","pc_genetic18","pc_genetic19","pc_genetic20"))
-  Z[,cols] = scale(Z[,cols])
-  Z[,'age2'] = Z[,'age']^2
+  Z = scale(Z)
   
   # Center X
   X.c = scale(X, center=T, scale=FALSE)
@@ -127,43 +119,53 @@ remove_Z = function(X, pheno){
   qrZ.Q = qr.Q(qrZ)[, 1:qrZ$rank]
   W = crossprod(qrZ.Q, X.c) # W = Q'X
   SZX = backsolve(qrZ.R, W) # (Z'Z)^{-1} Z'X = R^{-1} Q'X
-  X = X.c - Z %*% SZX
+  X.res = X.c - Z %*% SZX
   
-  return(list(X=X, xtxdiag = colSums(X.c^2), W=W))
+  return(list(X=X.c, X.res=X.res, Z=Z, xtxdiag = colSums(X.c^2), W=W))
 }
 
 pheno.sample = pheno[in_sample, ]
-X.sample.res = remove_Z(X.sample, pheno.sample)
-X.sample = X.sample.res$X
+X.sample.result = remove_Z(X.sample, pheno.sample)
+X.sample = X.sample.result$X
+X.sample.resid = X.sample.result$X.res
+Z.sample = X.sample.result$Z
 
 if(GWASsample == n){
   ld.matrix = as.matrix(fread(paste0(dataset,'.matrix')))
   ld.matrix = ld.matrix[choose.idx[overlap.idx[X.idx]], choose.idx[overlap.idx[X.idx]]]
-  XtX = sqrt(X.sample.res$xtxdiag) * t(ld.matrix*sqrt(X.sample.res$xtxdiag)) - 
-    crossprod(X.sample.res$W) # W'W = X'Q Q'X = X'Z(Z'Z)^{-1}Z'X
-  r.sample = cov2cor(XtX)
+  XtX = sqrt(X.sample.result$xtxdiag) * t(ld.matrix*sqrt(X.sample.result$xtxdiag)) - 
+    crossprod(X.sample.result$W) # W'W = X'Q Q'X = X'Z(Z'Z)^{-1}Z'X
+  r.sample = ld.matrix
+  r.sample.Z = cov2cor(XtX)
 }else{
   r.sample = cor(X.sample)
+  r.sample.Z = cor(X.sample.result$X.res)
 }
 
 if (all(!is.na(X.ref))) {
   pheno.ref = pheno[ref_sample, ]
-  X.ref.res = remove_Z(X.ref, pheno.ref)
-  X.ref = X.ref.res$X
+  X.ref.result = remove_Z(X.ref, pheno.ref)
+  X.ref = X.ref.result$X
+  Z.ref = X.ref.result$Z
   r.ref = cor(X.ref)
+  r.ref.Z = cor(X.ref.result$X.res)
 } else {
   r.ref = NA
 }
 
 if(all(!is.na(X.ref))){
-  r.Fdist = Matrix::norm(r.sample - r.ref, type='F')
-  r.Mdist = max(abs(r.sample - r.ref))
+  r.Z.2dist = Matrix::norm(r.sample - r.sample.Z, type='2')
+  r.ref.2dist = Matrix::norm(r.sample - r.ref, type='2')
+  r.Z.Mdist = max(abs(r.sample - r.sample.Z))
+  r.ref.Mdist = max(abs(r.sample - r.ref))
 }else{
-  r.Fdist = r.Mdist = NA
+  r.Z.2dist = r.ref.2dist = r.Z.Mdist = r.ref.Mdist = NA
 }
 
+write.table(ind[in_sample,c(1,2)], in_sample_id_file, quote=F, col.names=F, row.names=F)
+write.table(gsub('_[A-Z]$','',colnames(X.sample)), snps_id_file, quote=F, col.names=F, row.names=F)
 write.table(r.sample, ld_sample_file, quote=F, col.names=F, row.names=F)
+write.table(r.sample.Z, ld_sample_Z_file, quote=F, col.names=F, row.names=F)
 write.table(r.ref, ld_ref_file, quote=F, col.names=F, row.names=F)
-
-
+write.table(r.ref.Z, ld_ref_Z_file, quote=F, col.names=F, row.names=F)
 

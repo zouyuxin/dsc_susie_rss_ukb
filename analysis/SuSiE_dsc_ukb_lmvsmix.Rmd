@@ -14,6 +14,17 @@ library(kableExtra)
 
 Mixed effects summary statistics are computed using GCTA. There are 100 data sets, each one has 3 simulated signals with total pve 0.01.
 
+I realized one problem about the simulation after it finished. I simulated response with population structure using PCs from UKBioBank databse. UKBioBank database provides top 40 PCs. Let $X \in \mathbb{R}^{N\times J}$ be the genotype matrix for one region, $Z \in \mathbb{R}^{N\times P}$ be the top PCs from UKBioBank,
+$$
+y = X\beta + Z\alpha + \epsilon.
+$$
+
+The mixed linear model is
+$$
+y = x_j \beta_j + g + e, \quad g \sim N(0,\sigma_g^2 GRM), \quad e \sim N(0, \sigma^2 I).
+$$
+The GRM doesn't include population sruture introduced by Z.
+
 ## Original
 
 ### NOT Estimate residual variance

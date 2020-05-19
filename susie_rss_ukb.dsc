@@ -10,8 +10,9 @@ DSC:
     method_susie: susie, susie_rss
   run:
     default: small_data * sim_gaussian * get_sumstats * (method_susie * score_susie, finemap * score_finemap, finemapv3 * score_finemapv3, caviar * score_caviar)
+    checkLD: small_data * sim_gaussian * get_sumstats * method_susie * score_susie
     large_region: full_data * sim_gaussian * get_sumstats * (susie * score_susie, method_susie_rss_simple * score_susie, method_finemap_simple * score_finemap, method_finemap_v3_simple * score_finemapv3, method_caviar_simple * score_caviar)
-    mix_effect: prepare_data * small_data
+    mix_effect: small_data * sim_gaussian * get_sumstats * susie_rss * score_susie
   exec_path: code
   global:
     data_file: data/ukb_genotypes_files.txt

@@ -7,6 +7,12 @@ output:
     code_folding: hide
 ---
 
+In susie-rss, we use LD matrix
+$$
+\tilde{R} = cov2cor((1-\omega) R + \omega z z^\intercal).
+$$
+We want to choose a safe, robust default for $\omega$.
+
 There are 200 data sets, each one has 2 simulated signals with total pve 0.02. I simulated response with population structure using PCs from UKBioBank databse. UKBioBank database provides top 40 PCs and I used top 20. Let $X \in \mathbb{R}^{N\times J}$ be the genotype matrix for one region after removing effects from sex, age, $age^2$, assessment_centre, genotype_measurement_batch, $Z \in \mathbb{R}^{N\times P}$ be the top PCs from UKBioBank,
 $$
 Y = X\beta + Z \alpha + \epsilon

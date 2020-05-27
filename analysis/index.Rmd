@@ -56,6 +56,8 @@ editor_options:
 
 * [RESULT](SuSiE_dsc_ukb_lmvsmix.html) from 2020.04.13 (comparing results using summary statistics from simple linear model vs mixed effect model)
 
+* [RESULT](SuSiE_dsc_ukb_weight.html) from 2020.05.27 (comparing results with different z_ld_weight)
+
 ---------------------
 
 * The result using GWASsample = 10000, REFsample = 500:

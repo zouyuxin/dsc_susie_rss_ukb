@@ -6,7 +6,12 @@ regress_Z_from_Y = function(Y, Z){
   reg = lapply(1:ncol(Y), function(i) .lm.fit(Z, Y[,i])$residuals)
   return(matrix(unlist(reg), ncol = ncol(Y), byrow = FALSE))
 }
-Y_reg = regress_Z_from_Y(Y,Z)
+if(Z_pve > 0){
+  Y_reg = regress_Z_from_Y(Y,Z)
+  X = X_resid
+}else{
+  Y_reg = Y
+}
 
 fitted <- list()
 posterior <- list()

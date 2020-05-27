@@ -100,35 +100,59 @@ match.idx = match(ind$IID, pheno$id)
 pheno = pheno[match.idx,]
 
 remove_Z = function(X, pheno){
-  Z = model.matrix(~ pc_genetic1 + pc_genetic2 + pc_genetic3 + pc_genetic4 + pc_genetic5 +
+  Z = model.matrix(~ sex + age + age2 + assessment_centre + genotype_measurement_batch +
+                     pc_genetic1 + pc_genetic2 + pc_genetic3 + pc_genetic4 + pc_genetic5 +
                      pc_genetic6 + pc_genetic7 + pc_genetic8 + pc_genetic9 + pc_genetic10 +
                      pc_genetic11 + pc_genetic12 + pc_genetic13 + pc_genetic14 + pc_genetic15 +
-                     pc_genetic16 + pc_genetic17 + pc_genetic18 + pc_genetic19 + pc_genetic20, 
+                     pc_genetic16 + pc_genetic17 + pc_genetic18 + pc_genetic19 + pc_genetic20,
                    data = pheno)
   # Remove intercept
   Z = Z[,-1]
-  Z = scale(Z)
+  Z = scale(Z, center=T, scale=F)
+  # standardize quantitative columns
+  cols = which(colnames(Z) %in% c("age","pc_genetic1","pc_genetic2","pc_genetic3","pc_genetic4",
+                                  "pc_genetic5","pc_genetic6","pc_genetic7","pc_genetic8","pc_genetic9",
+                                  "pc_genetic10","pc_genetic11","pc_genetic12","pc_genetic13","pc_genetic14",
+                                  "pc_genetic15","pc_genetic16","pc_genetic17","pc_genetic18","pc_genetic19","pc_genetic20"))
+  Z[,cols] = scale(Z[,cols])
+  Z[,'age2'] = Z[,'age']^2
+  qrZ <- qr(Z) # Z = QR
+  Z = Z[, qrZ$pivot[1:qrZ$rank]] # remove rank deficient columns
   
   # Center X
   X.c = scale(X, center=T, scale=FALSE)
-  
-  # Remove Z from X
-  qrZ <- qr(Z) # Z = QR
-  Z = Z[, qrZ$pivot[1:qrZ$rank]] # remove rank deficient columns
+ 
+  pcs = which(colnames(Z) %in% c("pc_genetic1","pc_genetic2","pc_genetic3","pc_genetic4",
+                           "pc_genetic5","pc_genetic6","pc_genetic7","pc_genetic8","pc_genetic9",
+                           "pc_genetic10","pc_genetic11","pc_genetic12","pc_genetic13","pc_genetic14",
+                           "pc_genetic15","pc_genetic16","pc_genetic17","pc_genetic18","pc_genetic19","pc_genetic20"))
+  Z_sub = Z[, -pcs]
+ 
+  # Remove all Z from X
   qrZ.R = qr.R(qrZ)[1:qrZ$rank, 1:qrZ$rank]
   qrZ.Q = qr.Q(qrZ)[, 1:qrZ$rank]
   W = crossprod(qrZ.Q, X.c) # W = Q'X
   SZX = backsolve(qrZ.R, W) # (Z'Z)^{-1} Z'X = R^{-1} Q'X
   X.res = X.c - Z %*% SZX
+
+  # Remove sex, age, assessment center, batch effects from X
+  qrZ_sub <- qr(Z_sub) # Z = QR
+  Z_sub = Z_sub[, qrZ_sub$pivot[1:qrZ_sub$rank]] # remove rank deficient columns
+  qrZ_sub.R = qr.R(qrZ_sub)[1:qrZ_sub$rank, 1:qrZ_sub$rank]
+  qrZ_sub.Q = qr.Q(qrZ_sub)[, 1:qrZ_sub$rank]
+  W_sub = crossprod(qrZ_sub.Q, X.c) # W = Q'X
+  SZ_subX = backsolve(qrZ_sub.R, W_sub) # (Z'Z)^{-1} Z'X = R^{-1} Q'X
+  X.res.sub = X.c - Z_sub %*% SZ_subX
   
-  return(list(X=X.c, X.res=X.res, Z=Z, xtxdiag = colSums(X.c^2), W=W))
+  return(list(X=X.c, X.res.batch = X.res.sub, X.res=X.res, PCs=Z[,pcs], xtxdiag = colSums(X.c^2), W=W, W_batch = W_sub))
 }
 
 pheno.sample = pheno[in_sample, ]
 X.sample.result = remove_Z(X.sample, pheno.sample)
 X.sample = X.sample.result$X
+X.sample.batch = X.sample.result$X.res.batch
 X.sample.resid = X.sample.result$X.res
-Z.sample = X.sample.result$Z
+PC.sample = X.sample.result$PCs
 
 if(GWASsample == n){
   ld.matrix = as.matrix(fread(paste0(dataset,'.matrix')))
@@ -137,18 +161,22 @@ if(GWASsample == n){
     crossprod(X.sample.result$W) # W'W = X'Q Q'X = X'Z(Z'Z)^{-1}Z'X
   r.sample = ld.matrix
   r.sample.Z = cov2cor(XtX)
+  XtX.batch = sqrt(X.sample.result$xtxdiag) * t(ld.matrix*sqrt(X.sample.result$xtxdiag)) -
+    crossprod(X.sample.result$W_batch)
+  r.sample.batch = cov2cor(XtX.batch)
 }else{
   r.sample = cor(X.sample)
-  r.sample.Z = cor(X.sample.result$X.res)
+  r.sample.batch = cor(X.sample.batch)
+  r.sample.Z = cor(X.sample.resid)
 }
 
 if (all(!is.na(X.ref))) {
   pheno.ref = pheno[ref_sample, ]
   X.ref.result = remove_Z(X.ref, pheno.ref)
   X.ref = X.ref.result$X
-  Z.ref = X.ref.result$Z
   r.ref = cor(X.ref)
   r.ref.Z = cor(X.ref.result$X.res)
+  r.ref.batch = cor(X.ref.result$X.res.batch)
 } else {
   r.ref = NA
 }
@@ -165,7 +193,9 @@ if(all(!is.na(X.ref))){
 write.table(ind[in_sample,c(1,2)], in_sample_id_file, quote=F, col.names=F, row.names=F)
 write.table(gsub('_[A-Z]$','',colnames(X.sample)), snps_id_file, quote=F, col.names=F, row.names=F)
 write.table(r.sample, ld_sample_file, quote=F, col.names=F, row.names=F)
+write.table(r.sample.batch, ld_sample_batch_file, quote=F, col.names=F, row.names=F)
 write.table(r.sample.Z, ld_sample_Z_file, quote=F, col.names=F, row.names=F)
 write.table(r.ref, ld_ref_file, quote=F, col.names=F, row.names=F)
+write.table(r.ref.batch, ld_ref_batch_file, quote=F, col.names=F, row.names=F)
 write.table(r.ref.Z, ld_ref_Z_file, quote=F, col.names=F, row.names=F)
 

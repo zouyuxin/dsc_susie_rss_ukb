@@ -5,10 +5,10 @@ sim_gaussian: simulate.R + \
   @CONF: R_libs = susieR
   seed: $seed
   X: $X_sample
-  Z: $Z_sample
-  pve: 0.01
-  Z_pve: 0.01
-  n_signal: 3
+  Z: $PC_sample
+  pve: 0.02
+  Z_pve: ${Z_pve}
+  n_signal: 1,2,3,4,5
   effects: ${neale_effect_size}
   n_traits: 1
   file_name: file(pheno)
@@ -16,6 +16,10 @@ sim_gaussian: simulate.R + \
   $Y: res$Y
   $meta: res$meta
   $pheno_file: file_name
+
+sim_gaussian_s2(sim_gaussian):
+  X: $X_sample_batch
+  n_signal: 2
 
 sim_gaussian_null(sim_gaussian):
   pve: 0

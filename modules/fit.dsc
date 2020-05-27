@@ -16,7 +16,7 @@ caviar: fit_caviar.R + add_z.R + R(posterior = finemap_mcaviar(z,ld_file, args, 
   sumstats: $sumstats
   ld: $ld
   N_ref: $N_ref
-  (addz, ld_method): (FALSE, "in_sample"), (FALSE, "in_sample_Z"),(FALSE, "ref_sample"), (FALSE, "ref_sample_Z"),(TRUE, "ref_sample")
+  (addz, ld_method): (FALSE, "in_sample"),(FALSE, "ref_sample"),(TRUE, "ref_sample")
   ld_ref_z_file: file(ref.z.ld)
   args: "-g 0.001 -c 1", "-g 0.001 -c 2", "-g 0.001 -c 3"
   cache: file(CAVIAR)
@@ -69,10 +69,12 @@ susie: initialize.R + R(if(is.na(init)){
   maxL: 10
   null_weight: 0
   prior_var: 0
-  X: $X_sample_resid
-  Z: $Z_sample
+  X: $X_sample
+  X_resid: $X_sample_resid
+  Z_pve: ${Z_pve}
+  Z: $PC_sample
   Y: $Y
-  estimate_residual_variance: TRUE, FALSE
+  estimate_residual_variance: TRUE
   init: NA
   $posterior: posterior
   $fitted: fitted
@@ -98,7 +100,7 @@ susie10(susie):
 # SuSiE with summary statistics
 #------------------------------
 
-susie_rss: add_z_susierss.R + initialize.R + R(if(is.na(init)){
+susie_rss: initialize.R + R(if(is.na(init)){
                           s_init = NA
                         }else if(init == 'oracle'){
                           s_init = init_susie_rss_true($(meta)$true_coef, n)
@@ -109,11 +111,10 @@ susie_rss: add_z_susierss.R + initialize.R + R(if(is.na(init)){
   sumstats: $sumstats
   ld: $ld
   L: 10
+  z_ld_weight: 0, 0.001, 0.002, 0.005, 0.01, 0.02
   n: $N_sample
-  N_ref: $N_ref
-  estimate_residual_variance: TRUE, FALSE
-  addz: FALSE, TRUE
-  ld_method: "in_sample", "ref_sample"
+  estimate_residual_variance: TRUE
+  ld_method: "in_sample_Z", "ref_sample_Z"
   init: NA
   $fitted: res$fitted
   $posterior: res$posterior
@@ -124,3 +125,23 @@ susie_rss_large(susie_rss):
 susie_rss_simple(susie_rss):
   L: 10
 
+susie_rss_lambda: add_z_susierss.R + initialize.R + R(if(is.na(init)){
+                          s_init = NA
+                        }else if(init == 'oracle'){
+                          s_init = init_susie_rss_true($(meta)$true_coef, n)
+                        }else if(init == 'lasso'){
+                          s_init = init_rss_lasso(z,r,L)
+                        }) + fit_susie_rss_lambda.R
+  @CONF: R_libs = (susieR, data.table)
+  sumstats: $sumstats
+  ld: $ld
+  L: 10
+  n: $N_sample
+  N_ref: $N_ref
+  estimate_residual_variance: TRUE
+  lamb: 0
+  addz: FALSE, TRUE
+  ld_method: "in_sample_Z", "ref_sample_Z"
+  init: NA
+  $fitted: res$fitted
+  $posterior: res$posterior

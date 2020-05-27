@@ -29,7 +29,11 @@ mixed_regression = function(X_file, Y_file, sample_file, snp_file, n_trait, pref
 }
 
 if(method == 'lm'){
-  res = mm_regression(as.matrix(X), as.matrix(Y), as.matrix(Z))
+  if(Z_pve > 0){
+    res = mm_regression(as.matrix(X), as.matrix(Y), as.matrix(Z))
+  }else{
+    res = mm_regression(as.matrix(X), as.matrix(Y))
+  }
 }else if(method == 'mixed'){
   res = mixed_regression(X_file, Y_file, sample_file, snp_file, n_trait)
 }

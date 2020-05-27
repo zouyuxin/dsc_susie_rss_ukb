@@ -1,0 +1,56 @@
+---
+title: "SuSiE-RSS different z_ld_weight"
+author: "Yuxin Zou"
+date: "05/27/2020"
+output:
+  workflowr::wflow_html:
+    code_folding: hide
+---
+
+There are 200 data sets, each one has 2 simulated signals with total pve 0.02. I simulated response with population structure using PCs from UKBioBank databse. UKBioBank database provides top 40 PCs and I used top 20. Let $X \in \mathbb{R}^{N\times J}$ be the genotype matrix for one region after removing effects from sex, age, $age^2$, assessment_centre, genotype_measurement_batch, $Z \in \mathbb{R}^{N\times P}$ be the top PCs from UKBioBank,
+$$
+Y = X\beta + Z \alpha + \epsilon
+$$
+PCs have 0.01 total PVE.
+
+We fit model with L = 10, estiamte prior variance and estimate residual variance.
+
+## In sample
+
+### Power
+
+![](assets/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_roc/susie_rss_ukb_weight_ldin_sample_Z_power.png)
+
+### ROC
+
+![](assets/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_roc/susie_rss_ukb_weight_ldin_sample_Z_roc.png)
+
+### CS
+
+![](assets/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_cs_compare/susie_rss_ukb_weight_ldin_sample_Z_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_cs_compare/susie_rss_ukb_weight_ldin_sample_Z_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,14:17)],4))))
+```
+
+## REF sample
+
+### Power
+
+![](assets/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_roc/susie_rss_ukb_weight_ldref_sample_Z_power.png)
+
+### ROC
+
+![](assets/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_roc/susie_rss_ukb_weight_ldref_sample_Z_roc.png)
+
+### CS
+
+![](assets/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_cs_compare/susie_rss_ukb_weight_ldref_sample_Z_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_cs_compare/susie_rss_ukb_weight_ldref_sample_Z_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,14:17)],4))))
+```

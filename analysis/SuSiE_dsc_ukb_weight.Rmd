@@ -13,7 +13,7 @@ $$
 $$
 We want to choose a safe, robust default for $\omega$.
 
-There are 200 data sets, each one has 2 simulated signals with total pve 0.02. The in sample data has 10000 individuals. The refenrece panel has 500 individuals. I simulated response with population structure using PCs from UKBioBank databse. UKBioBank database provides top 40 PCs and I used top 20. Let $X \in \mathbb{R}^{N\times J}$ be the genotype matrix for one region after removing effects from sex, age, $age^2$, assessment_centre, genotype_measurement_batch, $Z \in \mathbb{R}^{N\times P}$ be the top PCs from UKBioBank,
+There are 200 data sets, each one has 2 simulated signals with total pve 0.02. The in sample data has 10000 individuals. The refenrece panel has 500 individuals. I simulated response with population structure using PCs from UKBioBank databse. UKBioBank database provides top 40 PCs and I used top 20. Let $X \in \mathbb{R}^{N\times J}$ be the genotype matrix for one region after removing effects from sex, age, $age^2$, assessment centre, genotype measurement batch, $Z \in \mathbb{R}^{N\times P}$ be the top PCs from UKBioBank,
 $$
 Y = X\beta + Z \alpha + \epsilon
 $$

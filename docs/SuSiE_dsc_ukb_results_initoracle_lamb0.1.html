@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="Yuxin Zou" />
@@ -28,6 +28,25 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -89,7 +108,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -238,6 +256,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -250,56 +269,12 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -313,6 +288,12 @@ $(document).ready(function ()  {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -408,13 +389,6 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<!-- Add a small amount of space between sections. -->
-<style type="text/css">
-div.section {
-  padding-top: 12px;
-}
-</style>
-
 <div class="fluid-row" id="header">
 
 <div class="btn-group pull-right">
@@ -454,7 +428,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-02-19
+<strong>Last updated:</strong> 2020-12-14
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -464,7 +438,7 @@ div.section {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -502,7 +476,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongSeedstrongcodesetseed20200107code" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20200107)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20200107)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
 </div>
 </div>
 </div>
@@ -545,13 +519,19 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree35d9a48514ec69c5ac372f66cc670c3fc43744c1targetblank35d9a48a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/35d9a48514ec69c5ac372f66cc670c3fc43744c1" target="_blank">35d9a48</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree30e89aa238074c153c0e04e41efd561b464e23fatargetblank30e89aaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/30e89aa238074c153c0e04e41efd561b464e23fa" target="_blank">30e89aa</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree35d9a48514ec69c5ac372f66cc670c3fc43744c1targetblank35d9a48a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree30e89aa238074c153c0e04e41efd561b464e23fatargetblank30e89aaa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/30e89aa238074c153c0e04e41efd561b464e23fa" target="_blank">30e89aa</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
@@ -562,10 +542,8 @@ Ignored files:
 Untracked files:
     Untracked:  .DS_Store
     Untracked:  .Rhistory
+    Untracked:  R-3.6.3.pkg
     Untracked:  results/dsc.finemap.rss.ukb.default.2.8/.DS_Store
-
-Unstaged changes:
-    Modified:   .gitignore
 
 </code></pre>
 <p>
@@ -580,7 +558,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/SuSiE_dsc_ukb_results_initoracle_lamb0.1.Rmd</code>) and HTML (<code>docs/SuSiE_dsc_ukb_results_initoracle_lamb0.1.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -604,6 +582,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/30e89aa238074c153c0e04e41efd561b464e23fa/analysis/SuSiE_dsc_ukb_results_initoracle_lamb0.1.Rmd" target="_blank">30e89aa</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-12-14
+</td>
+<td>
+wflow_publish(“analysis/SuSiE_dsc_ukb_results_initoracle_lamb0.1.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/d3a5c025e0dbcb3759adb6eb2a0a2f2ead1c3cfd/docs/SuSiE_dsc_ukb_results_initoracle_lamb0.1.html" target="_blank">d3a5c02</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-02-19
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -632,7 +644,7 @@ html
 zouyuxin
 </td>
 <td>
-2020-02-16
+2020-02-15
 </td>
 <td>
 Build site.
@@ -721,51 +733,27 @@ library(kableExtra)</code></pre>
 <h3>NOT Estimate residual variance</h3>
 <div id="pip-calibration" class="section level4">
 <h4>PIP calibration</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_pipcali.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_pipcali.png" /></p>
 </div>
 <div id="pip-comparison" class="section level4">
 <h4>PIP comparison</h4>
-<p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVSsusie.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVScaviar.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVSfinemap.png" /></p>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVSfinemapv3.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_susieVScaviar.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_susieVSfinemap.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_susieVSfinemapv3.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVSsusie.png" /> <img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVScaviar.png" /> <img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVSfinemap.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_rssVSfinemapv3.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_susieVScaviar.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_susieVSfinemap.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_susieVSfinemapv3.png" /></p>
 </div>
 <div id="power" class="section level4">
 <h4>Power</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all_power_combine.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all_power_combine.png" /></p>
 </div>
 <div id="roc" class="section level4">
 <h4>ROC</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all_roc_combine.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all_roc_combine.png" /></p>
 </div>
 <div id="cs" class="section level4">
 <h4>CS</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_cs_plots.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_cs_plots.png" /></p>
 <pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
@@ -883,51 +871,27 @@ susierss_fail
 <h3>Estimate residual variance</h3>
 <div id="pip-calibration-1" class="section level4">
 <h4>PIP calibration</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_pipcali.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_pipcali.png" /></p>
 </div>
 <div id="pip-comparison-1" class="section level4">
 <h4>PIP comparison</h4>
-<p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVSsusie.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVScaviar.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVSfinemap.png" /></p>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVSfinemapv3.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_susieVScaviar.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_susieVSfinemap.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_susieVSfinemapv3.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVSsusie.png" /> <img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVScaviar.png" /> <img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVSfinemap.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_rssVSfinemapv3.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_susieVScaviar.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_susieVSfinemap.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_susieVSfinemapv3.png" /></p>
 </div>
 <div id="power-1" class="section level4">
 <h4>Power</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all_power_combine.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all_power_combine.png" /></p>
 </div>
 <div id="roc-1" class="section level4">
 <h4>ROC</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all_roc_combine.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all_roc_combine.png" /></p>
 </div>
 <div id="cs-1" class="section level4">
 <h4>CS</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_cs_plots.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_cs_plots.png" /></p>
 <pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
@@ -1048,50 +1012,26 @@ susierss_fail
 <h3>NOT Estimate residual variance</h3>
 <div id="pip-calibration-2" class="section level4">
 <h4>PIP calibration</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_pipcali.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_pipcali.png" /></p>
 </div>
 <div id="pip-comparison-2" class="section level4">
 <h4>PIP comparison</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVSsusie.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVScaviar.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemap.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemapv3.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVSsusie.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVScaviar.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemap.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemapv3.png" /></p>
 </div>
 <div id="power-2" class="section level4">
 <h4>Power</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all_power_combine.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all_power_combine.png" /></p>
 </div>
 <div id="roc-2" class="section level4">
 <h4>ROC</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all_roc_combine.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all_roc_combine.png" /></p>
 </div>
 <div id="cs-2" class="section level4">
 <h4>CS</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_cs_plots.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_cs_plots.png" /></p>
 <pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
@@ -1209,50 +1149,26 @@ susierss_fail
 <h3>Estimate residual variance</h3>
 <div id="pip-calibration-3" class="section level4">
 <h4>PIP calibration</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_pipcali.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_pipcali.png" /></p>
 </div>
 <div id="pip-comparison-3" class="section level4">
 <h4>PIP comparison</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVSsusie.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVScaviar.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemap.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemapv3.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVSsusie.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVScaviar.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemap.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemapv3.png" /></p>
 </div>
 <div id="power-3" class="section level4">
 <h4>Power</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all_power_combine.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all_power_combine.png" /></p>
 </div>
 <div id="roc-3" class="section level4">
 <h4>ROC</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all_roc_combine.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all_roc_combine.png" /></p>
 </div>
 <div id="cs-3" class="section level4">
 <h4>CS</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_cs_plots.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_cs_plots.png" /></p>
 <pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
@@ -1373,50 +1289,26 @@ susierss_fail
 <h3>NOT Estimate residual variance</h3>
 <div id="pip-calibration-4" class="section level4">
 <h4>PIP calibration</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_pipcali.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_pipcali.png" /></p>
 </div>
 <div id="pip-comparison-4" class="section level4">
 <h4>PIP comparison</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVSsusie.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVScaviar.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemap.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemapv3.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVSsusie.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVScaviar.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemap.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_rssVSfinemapv3.png" /></p>
 </div>
 <div id="power-4" class="section level4">
 <h4>Power</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all_power_combine.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all_power_combine.png" /></p>
 </div>
 <div id="roc-4" class="section level4">
 <h4>ROC</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all_roc_combine.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all_roc_combine.png" /></p>
 </div>
 <div id="cs-4" class="section level4">
 <h4>CS</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_cs_plots.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_cs_plots.png" /></p>
 <pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
@@ -1534,43 +1426,25 @@ susierss_fail
 <h3>Estimate residual variance</h3>
 <div id="pip-calibration-5" class="section level4">
 <h4>PIP calibration</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_pipcali.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_pipcali.png" /></p>
 </div>
 <div id="pip-comparison-5" class="section level4">
 <h4>PIP comparison</h4>
-<p><img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVSsusie.png" /> <img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVScaviar.png" /></p>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemap.png" />
-
-</div>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemapv3.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVSsusie.png" /> <img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVScaviar.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemap.png" /></p>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_comparison/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_rssVSfinemapv3.png" /></p>
 </div>
 <div id="power-5" class="section level4">
 <h4>Power</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all_power_combine.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all_power_combine.png" /></p>
 </div>
 <div id="roc-5" class="section level4">
 <h4>ROC</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all_roc_combine.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all_roc_combine.png" /></p>
 </div>
 <div id="cs-5" class="section level4">
 <h4>CS</h4>
-<div class="figure">
-<img src="../results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_cs_plots.png" />
-
-</div>
+<p><img src="assets/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_cs_plots.png" /></p>
 <pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_cs_compare/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,17:20)],4))))</code></pre>
@@ -1690,13 +1564,13 @@ susierss_fail
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 3.5.3 (2019-03-11)
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
-Running under: macOS  10.15.3
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
 
 Matrix products: default
-BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -1705,25 +1579,20 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] kableExtra_1.1.0 dplyr_0.8.1     
+[1] kableExtra_1.3.1 dplyr_1.0.2      workflowr_1.6.2 
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.3        highr_0.8         compiler_3.5.3   
- [4] pillar_1.4.2      later_0.8.0       git2r_0.26.1     
- [7] workflowr_1.5.0   tools_3.5.3       zeallot_0.1.0    
-[10] digest_0.6.23     viridisLite_0.3.0 evaluate_0.13    
-[13] tibble_2.1.3      pkgconfig_2.0.3   rlang_0.4.2      
-[16] rstudioapi_0.10   yaml_2.2.0        xfun_0.7         
-[19] stringr_1.4.0     httr_1.4.0        knitr_1.23       
-[22] xml2_1.2.0        fs_1.3.1          vctrs_0.2.0      
-[25] hms_0.5.2         webshot_0.5.1     rprojroot_1.3-2  
-[28] tidyselect_0.2.5  glue_1.3.1        R6_2.4.1         
-[31] rmarkdown_1.13    purrr_0.3.3       readr_1.3.1      
-[34] magrittr_1.5      whisker_0.3-2     backports_1.1.5  
-[37] scales_1.0.0      promises_1.0.1    htmltools_0.3.6  
-[40] assertthat_0.2.1  rvest_0.3.4       colorspace_1.4-1 
-[43] httpuv_1.5.1      stringi_1.4.3     munsell_0.5.0    
-[46] crayon_1.3.4     </code></pre>
+ [1] Rcpp_1.0.5        highr_0.8         pillar_1.4.7      compiler_4.0.3   
+ [5] later_1.1.0.1     git2r_0.27.1      tools_4.0.3       digest_0.6.27    
+ [9] viridisLite_0.3.0 evaluate_0.14     lifecycle_0.2.0   tibble_3.0.4     
+[13] pkgconfig_2.0.3   rlang_0.4.9       rstudioapi_0.13   yaml_2.2.1       
+[17] xfun_0.19         stringr_1.4.0     httr_1.4.2        knitr_1.30       
+[21] xml2_1.3.2        generics_0.1.0    fs_1.5.0          vctrs_0.3.5      
+[25] webshot_0.5.2     rprojroot_2.0.2   tidyselect_1.1.0  glue_1.4.2       
+[29] R6_2.5.0          rmarkdown_2.5     purrr_0.3.4       magrittr_2.0.1   
+[33] whisker_0.4       scales_1.1.1      promises_1.1.1    ellipsis_0.3.1   
+[37] htmltools_0.5.0   rvest_0.3.6       colorspace_2.0-0  httpuv_1.5.4     
+[41] stringi_1.5.3     munsell_0.5.0     crayon_1.3.4     </code></pre>
 </div>
 </div>
 </div>
@@ -1752,13 +1621,61 @@ footer is added to webpages before the MathJax javascript. -->
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

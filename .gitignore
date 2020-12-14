@@ -10,3 +10,4 @@ results/**/*.rds
 !results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/*.rds
 !results/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_cs_compare/*.rds
 .Rproj.user/*
+.Rproj.user

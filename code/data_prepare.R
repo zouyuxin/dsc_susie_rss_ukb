@@ -2,6 +2,7 @@ library(data.table)
 library(Matrix)
 library(readr)
 library(digest)
+library(rsvd)
 # get unique seed for this genotype
 str_to_int = function(x){
   h = digest(x, algo = "xxhash32")
@@ -17,8 +18,9 @@ geno <- fread(paste0(dataset, '.raw.gz'),sep = "\t",
 class(geno) <- "data.frame"
 # Extract the genotypes.
 X <- as(as.matrix(geno[-(1:6)]),'dgCMatrix')
-
+ind <- geno[(1:2)]
 # Get subset of X (individuals)
+set.seed(1)
 n = nrow(X)
 in_sample = sample(1:n, GWASsample)
 X.sample = X[in_sample,]
@@ -32,6 +34,7 @@ if(REFsample > 0){
 }else{
   X.ref = NA
 }
+rm(X)
 
 # Remove invariant SNPs
 sample.idx = apply(X.sample, 2, var, na.rm=TRUE) != 0
@@ -84,118 +87,64 @@ if(all(!is.na(X.ref))){
   maf.ref = maf.ref[X.idx]
 }
 
+X.sample = center_scale(X.sample)
+X.ref = center_scale(X.ref)
+## Get PCA for X
+
+library(rsvd)
+out.pca <- rpca(X.sample,k = 5,center = TRUE,
+                scale = TRUE,retx = TRUE)
+pcs = out.pca$x
+colnames(pcs) <- paste0("PC",1:5)
 
 # Load covariates
 # read phenotype files
-pheno.file <- "genotype_dir/height.csv.gz"
-pheno        <- suppressMessages(read_csv(pheno.file))
-class(pheno) <- "data.frame"
-pheno$sex = factor(pheno$sex)
-pheno$assessment_centre = factor(pheno$assessment_centre)
-pheno$genotype_measurement_batch = factor(pheno$genotype_measurement_batch)
-pheno$age2 = pheno$age^2
-# match individual order with genotype file
-ind = fread(paste0(dataset, '.psam'))
-match.idx = match(ind$IID, pheno$id)
-pheno = pheno[match.idx,]
 
-remove_Z = function(X, pheno){
-  Z = model.matrix(~ sex + age + age2 + assessment_centre + genotype_measurement_batch +
-                     pc_genetic1 + pc_genetic2 + pc_genetic3 + pc_genetic4 + pc_genetic5 +
-                     pc_genetic6 + pc_genetic7 + pc_genetic8 + pc_genetic9 + pc_genetic10 +
-                     pc_genetic11 + pc_genetic12 + pc_genetic13 + pc_genetic14 + pc_genetic15 +
-                     pc_genetic16 + pc_genetic17 + pc_genetic18 + pc_genetic19 + pc_genetic20,
-                   data = pheno)
-  # Remove intercept
-  Z = Z[,-1]
-  Z = scale(Z, center=T, scale=F)
-  # standardize quantitative columns
-  cols = which(colnames(Z) %in% c("age","pc_genetic1","pc_genetic2","pc_genetic3","pc_genetic4",
-                                  "pc_genetic5","pc_genetic6","pc_genetic7","pc_genetic8","pc_genetic9",
-                                  "pc_genetic10","pc_genetic11","pc_genetic12","pc_genetic13","pc_genetic14",
-                                  "pc_genetic15","pc_genetic16","pc_genetic17","pc_genetic18","pc_genetic19","pc_genetic20"))
-  Z[,cols] = scale(Z[,cols])
-  Z[,'age2'] = Z[,'age']^2
-  qrZ <- qr(Z) # Z = QR
-  Z = Z[, qrZ$pivot[1:qrZ$rank]] # remove rank deficient columns
-  
-  # Center X
-  X.c = scale(X, center=T, scale=FALSE)
- 
-  pcs = which(colnames(Z) %in% c("pc_genetic1","pc_genetic2","pc_genetic3","pc_genetic4",
-                           "pc_genetic5","pc_genetic6","pc_genetic7","pc_genetic8","pc_genetic9",
-                           "pc_genetic10","pc_genetic11","pc_genetic12","pc_genetic13","pc_genetic14",
-                           "pc_genetic15","pc_genetic16","pc_genetic17","pc_genetic18","pc_genetic19","pc_genetic20"))
-  Z_sub = Z[, -pcs]
- 
-  # Remove all Z from X
-  qrZ.R = qr.R(qrZ)[1:qrZ$rank, 1:qrZ$rank]
-  qrZ.Q = qr.Q(qrZ)[, 1:qrZ$rank]
-  W = crossprod(qrZ.Q, X.c) # W = Q'X
-  SZX = backsolve(qrZ.R, W) # (Z'Z)^{-1} Z'X = R^{-1} Q'X
-  X.res = X.c - Z %*% SZX
+# remove_Z = function(X, PC){
+# 
+#   Z = scale(PC, center=T, scale=T)
+#   qrZ <- qr(Z) # Z = QR
+#   Z = Z[, qrZ$pivot[1:qrZ$rank]] # remove rank deficient columns
+#   
+#   # Remove Z from X
+#   qrZ.R = qr.R(qrZ)[1:qrZ$rank, 1:qrZ$rank]
+#   qrZ.Q = qr.Q(qrZ)[, 1:qrZ$rank]
+#   W = crossprod(qrZ.Q, X) # W = Q'X
+#   SZX = backsolve(qrZ.R, W) # (Z'Z)^{-1} Z'X = R^{-1} Q'X
+#   X.res = X - Z %*% SZX
+# 
+#   return(list(X=X.res, PCs=Z, xtxdiag = colSums(X^2), W=W))
+# }
 
-  # Remove sex, age, assessment center, batch effects from X
-  qrZ_sub <- qr(Z_sub) # Z = QR
-  Z_sub = Z_sub[, qrZ_sub$pivot[1:qrZ_sub$rank]] # remove rank deficient columns
-  qrZ_sub.R = qr.R(qrZ_sub)[1:qrZ_sub$rank, 1:qrZ_sub$rank]
-  qrZ_sub.Q = qr.Q(qrZ_sub)[, 1:qrZ_sub$rank]
-  W_sub = crossprod(qrZ_sub.Q, X.c) # W = Q'X
-  SZ_subX = backsolve(qrZ_sub.R, W_sub) # (Z'Z)^{-1} Z'X = R^{-1} Q'X
-  X.res.sub = X.c - Z_sub %*% SZ_subX
-  
-  return(list(X=X.c, X.res.batch = X.res.sub, X.res=X.res, PCs=Z[,pcs], xtxdiag = colSums(X.c^2), W=W, W_batch = W_sub))
-}
-
-pheno.sample = pheno[in_sample, ]
-X.sample.result = remove_Z(X.sample, pheno.sample)
-X.sample = X.sample.result$X
-X.sample.batch = X.sample.result$X.res.batch
-X.sample.resid = X.sample.result$X.res
-PC.sample = X.sample.result$PCs
+# X.sample.result = remove_Z(X.sample, pcs)
+# X.sample.resid = X.sample.result$X
 
 if(GWASsample == n){
   ld.matrix = as.matrix(fread(paste0(dataset,'.matrix')))
   ld.matrix = ld.matrix[choose.idx[overlap.idx[X.idx]], choose.idx[overlap.idx[X.idx]]]
-  XtX = sqrt(X.sample.result$xtxdiag) * t(ld.matrix*sqrt(X.sample.result$xtxdiag)) - 
-    crossprod(X.sample.result$W) # W'W = X'Q Q'X = X'Z(Z'Z)^{-1}Z'X
+  # XtX = sqrt(X.sample.result$xtxdiag) * t(ld.matrix*sqrt(X.sample.result$xtxdiag)) - 
+  #   crossprod(X.sample.result$W) # W'W = X'Q Q'X = X'Z(Z'Z)^{-1}Z'X
   r.sample = ld.matrix
-  r.sample.Z = cov2cor(XtX)
-  XtX.batch = sqrt(X.sample.result$xtxdiag) * t(ld.matrix*sqrt(X.sample.result$xtxdiag)) -
-    crossprod(X.sample.result$W_batch)
-  r.sample.batch = cov2cor(XtX.batch)
+  # r.sample.Z = cov2cor(XtX)
 }else{
   r.sample = cor(X.sample)
-  r.sample.batch = cor(X.sample.batch)
-  r.sample.Z = cor(X.sample.resid)
+  # r.sample.Z = cor(X.sample.resid)
 }
 
 if (all(!is.na(X.ref))) {
-  pheno.ref = pheno[ref_sample, ]
-  X.ref.result = remove_Z(X.ref, pheno.ref)
-  X.ref = X.ref.result$X
   r.ref = cor(X.ref)
-  r.ref.Z = cor(X.ref.result$X.res)
-  r.ref.batch = cor(X.ref.result$X.res.batch)
 } else {
   r.ref = NA
 }
 
 if(all(!is.na(X.ref))){
-  r.Z.2dist = Matrix::norm(r.sample - r.sample.Z, type='2')
   r.ref.2dist = Matrix::norm(r.sample - r.ref, type='2')
-  r.Z.Mdist = max(abs(r.sample - r.sample.Z))
   r.ref.Mdist = max(abs(r.sample - r.ref))
 }else{
-  r.Z.2dist = r.ref.2dist = r.Z.Mdist = r.ref.Mdist = NA
+  r.ref.2dist = r.ref.Mdist = NA
 }
 
-write.table(ind[in_sample,c(1,2)], in_sample_id_file, quote=F, col.names=F, row.names=F)
+write.table(ind[in_sample,], in_sample_id_file, quote=F, col.names=F, row.names=F)
 write.table(gsub('_[A-Z]$','',colnames(X.sample)), snps_id_file, quote=F, col.names=F, row.names=F)
 write.table(r.sample, ld_sample_file, quote=F, col.names=F, row.names=F)
-write.table(r.sample.batch, ld_sample_batch_file, quote=F, col.names=F, row.names=F)
-write.table(r.sample.Z, ld_sample_Z_file, quote=F, col.names=F, row.names=F)
 write.table(r.ref, ld_ref_file, quote=F, col.names=F, row.names=F)
-write.table(r.ref.batch, ld_ref_batch_file, quote=F, col.names=F, row.names=F)
-write.table(r.ref.Z, ld_ref_Z_file, quote=F, col.names=F, row.names=F)
-

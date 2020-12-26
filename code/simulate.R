@@ -7,14 +7,18 @@
 #' @return sim_y an n vector simulated gaussian y
 #' @return beta a p vector of effects
 #' @return mean_corX mean of correlations of X (lower triangular entries of correlation matrix of X)
-sim_gaussian = function(X, Z, pve, Z_pve = 0, effect_num, effects){
+sim_gaussian = function(X, Z, pve, Z_pve = 0, effect_num){
   n = dim(X)[1]
   p = dim(X)[2]
 
   beta.idx = sample(p, effect_num)
   beta = rep(0,p)
-  beta.values = sample(effects, effect_num)
-  beta[beta.idx] = beta.values
+  beta.values = numeric(0)
+  
+  if(effect_num > 0){
+    beta.values = rnorm(effect_num)
+    beta[beta.idx] = beta.values
+  }
   
   if (effect_num==1){
     mean_corX = 1
@@ -33,7 +37,7 @@ sim_gaussian = function(X, Z, pve, Z_pve = 0, effect_num, effects){
     resid_var = pheno_var - var(y_genetic)
     if(Z_pve > 0){ 
       Z_sigma2 = pheno_var*Z_pve/sum(apply(Z, 2, var))
-      Z_coef = rnorm(ncol(Z), 0, sqrt(Z_sigma2))
+      Z_coef = rep(sqrt(Z_sigma2), ncol(Z))
       resid_var = pheno_var*(1 - Z_pve - pve)
     }else{
       Z_coef = numeric(ncol(Z))
@@ -47,12 +51,12 @@ sim_gaussian = function(X, Z, pve, Z_pve = 0, effect_num, effects){
 }
 
 # A wrapper for simulating multiple Y's
-sim_gaussian_multiple = function(X, Z, pve, Z_pve=0, effect_num, effects, n_traits=1, file_name, sample_file) {
+sim_gaussian_multiple = function(X, Z, pve, Z_pve=0, effect_num, n_traits=1, file_name, sample_file) {
   meta = list(residual_variance = vector())
   Y = NULL
   sample_id = data.table::fread(sample_file)
   for (r in 1:n_traits) {
-    res = sim_gaussian(X, Z, pve, Z_pve, effect_num, effects)
+    res = sim_gaussian(X, Z, pve, Z_pve, effect_num)
     if (is.null(Y)) Y = as.matrix(res$Y)
     else Y = cbind(Y, as.matrix(res$Y))
     if (is.null(meta$true_coef)) meta$true_coef = as.matrix(res$beta)

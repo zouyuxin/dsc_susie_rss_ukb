@@ -17,9 +17,9 @@ susie_rss_lamb_multiple = function(Z, R, L, lambda, s_init, estimate_residual_va
   posterior = list()
   if (is.null(dim(Z))) Z = matrix(ncol=1, Z)
   for (r in 1:ncol(Z)) {
-    if (is.na(s_init))
+    if (is.null(s_init))
       fitted[[r]] = susie_rss_lamb_analyze(Z[,r], R, L, lamb,
-                                      list(),
+                                      NULL,
                                       estimate_residual_variance)
     else
       fitted[[r]] = susie_rss_lamb_analyze(Z[,r], R, L, lamb,

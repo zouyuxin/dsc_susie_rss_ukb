@@ -20,9 +20,9 @@ susie_rss_multiple = function(Z, R, L, z_ld_weight, s_init, estimate_residual_va
   posterior = list()
   if (is.null(dim(Z))) Z = matrix(ncol=1, Z)
   for (r in 1:ncol(Z)) {
-    if (is.na(s_init))
+    if (is.null(s_init))
       fitted[[r]] = susie_rss_analyze(Z[,r], R, L,z_ld_weight,
-                                      list(),
+                                      NULL,
                                       estimate_residual_variance)
     else
       fitted[[r]] = susie_rss_analyze(Z[,r], R, L,z_ld_weight,

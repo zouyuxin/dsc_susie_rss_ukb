@@ -1,0 +1,107 @@
+---
+title: "SuSiE-RSS"
+author: "Yuxin Zou"
+date: "12/25/2020"
+output:
+  workflowr::wflow_html:
+    code_folding: hide
+---
+
+```{r warning=FALSE, message=FALSE}
+library(dplyr)
+library(kableExtra)
+```
+
+There are 200 data sets, each dataset has 1000 SNPs. The in sample data has 10000 individuals. The refenrece panel has 500 individuals. The total PVE is 0.04. We estimate prior and residual variance in susie-related models.  
+
+## IN sample
+
+### PIP calibration
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_lamb0_pipcali.png)
+
+### PIP comparison
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_comparison/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0_rssVSsusie.png)
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_comparison/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0_rssVScaviar.png)
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_comparison/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0_rssVSfinemap.png)
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_comparison/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0_susieVScaviar.png)
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_comparison/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0__susieVSfinemap.png)
+
+### Power
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0_roc_all_power_combine.png)
+
+### ROC
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0_roc_all_roc_combine.png)
+
+### CS
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_cs_compare/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/rss_compare_ukb_default20201221/susierss_ukb_default_cs_compare/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,13:16)],4))))
+```
+
+## OUT sample
+
+### PIP calibration
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_lamb0_pipcali.png)
+
+### PIP comparison
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_comparison/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb0_rssVSsusie.png)
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_comparison/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb0_rssVScaviar.png)
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_comparison/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb0_rssVSfinemap.png)
+
+### Power
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb0_roc_all_power_combine.png)
+
+### ROC
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb0_roc_all_roc_combine.png)
+
+### CS
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb0_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/rss_compare_ukb_default20201221/susierss_ukb_default_cs_compare/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb0_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,13:16)],4))))
+```
+
+## OUT sample ADDZ
+
+### PIP calibration
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_lamb0_pipcali.png)
+
+#### PIP comparison
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_comparison/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb0_rssVSsusie.png)
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_comparison/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb0_rssVScaviar.png)
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_pip_comparison/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb0_rssVSfinemap.png)
+
+### Power
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb0_roc_all_power_combine.png)
+
+#### ROC
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb0_roc_all_roc_combine.png)
+
+#### CS
+
+![](assets/rss_compare_ukb_default20201221/susierss_ukb_default_cs_compare/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb0_cs_plots.png)
+
+```{r fig.align='center', fig.width=20, results='asis'}
+output = 'results/rss_compare_ukb_default20201221/susierss_ukb_default_cs_compare/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb0_cs.rds'
+result = readRDS(output)
+print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,13:16)],4))))
+```

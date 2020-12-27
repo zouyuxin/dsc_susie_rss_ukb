@@ -56,7 +56,13 @@ dap_z: fit_dap.py + Python(z = sumstats['bhat']/sumstats['shat'];
   cache: file(DAP)
   $posterior: posterior
 
-susie: initialize.R + fit_susie.R
+susie: initialize.R + R(if(is.na(init)){
+                          s_init = NA
+                        }else if(init == 'oracle'){
+                          s_init = init_susie_true($(meta)$true_coef)
+                        }else if(init == 'lasso'){
+                          s_init = init_lasso(X,Y,maxL)
+                        }) + fit_susie.R
   # Prior variance of nonzero effects.
   @CONF: R_libs = susieR
   maxI: 1000
@@ -64,17 +70,14 @@ susie: initialize.R + fit_susie.R
   null_weight: 0
   prior_var: 0
   X: $X_sample
-  Zpve: $Zpve
+  X_resid: $X_sample_resid
+  Z_pve: ${Z_pve}
   Z: $PC_sample
   Y: $Y
-  meta: $meta
   estimate_residual_variance: TRUE
   init: NA
   $posterior: posterior
   $fitted: fitted
-
-susie_init(susie):
-  init: NA, 'oracle', 'lasso'
 
 susie_auto: fit_susie.R
   @CONF: R_libs = susieR
@@ -98,7 +101,7 @@ susie10(susie):
 #------------------------------
 
 susie_rss: initialize.R + R(if(is.na(init)){
-                          s_init = NULL
+                          s_init = NA
                         }else if(init == 'oracle'){
                           s_init = init_susie_rss_true($(meta)$true_coef, n)
                         }else if(init == 'lasso'){
@@ -108,10 +111,10 @@ susie_rss: initialize.R + R(if(is.na(init)){
   sumstats: $sumstats
   ld: $ld
   L: 10
-  z_ld_weight: 0, 0.002
+  z_ld_weight: 0, 0.001, 0.002, 0.005, 0.01, 0.02
   n: $N_sample
   estimate_residual_variance: TRUE
-  ld_method: "in_sample", "ref_sample"
+  ld_method: "in_sample_Z", "ref_sample_Z"
   init: NA
   $fitted: res$fitted
   $posterior: res$posterior
@@ -121,15 +124,9 @@ susie_rss_large(susie_rss):
 
 susie_rss_simple(susie_rss):
   L: 10
-  
-susie_rss_zldweight(susie_rss):
-  z_ld_weight: 0, 0.001, 0.002, 0.005, 0.01
-
-susie_rss_init(susie_rss):
-  init: NA, 'oracle', 'lasso'
 
 susie_rss_lambda: add_z_susierss.R + initialize.R + R(if(is.na(init)){
-                          s_init = NULL
+                          s_init = NA
                         }else if(init == 'oracle'){
                           s_init = init_susie_rss_true($(meta)$true_coef, n)
                         }else if(init == 'lasso'){
@@ -142,12 +139,9 @@ susie_rss_lambda: add_z_susierss.R + initialize.R + R(if(is.na(init)){
   n: $N_sample
   N_ref: $N_ref
   estimate_residual_variance: TRUE
-  lamb: 0.0001, 0.01
+  lamb: 0
   addz: FALSE, TRUE
-  ld_method: "in_sample", "ref_sample"
+  ld_method: "in_sample_Z", "ref_sample_Z"
   init: NA
   $fitted: res$fitted
   $posterior: res$posterior
-
-susie_rss_lambda_init(susie_rss_lambda):
-  init: NA, 'oracle', 'lasso'

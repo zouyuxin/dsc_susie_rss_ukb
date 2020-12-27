@@ -16,7 +16,7 @@ caviar: fit_caviar.R + add_z.R + R(posterior = finemap_mcaviar(z,ld_file, args, 
   sumstats: $sumstats
   ld: $ld
   N_ref: $N_ref
-  (addz, ld_method): (FALSE, "in_sample"),(FALSE, "ref_sample"),(TRUE, "ref_sample")
+  (addz, ld_method): (FALSE, "in_sample_Z"),(FALSE, "ref_sample_Z"),(TRUE, "ref_sample_Z")
   ld_ref_z_file: file(ref.z.ld)
   args: "-g 0.001 -c 1", "-g 0.001 -c 2", "-g 0.001 -c 3"
   cache: file(CAVIAR)
@@ -46,16 +46,6 @@ finemapv3(caviar): fit_finemap_v3.R + add_z.R + R(posterior = finemap_mvar_v1.3.
 finemapv3_simple(finemapv3):
   args: "--n-causal-snps 3"
 
-dap_z: fit_dap.py + Python(z = sumstats['bhat']/sumstats['shat'];
-                           numpy.nan_to_num(z, copy=False);
-                           posterior = dap_batch_z(z, ld[ld_method], cache, args))
-  sumstats: $sumstats
-  ld: $ld
-  ld_method: "in_sample", "ref_sample"
-  args: "-ld_control 0.20 --all"
-  cache: file(DAP)
-  $posterior: posterior
-
 susie: initialize.R + R(if(is.na(init)){
                           s_init = NA
                         }else if(init == 'oracle'){
@@ -69,33 +59,18 @@ susie: initialize.R + R(if(is.na(init)){
   maxL: 10
   null_weight: 0
   prior_var: 0
-  X: $X_sample
-  X_resid: $X_sample_resid
-  Z_pve: ${Z_pve}
+  X: $X_sample_resid
+  Z_pve: $Zpve
   Z: $PC_sample
   Y: $Y
-  estimate_residual_variance: TRUE
+  estimate_residual_variance: TRUE, FALSE
   init: NA
   $posterior: posterior
   $fitted: fitted
 
-susie_auto: fit_susie.R
-  @CONF: R_libs = susieR
-  X: $X_sample
-  Y: $Y
-  prior_var: "auto"
-  $posterior: posterior
-  $fitted: fitted
-
-susie01(susie):
-  null_weight: 0
-  maxL: 1
-
-susie10(susie):
-  null_weight: 0
-  maxL: 15
-  prior_var: 0, 0.1
-
+susie_init(susie):
+  init: NA, 'oracle', 'lasso'
+  
 #------------------------------
 # SuSiE with summary statistics
 #------------------------------
@@ -111,19 +86,23 @@ susie_rss: initialize.R + R(if(is.na(init)){
   sumstats: $sumstats
   ld: $ld
   L: 10
-  z_ld_weight: 0, 0.001, 0.002, 0.005, 0.01, 0.02
+  z_ld_weight: 0, 0.002
   n: $N_sample
-  estimate_residual_variance: TRUE
+  estimate_residual_variance: TRUE, FALSE
   ld_method: "in_sample_Z", "ref_sample_Z"
   init: NA
   $fitted: res$fitted
   $posterior: res$posterior
 
-susie_rss_large(susie_rss):
-  L: 15
+susie_rss_init(susie_rss):
+  init: NA, 'oracle', 'lasso'
 
-susie_rss_simple(susie_rss):
-  L: 10
+susie_rss_zldweight(susie_rss):
+  z_ld_weight: 0, 0.001, 0.002, 0.005, 0.01, 0.02
+
+susie_rss_mix(susie_rss):
+  z_ld_weight: 0
+  ld_method: "in_sample", "in_sample_pca"
 
 susie_rss_lambda: add_z_susierss.R + initialize.R + R(if(is.na(init)){
                           s_init = NA
@@ -138,10 +117,13 @@ susie_rss_lambda: add_z_susierss.R + initialize.R + R(if(is.na(init)){
   L: 10
   n: $N_sample
   N_ref: $N_ref
-  estimate_residual_variance: TRUE
-  lamb: 0
+  estimate_residual_variance: TRUE, FALSE
+  lamb: 0, 0.0001, 0.1
   addz: FALSE, TRUE
   ld_method: "in_sample_Z", "ref_sample_Z"
   init: NA
   $fitted: res$fitted
   $posterior: res$posterior
+
+susie_rss_lambda_init(susie_rss_lambda):
+  init: NA, 'oracle', 'lasso'

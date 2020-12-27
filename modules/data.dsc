@@ -52,23 +52,6 @@ tiny_data(full_data):
   maf_thresh: 0
   subset: 300
 
-get_sumstats: regression.R
-  @CONF: R_libs = (abind, data.table)
-  method: 'lm', 'mixed'
-  X: $X_sample_batch
-  Z: $PC_sample
-  Z_pve: ${Z_pve}
-  Y: $Y
-  X_file: $X_file
-  Y_file: $pheno_file
-  sample_file: $sample_file
-  snp_file: $snp_file
-  n_trait: ncol(Y)
-  $sumstats: res
-
-get_sumstats_lm(get_sumstats):
-  method: 'lm'
-
 summarize_ld: lib_regression_simulator.py + \
                 regression_simulator.py + \
                 Python(res = summarize_LD(X, ld_file['in_sample'], ld_plot))

@@ -1,7 +1,7 @@
 ---
 title: "SuSiE-RSS lm vs mix"
 author: "Yuxin Zou"
-date: "04/16/2020"
+date: "01/01/2021"
 output:
   workflowr::wflow_html:
     code_folding: hide
@@ -12,115 +12,49 @@ library(dplyr)
 library(kableExtra)
 ```
 
-Mixed effects summary statistics are computed using GCTA. There are 100 data sets, each one has 3 simulated signals with total pve 0.01.
-
-I realized one problem about the simulation after it finished. I simulated response with population structure using PCs from UKBioBank databse. UKBioBank database provides top 40 PCs. Let $X \in \mathbb{R}^{N\times J}$ be the genotype matrix for one region, $Z \in \mathbb{R}^{N\times P}$ be the top PCs from UKBioBank,
+Mixed effects summary statistics are computed using GCTA. There are 100 data sets, each one has 2 simulated signals with total pve 0.01.
+The phenotypes are generated from 
 $$
-y = X\beta + Z\alpha + \epsilon.
+y = X\beta + \epsilon.
 $$
+The summary statistics are from simple linear model, or linear mixed model. 
 
-The mixed linear model is
-$$
-y = x_j \beta_j + g + e, \quad g \sim N(0,\sigma_g^2 GRM), \quad e \sim N(0, \sigma^2 I).
-$$
-The GRM doesn't include population sruture introduced by Z.
+## NOT Estimate residual variance
 
-## Original
+### PIP calibration
 
-### NOT Estimate residual variance
+![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERFALSE_pipcali.png)
 
-#### PIP calibration
+### Power
 
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_pipcali.png)
+![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERFALSE_roc_2_power.png)
 
-#### Power
+### CS
 
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_roc_2_power.png)
-
-#### ROC
-
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_roc_2_roc.png)
-
-#### CS
-
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_cs_plots.png)
+![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERFALSE_cs_plots.png)
 
 ```{r fig.align='center', fig.width=20, results='asis'}
-output = 'results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_cs.rds'
+output = 'results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERFALSE_cs.rds'
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,23:30)],4))))
 ```
 
-### Estimate residual variance
+## Estimate residual variance
 
-#### PIP calibration
+### PIP calibration
 
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_pipcali.png)
+![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERTRUE_pipcali.png)
 
-#### Power
+### Power
 
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_roc_2_power.png)
+![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERTRUE_roc_2_power.png)
 
-#### ROC
+### CS
 
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_roc_2_roc.png)
-
-#### CS
-
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_cs_plots.png)
+![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERTRUE_cs_plots.png)
 
 ```{r fig.align='center', fig.width=20, results='asis'}
-output = 'results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_cs.rds'
-result = readRDS(output)
-print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,23:30)],4))))
-```
-
-## Add Z
-
-### NOT Estimate residual variance
-
-#### PIP calibration
-
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_pipcali.png)
-
-#### Power
-
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_roc_2_power.png)
-
-#### ROC
-
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_roc_2_roc.png)
-
-#### CS
-
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_cs_plots.png)
-
-```{r fig.align='center', fig.width=20, results='asis'}
-output = 'results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_cs.rds'
-result = readRDS(output)
-print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,23:30)],4))))
-```
-
-### Estimate residual variance
-
-#### PIP calibration
-
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_pipcali.png)
-
-#### Power
-
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_roc_2_power.png)
-
-#### ROC
-
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_roc_2_roc.png)
-
-#### CS
-
-![](assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_cs_plots.png)
-
-```{r fig.align='center', fig.width=20, results='asis'}
-output = 'results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_cs.rds'
+output = 'results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERTRUE_cs.rds'
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,23:30)],4))))
 ```

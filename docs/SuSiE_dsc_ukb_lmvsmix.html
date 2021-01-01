@@ -11,7 +11,7 @@
 
 <meta name="author" content="Yuxin Zou" />
 
-<meta name="date" content="2020-04-16" />
+<meta name="date" content="2021-01-01" />
 
 <title>SuSiE-RSS lm vs mix</title>
 
@@ -28,6 +28,14 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -408,13 +416,6 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<!-- Add a small amount of space between sections. -->
-<style type="text/css">
-div.section {
-  padding-top: 12px;
-}
-</style>
-
 <div class="fluid-row" id="header">
 
 <div class="btn-group pull-right">
@@ -429,7 +430,7 @@ div.section {
 
 <h1 class="title toc-ignore">SuSiE-RSS lm vs mix</h1>
 <h4 class="author">Yuxin Zou</h4>
-<h4 class="date">04/16/2020</h4>
+<h4 class="date">01/01/2021</h4>
 
 </div>
 
@@ -454,7 +455,7 @@ div.section {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-04-20
+<strong>Last updated:</strong> 2021-01-01
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -464,7 +465,7 @@ div.section {
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -545,28 +546,533 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree3ccce42c50afa878179dbb9bccaf5f238fbf7e8ftargetblank3ccce42a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/3ccce42c50afa878179dbb9bccaf5f238fbf7e8f" target="_blank">3ccce42</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtreec19b6cac1428054727a87b07d2a312337518840ftargetblankc19b6caa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/c19b6cac1428054727a87b07d2a312337518840f" target="_blank">c19b6ca</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtree3ccce42c50afa878179dbb9bccaf5f238fbf7e8ftargetblank3ccce42a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomzouyuxindscsusierssukbtreec19b6cac1428054727a87b07d2a312337518840ftargetblankc19b6caa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/tree/c19b6cac1428054727a87b07d2a312337518840f" target="_blank">c19b6ca</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    .Rproj.user/
+    Ignored:    .sos/
+    Ignored:    data/susie_rss_ukb_default_problem/small_data_51_sim_gaussian_3_caviar.log
+    Ignored:    dsc.finemap.rss.ukb.checkLD.job.log
+    Ignored:    dsc.finemap.rss.ukb.default.job.log
+    Ignored:    dsc.finemap.rss.ukb.largeregion.job.log
+    Ignored:    dsc.finemap.rss.ukb.mix.job.log
+    Ignored:    dsc.finemap.rss.ukb.weight.job.log
+    Ignored:    genotype_dir
+    Ignored:    output/
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/.sos/
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/slurm-65842650.out
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/slurm-65895491.out
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/slurm-65899061.out
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/slurm-65899065.out
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/slurm-65899068.out
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/slurm-65899136.out
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/slurm-65899137.out
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/slurm-65899140.out
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/slurm-65899166.out
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/slurm-65899179.out
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/slurm-65899197.out
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
     Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_pip_extraction/
     Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_query.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initNA_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initlasso_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default.2.8/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_initoracle_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/.sos/
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_pip_extraction/
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_query.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s1/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s2/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERFALSE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0.1_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb0_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.default/susie_rss_ukb_default_roc_s3/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_ERTRUE_lamb1e-04_roc_all.rds
+    Ignored:    results/dsc.finemap.rss.ukb.mix/.sos/
+    Ignored:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERFALSE_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERTRUE_pipcali.rds
+    Ignored:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_extraction/
+    Ignored:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_query.rds
+    Ignored:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERFALSE_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERTRUE_roc_2.rds
+    Ignored:    results/dsc.finemap.rss.ukb.weight/.sos/
+    Ignored:    results/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_pip_extraction/
+    Ignored:    results/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_query.rds
+    Ignored:    results/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_query_weights.rds
+    Ignored:    results/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_roc/susie_rss_ukb_weight_ldin_sample_Z.rds
+    Ignored:    results/dsc.finemap.rss.ukb.weight/susie_rss_ukb_weight_roc/susie_rss_ukb_weight_ldref_sample_Z.rds
+    Ignored:    results/rss_compare_ukb_default20201221/slurm-7895505.out
+    Ignored:    results/rss_compare_ukb_default20201221/susie_rss_ukb_default_query.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_lamb0.01_pipcali.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_lamb0_pipcali.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldin_sample_lamb1e-04_pipcali.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_lamb0.01_pipcali.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_lamb0_pipcali.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZFALSE_ldref_sample_lamb1e-04_pipcali.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_lamb0.01_pipcali.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_lamb0_pipcali.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_pip_calibration/susie_rss_ukb_default_pip_AZTRUE_ldref_sample_lamb1e-04_pipcali.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_pip_extraction/
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0.01_roc_2.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0.01_roc_all.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0_roc_2.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb0_roc_all.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb1e-04_roc_2.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldin_sample_lamb1e-04_roc_all.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb0.01_roc_2.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb0.01_roc_all.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb0_roc_2.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb0_roc_all.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb1e-04_roc_2.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZFALSE_ldref_sample_lamb1e-04_roc_all.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb0.01_roc_2.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb0.01_roc_all.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb0_roc_2.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb0_roc_all.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb1e-04_roc_2.rds
+    Ignored:    results/rss_compare_ukb_default20201221/susierss_ukb_default_roc/susierss_ukb_default_pip_AZTRUE_ldref_sample_lamb1e-04_roc_all.rds
 
 Untracked files:
-    Untracked:  .DS_Store
-    Untracked:  .Rhistory
-    Untracked:  R-3.6.3.pkg
-    Untracked:  results/dsc.finemap.rss.ukb.default.2.8/.DS_Store
+    Untracked:  dsc_cluster_submit.sbatch
+    Untracked:  dsc_cluster_submit_zweight.sbatch
+    Untracked:  results/dsc.finemap.rss.ukb.checkLD.20200315/
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERFALSE_cs.rds
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERFALSE_cs_plots.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERFALSE_cs_plots.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERTRUE_cs.rds
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERTRUE_cs_plots.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERTRUE_cs_plots.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERFALSE_pipcali.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERFALSE_pipcali_1.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERFALSE_pipcali_1.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERFALSE_pipcali_2.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERFALSE_pipcali_2.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERFALSE_pipcali_3.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERFALSE_pipcali_3.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERFALSE_pipcali_4.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERFALSE_pipcali_4.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERTRUE_pipcali.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERTRUE_pipcali_1.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERTRUE_pipcali_1.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERTRUE_pipcali_2.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERTRUE_pipcali_2.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERTRUE_pipcali_3.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERTRUE_pipcali_3.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERTRUE_pipcali_4.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERTRUE_pipcali_4.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERFALSE_roc_2_power.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERFALSE_roc_2_power.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERFALSE_roc_2_roc.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERFALSE_roc_2_roc.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERTRUE_roc_2_power.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERTRUE_roc_2_power.png
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERTRUE_roc_2_roc.pdf
+    Untracked:  results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERTRUE_roc_2_roc.png
+    Untracked:  rss_compare_ukb_LD.html
 
 Unstaged changes:
-    Modified:   .gitignore
+    Modified:   code/fit_susie.R
+    Modified:   code/fit_susie_bhat.R
+    Modified:   code/fit_susie_rss.R
+    Modified:   modules/data.dsc
+    Modified:   modules/fit.dsc
+    Modified:   modules/get_sumstats.dsc
+    Modified:   modules/simulate.dsc
+    Modified:   results/dsc.finemap.rss.ukb.mix/ROC.R
+    Modified:   results/dsc.finemap.rss.ukb.mix/cs_compare.R
+    Modified:   results/dsc.finemap.rss.ukb.mix/pip_calib.R
+    Modified:   results/dsc.finemap.rss.ukb.mix/pip_extract.R
+    Modified:   results/dsc.finemap.rss.ukb.mix/query.R
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_cs.rds
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_cs_plots.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_cs_plots.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_cs.rds
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_cs_plots.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_cs_plots.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_cs.rds
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_cs_plots.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_cs_plots.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_cs.rds
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_cs_plots.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_cs_plots.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_pipcali.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_pipcali_1.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_pipcali_1.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_pipcali_2.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_pipcali_2.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_pipcali_3.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_pipcali_3.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_pipcali_4.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_pipcali_4.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_pipcali.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_pipcali_1.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_pipcali_1.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_pipcali_2.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_pipcali_2.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_pipcali_3.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_pipcali_3.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_pipcali_4.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_pipcali_4.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_pipcali.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_pipcali_1.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_pipcali_1.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_pipcali_2.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_pipcali_2.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_pipcali_3.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_pipcali_3.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_pipcali_4.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_pipcali_4.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_pipcali.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_pipcali_1.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_pipcali_1.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_pipcali_2.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_pipcali_2.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_pipcali_3.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_pipcali_3.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_pipcali_4.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_pipcali_4.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_roc_2_power.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_roc_2_power.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_roc_2_roc.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_roc_2_roc.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_roc_2_power.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_roc_2_power.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_roc_2_roc.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_roc_2_roc.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_roc_2_power.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_roc_2_power.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_roc_2_roc.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_roc_2_roc.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_roc_2_power.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_roc_2_power.png
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_roc_2_roc.pdf
+    Deleted:    results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_roc_2_roc.png
+    Modified:   susie_rss_ukb.dsc
+    Modified:   yuxin_midway.yml
 
 </code></pre>
 <p>
@@ -581,7 +1087,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/SuSiE_dsc_ukb_lmvsmix.Rmd</code>) and HTML (<code>docs/SuSiE_dsc_ukb_lmvsmix.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -610,6 +1116,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/c19b6cac1428054727a87b07d2a312337518840f/analysis/SuSiE_dsc_ukb_lmvsmix.Rmd" target="_blank">c19b6ca</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2021-01-01
+</td>
+<td>
+wflow_publish(“analysis/SuSiE_dsc_ukb_lmvsmix.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/zouyuxin/dsc_susie_rss_ukb/94f180ebd79628d8433bbd25dc0891ea607d6762/docs/SuSiE_dsc_ukb_lmvsmix.html" target="_blank">94f180e</a>
+</td>
+<td>
+zouyuxin
+</td>
+<td>
+2020-04-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/zouyuxin/dsc_susie_rss_ukb/blob/3ccce42c50afa878179dbb9bccaf5f238fbf7e8f/analysis/SuSiE_dsc_ukb_lmvsmix.Rmd" target="_blank">3ccce42</a>
 </td>
 <td>
@@ -633,7 +1173,7 @@ html
 zouyuxin
 </td>
 <td>
-2020-04-19
+2020-04-18
 </td>
 <td>
 Build site.
@@ -650,7 +1190,7 @@ Rmd
 zouyuxin
 </td>
 <td>
-2020-04-19
+2020-04-18
 </td>
 <td>
 wflow_publish(“analysis/SuSiE_dsc_ukb_lmvsmix.Rmd”)
@@ -699,45 +1239,32 @@ wflow_publish(c(“analysis/SuSiE_dsc_ukb_lmvsmix.Rmd”, “analysis/index.Rmd�
 </div>
 <pre class="r"><code>library(dplyr)
 library(kableExtra)</code></pre>
-<p>Mixed effects summary statistics are computed using GCTA. There are 100 data sets, each one has 3 simulated signals with total pve 0.01.</p>
-<p>I realized one problem about the simulation after it finished. I simulated response with population structure using PCs from UKBioBank databse. UKBioBank database provides top 40 PCs. Let <span class="math inline">\(X \in \mathbb{R}^{N\times J}\)</span> be the genotype matrix for one region, <span class="math inline">\(Z \in \mathbb{R}^{N\times P}\)</span> be the top PCs from UKBioBank, <span class="math display">\[
-y = X\beta + Z\alpha + \epsilon.
-\]</span></p>
-<p>The mixed linear model is <span class="math display">\[
-y = x_j \beta_j + g + e, \quad g \sim N(0,\sigma_g^2 GRM), \quad e \sim N(0, \sigma^2 I).
-\]</span> The GRM doesn’t include population sruture introduced by Z.</p>
-<div id="original" class="section level2">
-<h2>Original</h2>
-<div id="not-estimate-residual-variance" class="section level3">
-<h3>NOT Estimate residual variance</h3>
-<div id="pip-calibration" class="section level4">
-<h4>PIP calibration</h4>
+<p>Mixed effects summary statistics are computed using GCTA. There are 100 data sets, each one has 2 simulated signals with total pve 0.01. The phenotypes are generated from <span class="math display">\[
+y = X\beta + \epsilon.
+\]</span> The summary statistics are from simple linear model, or linear mixed model.</p>
+<div id="not-estimate-residual-variance" class="section level2">
+<h2>NOT Estimate residual variance</h2>
+<div id="pip-calibration" class="section level3">
+<h3>PIP calibration</h3>
 <div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_pipcali.png" />
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERFALSE_pipcali.png" />
 
 </div>
 </div>
-<div id="power" class="section level4">
-<h4>Power</h4>
+<div id="power" class="section level3">
+<h3>Power</h3>
 <div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_roc_2_power.png" />
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERFALSE_roc_2_power.png" />
 
 </div>
 </div>
-<div id="roc" class="section level4">
-<h4>ROC</h4>
+<div id="cs" class="section level3">
+<h3>CS</h3>
 <div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_roc_2_roc.png" />
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERFALSE_cs_plots.png" />
 
 </div>
-</div>
-<div id="cs" class="section level4">
-<h4>CS</h4>
-<div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_cs_plots.png" />
-
-</div>
-<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERFALSE_cs.rds&#39;
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERFALSE_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,23:30)],4))))</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -755,10 +1282,10 @@ susierss_lm_insample_overlap
 susierss_mix_insample_overlap
 </th>
 <th style="text-align:right;">
-susierss_lm_refsample_overlap
+susierss_lm_insamplez_overlap
 </th>
 <th style="text-align:right;">
-susierss_mix_refsample_overlap
+susierss_mix_insamplez_overlap
 </th>
 <th style="text-align:right;">
 susierss_lm_insample_fail
@@ -767,23 +1294,20 @@ susierss_lm_insample_fail
 susierss_mix_insample_fail
 </th>
 <th style="text-align:right;">
-susierss_lm_refsample_fail
+susierss_lm_insamplez_fail
 </th>
 <th style="text-align:right;">
-susierss_mix_refsample_fail
+susierss_mix_insamplez_fail
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-3
+2
 </td>
 <td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
+2
 </td>
 <td style="text-align:right;">
 0
@@ -798,49 +1322,45 @@ susierss_mix_refsample_fail
 0
 </td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-3
+0
+</td>
+<td style="text-align:right;">
+0
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="estimate-residual-variance" class="section level3">
-<h3>Estimate residual variance</h3>
-<div id="pip-calibration-1" class="section level4">
-<h4>PIP calibration</h4>
+<div id="estimate-residual-variance" class="section level2">
+<h2>Estimate residual variance</h2>
+<div id="pip-calibration-1" class="section level3">
+<h3>PIP calibration</h3>
 <div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_pipcali.png" />
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ERTRUE_pipcali.png" />
 
 </div>
 </div>
-<div id="power-1" class="section level4">
-<h4>Power</h4>
+<div id="power-1" class="section level3">
+<h3>Power</h3>
 <div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_roc_2_power.png" />
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ERTRUE_roc_2_power.png" />
 
 </div>
 </div>
-<div id="roc-1" class="section level4">
-<h4>ROC</h4>
+<div id="cs-1" class="section level3">
+<h3>CS</h3>
 <div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_roc_2_roc.png" />
+<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERTRUE_cs_plots.png" />
 
 </div>
-</div>
-<div id="cs-1" class="section level4">
-<h4>CS</h4>
-<div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_cs_plots.png" />
-
-</div>
-<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZFALSE_ERTRUE_cs.rds&#39;
+<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_ERTRUE_cs.rds&#39;
 result = readRDS(output)
 print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,23:30)],4))))</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -858,116 +1378,10 @@ susierss_lm_insample_overlap
 susierss_mix_insample_overlap
 </th>
 <th style="text-align:right;">
-susierss_lm_refsample_overlap
+susierss_lm_insamplez_overlap
 </th>
 <th style="text-align:right;">
-susierss_mix_refsample_overlap
-</th>
-<th style="text-align:right;">
-susierss_lm_insample_fail
-</th>
-<th style="text-align:right;">
-susierss_mix_insample_fail
-</th>
-<th style="text-align:right;">
-susierss_lm_refsample_fail
-</th>
-<th style="text-align:right;">
-susierss_mix_refsample_fail
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div id="add-z" class="section level2">
-<h2>Add Z</h2>
-<div id="not-estimate-residual-variance-1" class="section level3">
-<h3>NOT Estimate residual variance</h3>
-<div id="pip-calibration-2" class="section level4">
-<h4>PIP calibration</h4>
-<div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_pipcali.png" />
-
-</div>
-</div>
-<div id="power-2" class="section level4">
-<h4>Power</h4>
-<div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_roc_2_power.png" />
-
-</div>
-</div>
-<div id="roc-2" class="section level4">
-<h4>ROC</h4>
-<div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_roc_2_roc.png" />
-
-</div>
-</div>
-<div id="cs-2" class="section level4">
-<h4>CS</h4>
-<div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_cs_plots.png" />
-
-</div>
-<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERFALSE_cs.rds&#39;
-result = readRDS(output)
-print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,23:30)],4))))</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-n_signal
-</th>
-<th style="text-align:right;">
-susierss_lm_insample_overlap
-</th>
-<th style="text-align:right;">
-susierss_mix_insample_overlap
-</th>
-<th style="text-align:right;">
-susierss_lm_refsample_overlap
-</th>
-<th style="text-align:right;">
-susierss_mix_refsample_overlap
+susierss_mix_insamplez_overlap
 </th>
 <th style="text-align:right;">
 susierss_lm_insample_fail
@@ -976,123 +1390,20 @@ susierss_lm_insample_fail
 susierss_mix_insample_fail
 </th>
 <th style="text-align:right;">
-susierss_lm_refsample_fail
+susierss_lm_insamplez_fail
 </th>
 <th style="text-align:right;">
-susierss_mix_refsample_fail
+susierss_mix_insamplez_fail
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-3
+2
 </td>
 <td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="estimate-residual-variance-1" class="section level3">
-<h3>Estimate residual variance</h3>
-<div id="pip-calibration-3" class="section level4">
-<h4>PIP calibration</h4>
-<div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_pipcali.png" />
-
-</div>
-</div>
-<div id="power-3" class="section level4">
-<h4>Power</h4>
-<div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_roc_2_power.png" />
-
-</div>
-</div>
-<div id="roc-3" class="section level4">
-<h4>ROC</h4>
-<div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_roc_2_roc.png" />
-
-</div>
-</div>
-<div id="cs-3" class="section level4">
-<h4>CS</h4>
-<div class="figure">
-<img src="assets/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_cs_plots.png" />
-
-</div>
-<pre class="r"><code>output = &#39;results/dsc.finemap.rss.ukb.mix/susie_rss_ukb_mix_cs_compare/susie_rss_ukb_mix_pip_AZTRUE_ERTRUE_cs.rds&#39;
-result = readRDS(output)
-print(kableExtra::kable_styling(knitr::kable(round(result[,c(1,23:30)],4))))</code></pre>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-n_signal
-</th>
-<th style="text-align:right;">
-susierss_lm_insample_overlap
-</th>
-<th style="text-align:right;">
-susierss_mix_insample_overlap
-</th>
-<th style="text-align:right;">
-susierss_lm_refsample_overlap
-</th>
-<th style="text-align:right;">
-susierss_mix_refsample_overlap
-</th>
-<th style="text-align:right;">
-susierss_lm_insample_fail
-</th>
-<th style="text-align:right;">
-susierss_mix_insample_fail
-</th>
-<th style="text-align:right;">
-susierss_lm_refsample_fail
-</th>
-<th style="text-align:right;">
-susierss_mix_refsample_fail
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:right;">
-3
+2
 </td>
 <td style="text-align:right;">
 0
@@ -1110,13 +1421,13 @@ susierss_mix_refsample_fail
 0
 </td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-3
+0
 </td>
 </tr>
 </tbody>
@@ -1129,40 +1440,43 @@ susierss_mix_refsample_fail
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 3.5.3 (2019-03-11)
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
-Running under: macOS  10.15.4
+<pre><code>R version 3.6.1 (2019-07-05)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Scientific Linux 7.4 (Nitrogen)
 
 Matrix products: default
-BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+BLAS/LAPACK: /software/openblas-0.2.19-el7-x86_64/lib/libopenblas_haswellp-r0.2.19.so
 
 locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] kableExtra_1.1.0 dplyr_0.8.1     
+[1] kableExtra_1.3.1 dplyr_0.8.3      workflowr_1.6.2 
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.4.6      highr_0.8         compiler_3.5.3   
- [4] pillar_1.4.2      later_0.8.0       git2r_0.26.1     
- [7] workflowr_1.5.0   tools_3.5.3       digest_0.6.25    
-[10] viridisLite_0.3.0 evaluate_0.13     tibble_2.1.3     
-[13] pkgconfig_2.0.3   rlang_0.4.4       rstudioapi_0.10  
-[16] yaml_2.2.0        xfun_0.7          stringr_1.4.0    
-[19] httr_1.4.0        knitr_1.23        xml2_1.2.0       
-[22] fs_1.3.1          vctrs_0.2.3       hms_0.5.3        
-[25] webshot_0.5.1     rprojroot_1.3-2   tidyselect_0.2.5 
-[28] glue_1.3.1        R6_2.4.1          rmarkdown_1.13   
-[31] purrr_0.3.3       readr_1.3.1       magrittr_1.5     
-[34] whisker_0.3-2     backports_1.1.5   scales_1.0.0     
-[37] promises_1.0.1    htmltools_0.3.6   assertthat_0.2.1 
-[40] rvest_0.3.4       colorspace_1.4-1  httpuv_1.5.1     
-[43] stringi_1.4.3     munsell_0.5.0     crayon_1.3.4     </code></pre>
-</div>
+ [1] Rcpp_1.0.5        highr_0.8         compiler_3.6.1   
+ [4] pillar_1.4.7      later_0.8.0       git2r_0.26.1     
+ [7] tools_3.6.1       digest_0.6.27     viridisLite_0.3.0
+[10] evaluate_0.14     tibble_3.0.4      lifecycle_0.2.0  
+[13] pkgconfig_2.0.3   rlang_0.4.10      rstudioapi_0.13  
+[16] yaml_2.2.0        xfun_0.8          stringr_1.4.0    
+[19] httr_1.4.1        knitr_1.23        xml2_1.3.2       
+[22] fs_1.3.1          vctrs_0.3.6       webshot_0.5.1    
+[25] rprojroot_2.0.2   tidyselect_1.1.0  glue_1.4.2       
+[28] R6_2.5.0          rmarkdown_1.13    purrr_0.3.4      
+[31] magrittr_2.0.1    whisker_0.3-2     scales_1.1.1     
+[34] promises_1.0.1    ellipsis_0.3.1    htmltools_0.3.6  
+[37] assertthat_0.2.1  rvest_0.3.5       colorspace_2.0-0 
+[40] httpuv_1.5.1      stringi_1.4.6     munsell_0.5.0    
+[43] crayon_1.3.4     </code></pre>
 </div>
 </div>
 </div>

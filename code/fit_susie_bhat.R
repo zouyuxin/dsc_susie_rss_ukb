@@ -1,7 +1,7 @@
 library(susieR)
 
 susie_bhat_analyze = function(bhat, shat, R, n, L, s_init, estimate_residual_variance) {
-  fit = tryCatch(susie_bhat(bhat, shat, R, n=n,
+  fit = tryCatch(susie_suff_stat(bhat, shat, R, n=n,
                             L=L, s_init=s_init,
                             estimate_residual_variance = estimate_residual_variance,
                             max_iter = 200),
@@ -17,7 +17,7 @@ susie_bhat_multiple = function(Bhat,Shat,R, n, L, s_init, estimate_residual_vari
   for (r in 1:ncol(Bhat)) {
     if (is.na(s_init))
       fitted[[r]] = susie_bhat_analyze(Bhat[,r],Shat[,r], R, n,
-                                       L=L, list(),
+                                       L=L, NULL,
                                        estimate_residual_variance)
     else
       fitted[[r]] = susie_bhat_analyze(Bhat[,r],Shat[,r], R, n,

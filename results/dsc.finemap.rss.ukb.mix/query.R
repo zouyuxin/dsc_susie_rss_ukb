@@ -4,12 +4,12 @@ output = 'susie_rss_ukb_mix_query.rds'
 library(tibble)
 library(dplyr)
 susie_out = dscrutils::dscquery(output_dir,
-                                targets = c("small_data.dataset","small_data.r_Z_2dist","small_data.r_ref_2dist", "small_data.r_Z_Mdist","small_data.r_ref_Mdist",
-                                            "sim_gaussian.meta", "sim_gaussian.n_signal",
-                                            "get_sumstats.method",
-                                            "susie_rss.ld_method", "susie_rss.addz",
-                                            "susie_rss.estimate_residual_variance",
-                                            "susie_rss.DSC_TIME", "score_susie",
+                                targets = c("small_data.dataset",
+                                            "sim_gaussian_simple.meta",
+                                            "get_sumstats_simple.method",
+                                            'susie_rss_mix.z_ld_weight',
+                                            "susie_rss_mix.estimate_residual_variance",
+                                            "susie_rss_mix.DSC_TIME", "score_susie",
                                             "score_susie.total", "score_susie.valid",
                                             "score_susie.size", "score_susie.purity", 
                                             "score_susie.avgr2", "score_susie.niter",
@@ -27,16 +27,13 @@ rename_cols = function(dat) {
 }
 # remove module names from column names; this is Okay because every column field here are unique
 res = rename_cols(list(susie=as_tibble(susie_out)))
-susierss_lm_in_out = res$susie %>% filter(method == 'lm',
-                                             ld_method == 'in_sample')
-susierss_lm_ref_out = res$susie %>% filter(method == 'lm',
-                                             ld_method == 'ref_sample')
-susierss_mix_in_out = res$susie %>% filter(method == 'mixed',
-                                             ld_method == 'in_sample')
-susierss_mix_ref_out = res$susie %>% filter(method == 'mixed',
-                                               ld_method == 'ref_sample')
+susierss_lm_in_out = res$susie %>% filter(method == 'lm',z_ld_weight==0)
+susierss_lm_inz_out = res$susie %>% filter(method == 'lm',z_ld_weight==0.0001)
+susierss_mix_in_out = res$susie %>% filter(method == 'mixed', z_ld_weight==0)
+susierss_mix_inz_out = res$susie %>% filter(method == 'mixed',z_ld_weight==0.0001)
+
 saveRDS(list(susierss_lm_insample = susierss_lm_in_out,
-             susierss_lm_refsample = susierss_lm_ref_out,
-             susierss_mix_refsample = susierss_mix_ref_out,
+             susierss_lm_insamplez = susierss_lm_inz_out,
+             susierss_mix_insamplez = susierss_mix_inz_out,
              susierss_mix_insample = susierss_mix_in_out), output)
 

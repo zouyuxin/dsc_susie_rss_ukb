@@ -17,6 +17,10 @@ get_sumstats: regression.R
 get_sumstats_lm(get_sumstats):
   method: 'lm'
 
+get_sumstats_simple(get_sumstats):
+  X: $X_sample
+  
+
 get_sumstats_pca(get_sumstats): R(Z = scale(Z, center=T, scale=T);
                                 qrZ <- qr(Z);
                                 Z = Z[, qrZ$pivot[1:qrZ$rank]];

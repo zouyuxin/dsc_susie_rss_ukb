@@ -24,8 +24,13 @@ sim_gaussian_s2(sim_gaussian):
   pve: 0.02
   Z_pve: 0.01
 
+sim_gaussian_simple(sim_gaussian):
+  X: $X_sample
+  n_signal: 2
+  
 sim_gaussian_pca(sim_gaussian): simulate.R + \
                                 R(library(rsvd);
+                                set.seed(seed);
                                 out.pca <- rpca(X,k = 10,center = TRUE,scale = FALSE,retx = TRUE);
                                 Z <- out.pca$x;
                                 neale_effects = readRDS(effects);

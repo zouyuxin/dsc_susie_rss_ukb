@@ -26,20 +26,18 @@ dot_plot = function(dataframe) {
 }
 
 ## parameters
-add_z = c(FALSE, TRUE)
 estimate_resid = c(FALSE, TRUE)
-all.comb = expand.grid(add_z, estimate_resid)
-colnames(all.comb) = c('add_z', 'estimate_resid')
+all.comb = expand.grid(estimate_resid)
+colnames(all.comb) = c('estimate_resid')
 
 bin_size = 20
 pip_cutoff = 0
 
 for (case in 1:nrow(all.comb)){
-  add_z = all.comb[case, 'add_z']
   estimate_resid = all.comb[case, 'estimate_resid']
-  input = paste0('susie_rss_ukb_mix_pip_extraction/susie_rss_ukb_mix_pip_AZ',add_z,'_ER',
+  input = paste0('susie_rss_ukb_mix_pip_extraction/susie_rss_ukb_mix_pip_ER',
                  estimate_resid, '.rds')
-  output_name = paste0('susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_AZ',add_z,'_ER',
+  output_name = paste0('susie_rss_ukb_mix_pip_calibration/susie_rss_ukb_mix_pip_ER',
                        estimate_resid,'_pipcali')
   output = paste0(output_name,'.rds')
   
@@ -60,8 +58,8 @@ for (case in 1:nrow(all.comb)){
   }
   saveRDS(list("lm in sample"=get_cali(pip_cali, 'susierss_lm_insample'),
                "mix in sample"=get_cali(pip_cali, 'susierss_mix_insample'),
-               "lm ref sample"=get_cali(pip_cali, 'susierss_lm_refsample'), 
-               "mix ref sample"=get_cali(pip_cali, 'susierss_mix_refsample')),
+               "lm in sample addz"=get_cali(pip_cali, 'susierss_lm_insamplez'), 
+               "mix in sample addz"=get_cali(pip_cali, 'susierss_mix_insamplez')),
           output)
   
   dat = readRDS(output)

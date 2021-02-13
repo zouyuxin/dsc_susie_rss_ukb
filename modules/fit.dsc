@@ -101,8 +101,8 @@ susie_rss_zldweight(susie_rss):
   z_ld_weight: 0, 0.001, 0.002, 0.005, 0.01, 0.02
 
 susie_rss_mix(susie_rss):
-  z_ld_weight: 0
-  ld_method: "in_sample", "in_sample_pca"
+  z_ld_weight: 0, 0.0001
+  ld_method: "in_sample"
 
 susie_rss_lambda: add_z_susierss.R + initialize.R + R(if(is.na(init)){
                           s_init = NA

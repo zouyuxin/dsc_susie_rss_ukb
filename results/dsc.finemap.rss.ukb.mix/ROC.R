@@ -57,10 +57,9 @@ add_text = function(thresholds, x, y, threshold, color, delta = 0.015, y.delta=0
 }
 
 ## parameters
-add_z = c(FALSE, TRUE)
 estimate_resid = c(TRUE, FALSE)
-all.comb = expand.grid(add_z, estimate_resid)
-colnames(all.comb) = c('add_z', 'estimate_resid')
+all.comb = expand.grid(estimate_resid)
+colnames(all.comb) = c('estimate_resid')
 
 pip_cutoff = 0.3
 
@@ -70,11 +69,10 @@ colors = c('cyan', '#7A68A6', '#348ABD', '#A60628', '#FF0000', '#188487', '#E2A2
            '#A9A9A9', '#000000', '#FF00FF', '#FFD700', '#ADFF2F', '#00FFFF')
 
 for (case in 1:nrow(all.comb)){
-  add_z = all.comb[case, 'add_z']
   estimate_resid = all.comb[case, 'estimate_resid']
-  input = paste0('susie_rss_ukb_mix_pip_extraction/susie_rss_ukb_mix_pip_AZ',add_z,'_ER',
+  input = paste0('susie_rss_ukb_mix_pip_extraction/susie_rss_ukb_mix_pip_ER',
                  estimate_resid,'.rds')
-  output2_name = paste0('susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_AZ',add_z,'_ER',
+  output2_name = paste0('susie_rss_ukb_mix_roc/susie_rss_ukb_mix_pip_ER',
                         estimate_resid, '_roc_2')
   output2 = paste0(output2_name,'.rds')
   
@@ -82,17 +80,17 @@ for (case in 1:nrow(all.comb)){
   result = readRDS(input)
   susierss_lm_insample = roc_data(do.call(rbind, lapply(1:length(result), function(i) cbind(result[[i]]$susierss_lm_insample, result[[i]]$is_signal))))
   susierss_mix_insample = roc_data(do.call(rbind, lapply(1:length(result), function(i) cbind(result[[i]]$susierss_mix_insample, result[[i]]$is_signal))))
-  susierss_lm_refsample = roc_data(do.call(rbind, lapply(1:length(result), function(i) cbind(result[[i]]$susierss_lm_refsample, result[[i]]$is_signal))))
-  susierss_mix_refsample = roc_data(do.call(rbind, lapply(1:length(result), function(i) cbind(result[[i]]$susierss_mix_refsample, result[[i]]$is_signal))))
+  susierss_lm_insamplez = roc_data(do.call(rbind, lapply(1:length(result), function(i) cbind(result[[i]]$susierss_lm_insamplez, result[[i]]$is_signal))))
+  susierss_mix_insamplez = roc_data(do.call(rbind, lapply(1:length(result), function(i) cbind(result[[i]]$susierss_mix_insamplez, result[[i]]$is_signal))))
   
   saveRDS(list(susierss_lm_insample = susierss_lm_insample, susierss_mix_insample = susierss_mix_insample,
-               susierss_lm_refsample = susierss_lm_refsample, susierss_mix_refsample = susierss_mix_refsample), output2)
+               susierss_lm_insamplez = susierss_lm_insamplez, susierss_mix_insamplez = susierss_mix_insamplez), output2)
   
   ## plots
   d1 = readRDS(output2)
   pdf(paste0(output2_name,"_power.pdf"), width=5, height=5, pointsize=15)
   yy = make_smooth(1 - d1$susierss_lm_insample$rates$Precision, d1$susierss_lm_insample$rates$Recall)
-  plot(yy$x, yy$y, t="l", col='black', ylab = "Power", xlab ="False Discovery Rate", main = "3 effect variables",
+  plot(yy$x, yy$y, t="l", col='black', ylab = "Power", xlab ="False Discovery Rate", main = "2 effect variables",
        bty='l', lwd = 2, xlim = c(0,0.5), ylim = c(0,0.5))
   add_text(d1$susierss_lm_insample$rates$Threshold, yy$x, yy$y, 0.95, 'black', 0.01, 0.01)
   
@@ -102,15 +100,15 @@ for (case in 1:nrow(all.comb)){
   lines(yy$x, yy$y, col = colors[5], lwd = 2, xlim = c(0,0.5), ylim = c(0,0.5))
   add_text(d1$susierss_mix_insample$rates$Threshold, yy$x, yy$y, 0.95, colors[5], 0.00, -0.02)
 
-  yy = make_smooth(1-d1$susierss_lm_refsample$rates$Precision, d1$susierss_lm_refsample$rates$Recall)
+  yy = make_smooth(1-d1$susierss_lm_insamplez$rates$Precision, d1$susierss_lm_insamplez$rates$Recall)
   lines(yy$x, yy$y, col = 'green2', lwd = 2, xlim = c(0,0.5), ylim = c(0,0.5))
-  add_text(d1$susierss_lm_refsample$rates$Threshold, yy$x, yy$y, 0.95, 'green2', 0.00, -0.02)
+  add_text(d1$susierss_lm_insamplez$rates$Threshold, yy$x, yy$y, 0.95, 'green2', 0.00, -0.02)
 
-  yy = make_smooth(1-d1$susierss_mix_refsample$rates$Precision, d1$susierss_mix_refsample$rates$Recall)
+  yy = make_smooth(1-d1$susierss_mix_insamplez$rates$Precision, d1$susierss_mix_insamplez$rates$Recall)
   lines(yy$x, yy$y, col = colors[7], lwd = 2, xlim = c(0,0.5), ylim = c(0,0.5))
-  add_text(d1$susierss_mix_refsample$rates$Threshold, yy$x, yy$y, 0.95, colors[7], 0.00, -0.02)
+  add_text(d1$susierss_mix_insamplez$rates$Threshold, yy$x, yy$y, 0.95, colors[7], 0.00, -0.02)
 
-  legend("topleft", legend=c("lm insample", "mix insample", "lm refsample", "mix refsample"),
+  legend("topleft", legend=c("lm insample", "mix insample", "lm insample addz", "mix insample addz"),
          col=c('black', colors[5], 'green2', colors[7]), lty=1, cex=0.8)
   dev.off()
   system(paste0("convert -flatten -density 120 ", output2_name, '_power.pdf', " ", output2_name, '_power.png'))
@@ -118,23 +116,23 @@ for (case in 1:nrow(all.comb)){
   ## TPR vs FPR
   yy = make_smooth(d1$susierss_lm_insample$rates$FPR, d1$susierss_lm_insample$rates$Recall)
   pdf(paste0(output2_name,"_roc.pdf"), width=5, height=5, pointsize=15)
-  plot(yy$x, yy$y, t="l", col='black', ylab = "True Discovery Rate", xlab ="False Positive Rate", main = "3 effect variables",
-       bty='l', lwd = 2, xlim = c(0,0.0005), ylim = c(0,0.3))
+  plot(yy$x, yy$y, t="l", col='black', ylab = "True Discovery Rate", xlab ="False Positive Rate", main = "2 effect variables",
+       bty='l', lwd = 2, xlim = c(0,0.005), ylim = c(0,0.3))
   add_text(d1$susierss_lm_insample$rates$Threshold, yy$x, yy$y, 0.95, 'black', -0.015, print.text = F)
   
   yy = make_smooth(d1$susierss_mix_insample$rates$FPR, d1$susierss_mix_insample$rates$Recall)
-  lines(yy$x, yy$y, col = colors[5], lwd = 2, xlim = c(0,0.0005), ylim = c(0,0.3))
+  lines(yy$x, yy$y, col = colors[5], lwd = 2, xlim = c(0,0.005), ylim = c(0,0.3))
   add_text(d1$susierss_mix_insample$rates$Threshold, yy$x, yy$y, 0.95, colors[5], -0.015, print.text = F)
   
-  yy = make_smooth(d1$susierss_lm_refsample$rates$FPR, d1$susierss_lm_refsample$rates$Recall)
-  lines(yy$x, yy$y, col = 'green2', lwd = 2, xlim = c(0,0.0005), ylim = c(0,0.3))
-  add_text(d1$susierss_lm_refsample$rates$Threshold, yy$x, yy$y, 0.95, 'green2', -0.015, print.text = F)
+  yy = make_smooth(d1$susierss_lm_insamplez$rates$FPR, d1$susierss_lm_insamplez$rates$Recall)
+  lines(yy$x, yy$y, col = 'green2', lwd = 2, xlim = c(0,0.005), ylim = c(0,0.3))
+  add_text(d1$susierss_lm_insamplez$rates$Threshold, yy$x, yy$y, 0.95, 'green2', -0.015, print.text = F)
   
-  yy = make_smooth(d1$susierss_mix_refsample$rates$FPR, d1$susierss_mix_refsample$rates$Recall)
-  lines(yy$x, yy$y, col = colors[7], lwd = 2, xlim = c(0,0.0005), ylim = c(0,0.3))
-  add_text(d1$susierss_mix_refsample$rates$Threshold, yy$x, yy$y, 0.95, colors[7], -0.015, print.text = F)
+  yy = make_smooth(d1$susierss_mix_insamplez$rates$FPR, d1$susierss_mix_insamplez$rates$Recall)
+  lines(yy$x, yy$y, col = colors[7], lwd = 2, xlim = c(0,0.005), ylim = c(0,0.3))
+  add_text(d1$susierss_mix_insamplez$rates$Threshold, yy$x, yy$y, 0.95, colors[7], -0.015, print.text = F)
 
-  legend("topleft", legend=c("lm insample", "mix insample", "lm refsample", "mix refsample"),
+  legend("topleft", legend=c("lm insample", "mix insample", "lm insample addz", "mix insample addz"),
          col=c('black', colors[5], 'green2', colors[7]), lty=1, cex=0.8)
   dev.off()
   system(paste0("convert -flatten -density 120 ", output2_name, '_roc.pdf', " ", output2_name, '_roc.png'))

@@ -8,7 +8,7 @@
 
 full_data: sim_utils.R + data_prepare.R
   tag: "full"
-  dataset: Shell{head -200 ${data_file}}
+  dataset: Shell{head -${n_dataset} ${data_file}}
   subset: NULL
   maf_thresh: 0
   GWASsample: ${GWAS_sample}

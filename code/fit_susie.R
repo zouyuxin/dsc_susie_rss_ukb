@@ -25,7 +25,7 @@ for (r in 1:ncol(Y)) {
                              estimate_residual_variance=estimate_residual_variance,
                              estimate_prior_variance=TRUE,
                              null_weight=null_weight,
-                             tol=1e-3, s_init = list())
+                             tol=1e-3, s_init = NULL)
       }else{
         fitted[[r]] <- susie(X,Y_reg[,r],L=maxL,
                              max_iter=maxI,
@@ -41,7 +41,7 @@ for (r in 1:ncol(Y)) {
                              estimate_residual_variance=estimate_residual_variance,
                              scaled_prior_variance=prior_var,
                              null_weight=null_weight,
-                             tol=1e-3, s_init = list())
+                             tol=1e-3, s_init = NULL)
       }else{
         fitted[[r]] <- susie(X,Y_reg[,r],L=maxL,
                              max_iter=maxI,
